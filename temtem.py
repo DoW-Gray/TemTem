@@ -232,12 +232,10 @@ def calc_damage(attacker, attack, target):
     else:
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
     damage /= 200
-    print(damage)
     damage += 7
     damage *= effectiveness(attack['Type'], target)
     if attack['Type'] in attacker.types:
         damage *= 1.5  # STAB
-    print(damage)
 
     return max(1, int(damage))
 
