@@ -37,18 +37,18 @@ class Stats(Enum):
     SpD = 7
 
 class Types(Enum):
-    Neutral = 1
-    Fire = 2
-    Water = 3
-    Nature = 4
-    Electric = 5
-    Earth = 6
-    Mental = 7
-    Wind = 8
-    Digital = 9
-    Melee = 10
-    Crystal = 10
-    Toxic = 12
+    neutral = 1
+    fire = 2
+    water = 3
+    nature = 4
+    electric = 5
+    earth = 6
+    mental = 7
+    wind = 8
+    digital = 9
+    melee = 10
+    crystal = 10
+    toxic = 12
 
 STAT_CONSTS = {
     Stats.HP: (80, 20_000, 15),
@@ -60,188 +60,189 @@ STAT_CONSTS = {
     Stats.SpD: (100, 25_000, 10),
 }
 
+# lookup table: TE[attack][target] = effectiveness
 TYPE_EFFECTIVENESS = {
-    Types.Neutral: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 1.0,
-        Types.Earth: 1.0,
-        Types.Mental: 0.5,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 1.0,
+    Types.neutral: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 1.0,
+        Types.earth: 1.0,
+        Types.mental: 0.5,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 1.0,
     },
-    Types.Fire: {
-        Types.Neutral: 1.0,
-        Types.Fire: 0.5,
-        Types.Water: 0.5,
-        Types.Nature: 2.0,
-        Types.Electric: 1.0,
-        Types.Earth: 0.5,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 2.0,
-        Types.Toxic: 1.0,
+    Types.fire: {
+        Types.neutral: 1.0,
+        Types.fire: 0.5,
+        Types.water: 0.5,
+        Types.nature: 2.0,
+        Types.electric: 1.0,
+        Types.earth: 0.5,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 2.0,
+        Types.toxic: 1.0,
     },
-    Types.Water: {
-        Types.Neutral: 1.0,
-        Types.Fire: 2.0,
-        Types.Water: 0.5,
-        Types.Nature: 0.5,
-        Types.Electric: 1.0,
-        Types.Earth: 2.0,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 2.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 0.5,
+    Types.water: {
+        Types.neutral: 1.0,
+        Types.fire: 2.0,
+        Types.water: 0.5,
+        Types.nature: 0.5,
+        Types.electric: 1.0,
+        Types.earth: 2.0,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 2.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 0.5,
     },
-    Types.Nature: {
-        Types.Neutral: 1.0,
-        Types.Fire: 0.5,
-        Types.Water: 2.0,
-        Types.Nature: 0.5,
-        Types.Electric: 1.0,
-        Types.Earth: 2.0,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 0.5,
+    Types.nature: {
+        Types.neutral: 1.0,
+        Types.fire: 0.5,
+        Types.water: 2.0,
+        Types.nature: 0.5,
+        Types.electric: 1.0,
+        Types.earth: 2.0,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 0.5,
     },
-    Types.Electric: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 2.0,
-        Types.Nature: 0.5,
-        Types.Electric: 0.5,
-        Types.Earth: 0.5,
-        Types.Mental: 2.0,
-        Types.Wind: 2.0,
-        Types.Digital: 2.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 0.5,
-        Types.Toxic: 1.0,
+    Types.electric: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 2.0,
+        Types.nature: 0.5,
+        Types.electric: 0.5,
+        Types.earth: 0.5,
+        Types.mental: 2.0,
+        Types.wind: 2.0,
+        Types.digital: 2.0,
+        Types.melee: 1.0,
+        Types.crystal: 0.5,
+        Types.toxic: 1.0,
     },
-    Types.Earth: {
-        Types.Neutral: 1.0,
-        Types.Fire: 2.0,
-        Types.Water: 0.5,
-        Types.Nature: 0.5,
-        Types.Electric: 2.0,
-        Types.Earth: 1.0,
-        Types.Mental: 1.0,
-        Types.Wind: 0.5,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 2.0,
-        Types.Toxic: 1.0,
+    Types.earth: {
+        Types.neutral: 1.0,
+        Types.fire: 2.0,
+        Types.water: 0.5,
+        Types.nature: 0.5,
+        Types.electric: 2.0,
+        Types.earth: 1.0,
+        Types.mental: 1.0,
+        Types.wind: 0.5,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 2.0,
+        Types.toxic: 1.0,
     },
-    Types.Mental: {
-        Types.Neutral: 2.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 1.0,
-        Types.Earth: 1.0,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 2.0,
-        Types.Crystal: 0.5,
-        Types.Toxic: 1.0,
+    Types.mental: {
+        Types.neutral: 2.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 1.0,
+        Types.earth: 1.0,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 2.0,
+        Types.crystal: 0.5,
+        Types.toxic: 1.0,
     },
-    Types.Wind: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 0.5,
-        Types.Earth: 1.0,
-        Types.Mental: 1.0,
-        Types.Wind: 0.5,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 2.0,
+    Types.wind: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 0.5,
+        Types.earth: 1.0,
+        Types.mental: 1.0,
+        Types.wind: 0.5,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 2.0,
     },
-    Types.Digital: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 1.0,
-        Types.Earth: 1.0,
-        Types.Mental: 2.0,
-        Types.Wind: 1.0,
-        Types.Digital: 2.0,
-        Types.Melee: 2.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 1.0,
+    Types.digital: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 1.0,
+        Types.earth: 1.0,
+        Types.mental: 2.0,
+        Types.wind: 1.0,
+        Types.digital: 2.0,
+        Types.melee: 2.0,
+        Types.crystal: 1.0,
+        Types.toxic: 1.0,
     },
-    Types.Melee: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 1.0,
-        Types.Earth: 2.0,
-        Types.Mental: 0.5,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 0.5,
-        Types.Crystal: 2.0,
-        Types.Toxic: 1.0,
+    Types.melee: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 1.0,
+        Types.earth: 2.0,
+        Types.mental: 0.5,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 0.5,
+        Types.crystal: 2.0,
+        Types.toxic: 1.0,
     },
-    Types.Crystal: {
-        Types.Neutral: 1.0,
-        Types.Fire: 0.5,
-        Types.Water: 1.0,
-        Types.Nature: 1.0,
-        Types.Electric: 2.0,
-        Types.Earth: 0.5,
-        Types.Mental: 2.0,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 1.0,
+    Types.crystal: {
+        Types.neutral: 1.0,
+        Types.fire: 0.5,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 2.0,
+        Types.earth: 0.5,
+        Types.mental: 2.0,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 1.0,
     },
-    Types.Toxic: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 2.0,
-        Types.Nature: 2.0,
-        Types.Electric: 1.0,
-        Types.Earth: 0.5,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 0.5,
-        Types.Melee: 1.0,
-        Types.Crystal: 0.5,
-        Types.Toxic: 0.5,
+    Types.toxic: {
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 2.0,
+        Types.nature: 2.0,
+        Types.electric: 1.0,
+        Types.earth: 0.5,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 0.5,
+        Types.melee: 1.0,
+        Types.crystal: 0.5,
+        Types.toxic: 0.5,
     },
     None: {
-        Types.Neutral: 1.0,
-        Types.Fire: 1.0,
-        Types.Water: 1.0,
-        Types.Nature: 2.0,
-        Types.Electric: 1.0,
-        Types.Earth: 1.0,
-        Types.Mental: 1.0,
-        Types.Wind: 1.0,
-        Types.Digital: 1.0,
-        Types.Melee: 1.0,
-        Types.Crystal: 1.0,
-        Types.Toxic: 1.0,
+        Types.neutral: 1.0,
+        Types.fire: 1.0,
+        Types.water: 1.0,
+        Types.nature: 1.0,
+        Types.electric: 1.0,
+        Types.earth: 1.0,
+        Types.mental: 1.0,
+        Types.wind: 1.0,
+        Types.digital: 1.0,
+        Types.melee: 1.0,
+        Types.crystal: 1.0,
+        Types.toxic: 1.0,
     },
 }
 
@@ -256,7 +257,9 @@ def load_temtem_data():
             base_stats = {}
             for stat in Stats:
                 base_stats[stat] = int(row[stat.name])
-            types = (row['Type 1'], row['Type 2'] or None)
+            t1 = row['Type 1']
+            t2 = row['Type 2']
+            types = (Types[t1], Types[t2] if t2 else None)
             data[row['Name']] = (base_stats, types)
 
     # sanity checks
@@ -273,7 +276,15 @@ def load_attack_data():
     data = {}
     with open(ATTACK_CSV, 'r') as fp:
         for row in DictReader(fp):
-            data[row['Name']] = row
+            res = {}
+            for col, cell in row.items():
+                if col in ('DMG', 'STA', 'Hold', 'Priority'):
+                    res[col] = 0 if cell == '-' else int(cell)
+                elif col.endswith('Type'):
+                    res[col] = Types[cell] if cell else None
+                else:
+                    res[col] = cell
+            data[row['Name']] = res
 
     # sanity checks
     if ATTACK_DATA is not None:
