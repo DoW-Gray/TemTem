@@ -81,7 +81,7 @@ class TemTem:
             val2 = self.svs[stat] * self.base_stats[stat] * self.level
             val2 //= STAT_CONSTS[stat][1]
             debug('For stat %s, val2 = %f' % (stat.name, val2))
-            stats[stat] = max(1, int(val1 + val2 + STAT_CONSTS[stat][2]))
+            stats[stat] = int(val1 + val2 + STAT_CONSTS[stat][2])
         stats[Stats.HP] += self.level
         self.stats = stats
 
@@ -231,10 +231,13 @@ def calc_damage(attacker, attack, target):
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
     else:
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
+    damage /= 200
+    print(damage)
     damage += 7
     damage *= effectiveness(attack['Type'], target)
-    if attack['Type'] in attacker.Types:
+    if attack['Type'] in attacker.types:
         damage *= 1.5  # STAB
+    print(damage)
 
     return max(1, int(damage))
 
