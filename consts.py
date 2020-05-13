@@ -230,20 +230,6 @@ TYPE_EFFECTIVENESS = {
         Types.crystal: 0.5,
         Types.toxic: 0.5,
     },
-    None: {
-        Types.neutral: 1.0,
-        Types.fire: 1.0,
-        Types.water: 1.0,
-        Types.nature: 1.0,
-        Types.electric: 1.0,
-        Types.earth: 1.0,
-        Types.mental: 1.0,
-        Types.wind: 1.0,
-        Types.digital: 1.0,
-        Types.melee: 1.0,
-        Types.crystal: 1.0,
-        Types.toxic: 1.0,
-    },
 }
 
 DEFAULT_LEVEL = 48

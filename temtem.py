@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 """
-temtem.py: TemTem class and damage calculation
+temtem.py: TemTem class and associated functions
 Copyright (C) 2020 DoW
 
 This program is free software; you can redistribute it and/or
@@ -22,10 +22,8 @@ from consts import (
     Stats,
     Types,
     STAT_CONSTS,
-    TYPE_EFFECTIVENESS,
     DEFAULT_LEVEL,
     lookup_temtem_data,
-    lookup_attack,
 )
 
 from logging import error, debug
@@ -67,6 +65,9 @@ class TemTem:
         self.item = item
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self._calc_live_stats()
+
+    def __repr__(self):
+        return "<TemTem %s>" % self.species
 
     def _calc_stats(self):
         stats = {}
@@ -220,28 +221,3 @@ def gen_tems(inpt):
 
     if next_tem:
         try_yield_tem(next_tem)
-
-def calc_damage(attacker, attack, target):
-    if isinstance(attack, str):
-        attack = lookup_attack(attack)
-
-    damage = attacker.level * attack['DMG']
-    if cl := attack['Class'] == 'Status':
-        return 0
-    elif cl == 'Physical':
-        damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
-    else:
-        damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
-    damage /= 200
-    damage += 7
-    damage *= effectiveness(attack['Type'], target)
-    if attack['Type'] in attacker.types:
-        damage *= 1.5  # STAB
-
-    return max(1, int(damage))
-
-def effectiveness(attack_type, target):
-    return (
-        TYPE_EFFECTIVENESS[attack_type][target.types[0]]
-        * TYPE_EFFECTIVENESS[attack_type][target.types[1]]
-    )
