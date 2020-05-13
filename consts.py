@@ -47,7 +47,7 @@ class Types(Enum):
     wind = 8
     digital = 9
     melee = 10
-    crystal = 10
+    crystal = 11
     toxic = 12
 
 STAT_CONSTS = {

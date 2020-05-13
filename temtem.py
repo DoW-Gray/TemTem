@@ -194,7 +194,7 @@ class TemTem:
         for move in self.moves:
             res += '- %s\n' % move
 
-        return res + '\n'
+        return res
 
 def gen_tems(inpt):
     if isinstance(inpt, str):
