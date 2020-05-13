@@ -1,0 +1,239 @@
+Gyalis @ Ice Cube
+Trait: Resistant
+TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
+- Heat Up
+- Crystal Bite
+- Haito Uchi
+- Sharp Stabs
+
+Raize @ Umbrella
+Trait: Demoralize
+TVs: 500 HP / 500 SpD
+- Embers
+- King's Roar
+- Roar
+- Fire Tornado
+
+Volarend @ Hand Fan
+Trait: Aerobic
+TVs: 408 HP / 90 Sta / 500 Spe / 1 Def / 1 SpA
+- Wind Blade
+- Hyperkinetic Strike
+- Blizzard
+- Toxic Plume
+
+Volarend @ Hand Fan
+Trait: Anaerobic
+TVs: 500 HP / 90 Sta / 410 Atk
+- Feather Gatling
+- Noxious Bomb
+- Toxic Plume
+- Hyperkinetic Strike
+
+Kinu @ Grease
+Trait: Protector
+TVs: 500 HP / 455 Def / 45 SpA
+- Beta Burst
+- Revitalize
+- Stone Wall
+- Turbo Choreography
+
+Pigepic @ Sweatband
+Trait: Fainted Curse
+TVs: 495 HP / 2 Sta / 493 Spe / 2 Def / 2 SpD
+- Bamboozle
+- Turbo Choreography
+- Tornado
+- Hypnosis
+
+Nidrasil @ Ice Cube
+Trait: Tri-Apothecary
+TVs: 500 HP / 500 Def
+- Allergic Spread
+- Bark Shield
+- Toxic Ink
+- Hallucination
+
+Zenoreth @ Ice Cube
+Trait: Channeler
+TVs: 190 HP / 310 Spe / 500 SpA
+- Madness Buff
+- Crystal Spikes
+- Footwork
+- Rend
+
+Valash @ Energy Drink
+Trait: Scavenger
+TVs: 500 Spe / 500 SpA
+- Crystal Spikes
+- Crystal Dust
+- Footwork
+- Madness Buff
+
+Valash @ Energy Drink
+Trait: Determined
+TVs: 500 Spe / 500 Atk
+- Crystal Bite
+- Ninja Jutsu
+- Footwork
+- Clinch
+
+Myx @ Sweatband
+Trait: Puppet Master
+TVs: 393 HP / 1 Sta / 13 Spe / 95 Def / 493 SpA / 5 SpD
+- Crystal Spikes
+- Energy Manipulation
+- Psy Surge
+- Cage
+
+Saipat @ Energy Drink
+Trait: Toxic Affinity
+TVs: 500 Spe / 500 Atk
+- Ice Shuriken
+- Toxic Ink
+- Nicho Sai
+- Ninja Jutsu
+
+Ukama @ Lightning Rod
+Trait: Hydrologist
+TVs: 500 Spe / 500 SpA
+- Water Cannon
+- Flood
+- Blizzard
+- Aquatic Whirlwind
+
+Tuvine @ Ice Cube
+Trait: Determined
+TVs: 200 HP / 500 Atk / 300 SpD
+- Crystal Plume Gatling
+- Diamond Fort
+- Feather Gatling
+- Noxious Bomb
+
+Vulcrane @ Talisman
+Trait: Vigorous
+TVs: 500 HP / 500 Atk
+- Stone Ball
+- Embers
+- Ninja Jutsu
+- Extinction
+
+Mudrid @ Sweatband
+Trait: Resistant
+TVs: 500 Spe / 500 Atk
+- Crystal Bite
+- Stone Ball
+- Head Ram
+- Footwork
+
+Raican @ Umbrella
+Trait: Motivator
+TVs: 500 HP / 300 Def / 200 SpD
+- King's Roar
+- Embers
+- Meteor Swarm
+- Held Anger
+
+Raican @ Fire Chip
+Trait: Prideful
+TVs: 500 Spe / 400 Atk / 100 SpA
+- King's Roar
+- Fire Tornado
+- Meteor Swarm
+- Held Anger
+
+Baboong @ Energy Drink
+Trait: Brawny
+TVs: 500 Spe / 500 Atk
+- Heat Up
+- Intimidation
+- Earth Wave
+- Uppercut
+
+Gazuma @ Rock Shield
+Trait: Receptive
+TVs: 500 Spe / 500 SpA
+- Tesla Prison
+- Noxious Bomb
+- Electric Storm
+- Turbo Choreography
+
+Anahir @ Energy Drink
+Trait: Flawed Crystal
+TVs: 500 HP / 500 Atk
+- Heat Up
+- Meteor Swarm
+- Crystal Bite
+- Chains Hit
+
+Platimous @ Coat
+Trait: Zen
+TVs: 385 HP / 105 Spe / 320 Atk / 190 SpA
+- Noxious Bomb
+- Aquatic Whirlwind
+- Paralyzing Poison
+- Flood
+
+Skunch @ Pansunscreen
+Trait: Brawny
+TVs: 500 Spe / 500 Atk
+- Haito Uchi
+- Oshi-Dashi
+- Fierce Claw
+- Ninja Jutsu
+
+Saku @ Sweatband
+Trait: Air Specialist
+TVs: 500 HP / 500 SpA
+- Lifeful Sap
+- Urushiol
+- Bark Shield
+- Tornado
+
+Barnshe @ Rock Shield
+Trait: Neutrality
+TVs: 500 HP / 35 Sta / 263 Spe / 117 Def / 85 SpD
+- Turbo Choreography
+- Relax
+- Bamboozle
+- Hypoxia
+
+Oceara @ Lightning Rod
+Trait: Hydrologist
+TVs: 500 Spe / 500 SpA
+- Ice Shuriken
+- Blizzard
+- Aquatic Whirlwind
+- High-pressure Water
+
+Shuine @ Energy Drink
+Trait: Guardian
+TVs: 500 HP / 500 Def
+- Crystal Bite
+- Flood
+- Relax
+- Sacrifice
+
+Tental @ Sweatband
+Trait: Avenger
+TVs: 500 Spe / 500 SpA
+- Beta Burst
+- Energy Manipulation
+- Madness Buff
+- Awful Song
+
+Tental @ Rock Shield
+Trait: Water Affinity
+TVs: 500 HP / 500 Spe
+- Beta Burst
+- Block
+- Madness Buff
+- High-pressure Water 
+
+Noxolotl @ Pillow
+Trait: Trance
+TVs: 300 HP / 350 SpA / 350 SpD
+- Narcoleptic Hit
+- Madness Buff
+- Hallucination
+- Hypnosis
