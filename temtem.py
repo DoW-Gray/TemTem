@@ -201,7 +201,7 @@ def gen_tems(inpt):
 
     def try_yield_tem(next_tem):
         try:
-            yield TemTem.from_importable(next_tem)
+            return TemTem.from_importable(next_tem)
         except Exception as err:
             error('Unable to parse the following lines:')
             for line in next_tem:
@@ -212,7 +212,8 @@ def gen_tems(inpt):
     for line in inpt:
         if not line.strip():
             if next_tem:
-                try_yield_tem(next_tem)
+                if (tem := try_yield_tem(next_tem)):
+                    yield tem
                 next_tem = []
         else:
             next_tem.append(line)
