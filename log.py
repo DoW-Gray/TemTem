@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 """
-logging.py: functions to print debug and error text
+log.py: functions to print debug and error text
 Copyright (C) 2020 DoW
 
 This program is free software; you can redistribute it and/or

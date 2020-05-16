@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from consts import (
+from static import (
     Stats,
     Types,
     STAT_CONSTS,
@@ -26,7 +26,9 @@ from consts import (
     lookup_temtem_data,
 )
 
-from logging import error, debug
+from log import error, debug
+
+SAMPLE_SETS = 'sets.txt'
 
 class TemTem:
     def __init__(
@@ -68,6 +70,21 @@ class TemTem:
 
     def __repr__(self):
         return "<TemTem %s>" % self.species
+
+    def __eq__(self, other):
+        if not isinstance(other, TemTem):
+            return NotImplemented
+
+        return (
+            self.species == other.species
+            and set(self.moves) == set(other.moves)  # order isn't relevant
+            and self.trait == other.trait
+            and self.svs == other.svs
+            and self.tvs == other.tvs
+            and self.item == other.item
+            and self.level == other.level
+            and self.boosts == other.boosts
+        )
 
     def _calc_stats(self):
         stats = {}
@@ -196,6 +213,10 @@ class TemTem:
 
         return res
 
+    @property
+    def fainted(self):
+        return self.live_stats[Stats.HP] > 0
+
 def gen_tems(inpt):
     if isinstance(inpt, str):
         inpt = inpt.split('\n')
@@ -221,3 +242,37 @@ def gen_tems(inpt):
 
     if next_tem:
         try_yield_tem(next_tem)
+
+
+### Tests
+def test_temtem_class():
+    from test_data import (
+        GYALIS_IMPORT,
+        GYALIS_STATS,
+        GYALIS_TEM,
+        KINU_IMPORT,
+        KINU_TEM,
+    )
+
+    assert GYALIS_TEM.stats == GYALIS_STATS
+    assert GYALIS_TEM.export() == GYALIS_IMPORT
+
+    gyalis_import = TemTem.from_importable(GYALIS_IMPORT)
+    kinu_import = TemTem.from_importable(KINU_IMPORT)
+    for imported, tem in ((gyalis_import, GYALIS_TEM), (kinu_import, KINU_TEM)):
+        assert imported == tem
+        assert imported.stats == tem.stats
+        assert imported.moves == tem.moves
+        assert imported.item == tem.item
+        assert imported.trait == tem.trait
+        assert imported.level == tem.level
+
+def test_gen_tems():
+    from test_data import MULTI_IMPORT, GYALIS_TEM, KINU_TEM
+
+    with open(SAMPLE_SETS, 'r') as fp:
+        next(gen_tems(fp))
+
+    gen = gen_tems(MULTI_IMPORT)
+    assert next(gen) == GYALIS_TEM
+    assert next(gen) == KINU_TEM

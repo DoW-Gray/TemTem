@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 """
-consts.py: access various constant TemTem data
+static.py: access various static TemTem data
 Copyright (C) 2020 DoW
 
 This program is free software; you can redistribute it and/or
@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from enum import Enum
 
-from logging import error
+from log import error
 
 TEMTEM_DATA = None
 TEMTEM_CSV = 'temtem.csv'
@@ -293,3 +293,35 @@ def lookup_attack(name):
     except (KeyError, TypeError):
         load_attack_data()
         return ATTACK_DATA[name]
+
+
+### Tests
+def test_load_temtem_data():
+    from test_data import GYALIS_DATA, PIGEPIC_DATA
+
+    load_temtem_data()
+
+    assert TEMTEM_DATA['Gyalis'] == GYALIS_DATA
+    assert TEMTEM_DATA['Pigepic'] == PIGEPIC_DATA
+
+def test_load_attack_data():
+    from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA
+
+    load_attack_data()
+
+    assert ATTACK_DATA['Beta Burst'] == BETA_BURST_DATA
+    assert ATTACK_DATA['High-pressure Water'] == HIGHPRESSURE_WATER_DATA
+    assert ATTACK_DATA['Stone Wall'] == STONE_WALL_DATA
+
+def test_lookup_temtem():
+    from test_data import GYALIS_DATA, PIGEPIC_DATA
+
+    assert lookup_temtem_data('Gyalis') == GYALIS_DATA
+    assert lookup_temtem_data('Pigepic') == PIGEPIC_DATA
+
+def test_lookup_attack():
+    from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA
+
+    assert lookup_attack('Beta Burst') == BETA_BURST_DATA
+    assert lookup_attack('High-pressure Water') == HIGHPRESSURE_WATER_DATA
+    assert lookup_attack('Stone Wall') == STONE_WALL_DATA

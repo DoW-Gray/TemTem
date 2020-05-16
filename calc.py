@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from consts import (
+from static import (
     Stats,
     TYPE_EFFECTIVENESS,
     lookup_attack,
@@ -55,3 +55,27 @@ def effectiveness(attack_type, target):
 def n_hko(attacker, attack, target):
     damage = calc_damage(attacker, attack, target)
     return target.stats[Stats.HP] // damage + 1
+
+
+### Tests
+def test_effectiveness():
+    from test_data import GYALIS_TEM, KINU_TEM
+    from static import Types
+
+    assert effectiveness(Types.fire, GYALIS_TEM) == 2.0
+    assert effectiveness(Types.crystal, GYALIS_TEM) == 1.0
+    assert effectiveness(Types.electric, GYALIS_TEM) == 0.5
+
+    prev_types = KINU_TEM.types
+    KINU_TEM.types = (Types.nature, Types.crystal)
+    assert effectiveness(Types.fire, KINU_TEM) == 4.0
+    KINU_TEM.types = prev_types
+
+def test_calc_damage():
+    from test_data import GYALIS_TEM, KINU_TEM
+
+    assert calc_damage(KINU_TEM, 'Turbo Choreography', GYALIS_TEM) == 0
+    # TODO: confirm the below values
+    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 43
+    assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 149
+    assert calc_damage(GYALIS_TEM, 'Haito Uchi', KINU_TEM) == 26
