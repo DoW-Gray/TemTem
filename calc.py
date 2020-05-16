@@ -24,6 +24,7 @@ from static import (
     lookup_attack,
 )
 
+
 def calc_damage(attacker, attack, target):
     if isinstance(attack, str):
         attack = lookup_attack(attack)
@@ -43,6 +44,7 @@ def calc_damage(attacker, attack, target):
 
     return max(1, int(damage))
 
+
 def effectiveness(attack_type, target):
     return (
         TYPE_EFFECTIVENESS[attack_type][target.types[0]]
@@ -52,12 +54,13 @@ def effectiveness(attack_type, target):
         )
     )
 
+
 def n_hko(attacker, attack, target):
     damage = calc_damage(attacker, attack, target)
     return target.stats[Stats.HP] // damage + 1
 
 
-### Tests
+# Tests
 def test_effectiveness():
     from test_data import GYALIS_TEM, KINU_TEM
     from static import Types
@@ -70,6 +73,7 @@ def test_effectiveness():
     KINU_TEM.types = (Types.nature, Types.crystal)
     assert effectiveness(Types.fire, KINU_TEM) == 4.0
     KINU_TEM.types = prev_types
+
 
 def test_calc_damage():
     from test_data import GYALIS_TEM, KINU_TEM

@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 # For static.py
 from static import Stats, Types
+from temtem import TemTem
 
 GYALIS_DATA = (
     {
@@ -105,7 +106,6 @@ GYALIS_STATS = {
     Stats.SpD: 83,
 }
 
-from temtem import TemTem
 GYALIS_TEM = TemTem(
     'Gyalis',
     ['Heat Up', 'Crystal Bite', 'Haito Uchi', 'Sharp Stabs'],

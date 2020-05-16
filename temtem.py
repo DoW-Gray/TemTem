@@ -20,7 +20,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from static import (
     Stats,
-    Types,
     STAT_CONSTS,
     DEFAULT_LEVEL,
     lookup_temtem_data,
@@ -29,6 +28,7 @@ from static import (
 from log import error, debug
 
 SAMPLE_SETS = 'sets.txt'
+
 
 class TemTem:
     def __init__(
@@ -217,6 +217,7 @@ class TemTem:
     def fainted(self):
         return self.live_stats[Stats.HP] > 0
 
+
 def gen_tems(inpt):
     if isinstance(inpt, str):
         inpt = inpt.split('\n')
@@ -244,7 +245,7 @@ def gen_tems(inpt):
         try_yield_tem(next_tem)
 
 
-### Tests
+# Tests
 def test_temtem_class():
     from test_data import (
         GYALIS_IMPORT,
@@ -266,6 +267,7 @@ def test_temtem_class():
         assert imported.item == tem.item
         assert imported.trait == tem.trait
         assert imported.level == tem.level
+
 
 def test_gen_tems():
     from test_data import MULTI_IMPORT, GYALIS_TEM, KINU_TEM

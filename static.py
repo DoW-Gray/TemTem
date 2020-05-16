@@ -27,6 +27,7 @@ TEMTEM_CSV = 'temtem.csv'
 ATTACK_DATA = None
 ATTACK_CSV = 'attacks.csv'
 
+
 class Stats(Enum):
     HP = 1
     Sta = 2
@@ -35,6 +36,7 @@ class Stats(Enum):
     Def = 5
     SpA = 6
     SpD = 7
+
 
 class Types(Enum):
     neutral = 1
@@ -49,6 +51,7 @@ class Types(Enum):
     melee = 10
     crystal = 11
     toxic = 12
+
 
 STAT_CONSTS = {
     Stats.HP: (80, 20_000, 15),
@@ -234,6 +237,7 @@ TYPE_EFFECTIVENESS = {
 
 DEFAULT_LEVEL = 48
 
+
 def load_temtem_data():
     from csv import DictReader
     global TEMTEM_DATA
@@ -255,6 +259,7 @@ def load_temtem_data():
                 error('Lost data on %s when reloading base_stats.csv' % tem)
 
     TEMTEM_DATA = data
+
 
 def load_attack_data():
     from csv import DictReader
@@ -280,12 +285,14 @@ def load_attack_data():
 
     ATTACK_DATA = data
 
+
 def lookup_temtem_data(name):
     try:
         return TEMTEM_DATA[name]
     except (KeyError, TypeError):
         load_temtem_data()
         return TEMTEM_DATA[name]
+
 
 def lookup_attack(name):
     try:
@@ -295,7 +302,7 @@ def lookup_attack(name):
         return ATTACK_DATA[name]
 
 
-### Tests
+# Tests
 def test_load_temtem_data():
     from test_data import GYALIS_DATA, PIGEPIC_DATA
 
@@ -303,6 +310,7 @@ def test_load_temtem_data():
 
     assert TEMTEM_DATA['Gyalis'] == GYALIS_DATA
     assert TEMTEM_DATA['Pigepic'] == PIGEPIC_DATA
+
 
 def test_load_attack_data():
     from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA
@@ -313,11 +321,13 @@ def test_load_attack_data():
     assert ATTACK_DATA['High-pressure Water'] == HIGHPRESSURE_WATER_DATA
     assert ATTACK_DATA['Stone Wall'] == STONE_WALL_DATA
 
+
 def test_lookup_temtem():
     from test_data import GYALIS_DATA, PIGEPIC_DATA
 
     assert lookup_temtem_data('Gyalis') == GYALIS_DATA
     assert lookup_temtem_data('Pigepic') == PIGEPIC_DATA
+
 
 def test_lookup_attack():
     from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA

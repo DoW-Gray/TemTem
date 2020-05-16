@@ -21,12 +21,15 @@ from sys import stderr
 
 DEBUG = False
 
+
 def error(*args, **kwargs):
     print(*args, **kwargs, file=stderr)
+
 
 def debug(*args, **kwargs):
     if DEBUG:
         print(*args, **kwargs)
+
 
 def set_log_level(level):
     global DEBUG
