@@ -30,12 +30,12 @@ def calc_damage(attacker, attack, target):
         attack = lookup_attack(attack)
 
     damage = attacker.level * attack['DMG']
-    if cl := attack['Class'] == 'Status':
+    if (cl := attack['Class']) == 'Status':
         return 0
     elif cl == 'Physical':
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
     else:
-        damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
+        damage *= attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
     damage /= 200
     damage += 7
     damage *= effectiveness(attack['Type'], target)
@@ -79,7 +79,6 @@ def test_calc_damage():
     from test_data import GYALIS_TEM, KINU_TEM
 
     assert calc_damage(KINU_TEM, 'Turbo Choreography', GYALIS_TEM) == 0
-    # TODO: confirm the below values
-    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 43
+    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 51
     assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 149
-    assert calc_damage(GYALIS_TEM, 'Haito Uchi', KINU_TEM) == 26
+    assert calc_damage(GYALIS_TEM, 'Earth Wave', KINU_TEM) == 18

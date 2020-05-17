@@ -81,7 +81,7 @@ STONE_WALL_DATA = {
 GYALIS_IMPORT = '''Gyalis @ Ice Cube
 Trait: Resistant
 TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
-SVs: 0 SpA
+SVs: 1 SpA
 - Heat Up
 - Crystal Bite
 - Haito Uchi
@@ -102,7 +102,7 @@ GYALIS_STATS = {
     Stats.Spe: 129,
     Stats.Atk: 151,
     Stats.Def: 83,
-    Stats.SpA: 26,
+    Stats.SpA: 27,
     Stats.SpD: 83,
 }
 
@@ -110,7 +110,7 @@ GYALIS_TEM = TemTem(
     'Gyalis',
     ['Heat Up', 'Crystal Bite', 'Haito Uchi', 'Sharp Stabs'],
     'Resistant',
-    svs={'SpA': 0},
+    svs={'SpA': 1},
     tvs={'HP': 350, 'Sta': 4, 'Spe': 146, 'Atk': 498, 'Def': 1, 'SpD': 1},
     item='Ice Cube',
 )
