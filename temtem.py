@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from static import (
     Stats,
+    Statuses,
     STAT_CONSTS,
     DEFAULT_LEVEL,
     lookup_temtem_data,
@@ -68,6 +69,15 @@ class TemTem:
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self._calc_live_stats()
 
+        self.statuses = {}
+        self.resting = False
+        self.overexerted = 0
+        # we can't just use a bool for overexerted, because there's one turn
+        # the tem uses too much sta, then one turn it can't move, so two
+        # non-normal states we need to represent at end of turn.
+        # So use 2 = used too much sta this turn, 1 = overexerted, 0 = normal
+        self.fainted = False
+
     def __repr__(self):
         return "<TemTem %s>" % self.species
 
@@ -86,6 +96,7 @@ class TemTem:
             and self.boosts == other.boosts
         )
 
+    # private stat calculation funcs
     def _calc_stats(self):
         stats = {}
         for stat in Stats:
@@ -111,18 +122,120 @@ class TemTem:
                     live_stats[stat] = self.live_stats[stat]
                 except (KeyError, AttributeError):
                     live_stats[stat] = self.stats[stat]
-            elif boost := self.boosts[stat] > 0:
+            elif (boost := self.boosts[stat]) > 0:
                 live_stats[stat] = int(self.stats[stat] * (2 + boost) / 2)
             elif boost < 0:
-                live_stats[stat] = max(1, 2 * self.stats[stat] / (2 + boost))
+                live_stats[stat] = max(1, int(2 * self.stats[stat] / (2 - boost)))
             else:
                 live_stats[stat] = self.stats[stat]
         self.live_stats = live_stats
 
+    # public funcs for use in simulating battles
     def clear_boosts(self):
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self.live_stats = self.stats
 
+    def apply_boost(self, stat, boost):
+        if isinstance(stat, str):
+            stat = Stats[stat]
+
+        self.boosts[stat] += boost
+        if self.boosts[stat] > 5:
+            self.boosts[stat] = 5
+        elif self.boosts[stat] < -5:
+            self.boosts[stat] = -5
+
+        self._calc_live_stats()
+
+    def apply_status(self, status, turns):
+        from contextlib import suppress
+
+        if isinstance(status, str):
+            status = Statuses[status]
+
+        if status in self.statuses:
+            if status != Statuses.cold:
+                return
+            raise NotImplementedError()  # TODO: work out how frozen works here
+        elif status in (Statuses.cold, Statuses.frozen):
+            with suppress(KeyError):
+                del self.statuses[Statuses.burned]
+        elif status == Statuses.burned:
+            with suppress(KeyError):
+                del self.statuses[Statuses.cold]
+                del self.statuses[Statuses.frozen]
+
+        if len(self.statuses) == 2:
+            # remove oldest status to replace with new status condition
+            del self.statuses[
+                sorted(self.statuses, key=lambda x: self.statuses[x]['existed'])[0]
+            ]
+
+        self.statuses[status] = {'remaining': turns, 'existed': 0}
+
+    def end_turn(self):
+        '''
+        handle various things that need to be done at the end of each turn:
+          - status effects update / run out
+          - handle stamina regeneration and overexertion
+        '''
+        from math import ceil, floor
+
+        # update status conditions
+        new_statuses = {}
+        for status, details in self.statuses.items():
+            if status == Statuses.poisoned:
+                self.take_damage(ceil(self.stats[Stats.HP] / 8))
+            elif status == Statuses.burned:
+                self.take_damage(ceil(self.stats[Stats.HP] / 16))
+            elif status == Statuses.regenerated:
+                self.take_damage(floor(self.stats[Stats.HP] / 10))
+            elif status == Statuses.doomed and details['remaining'] == 1:
+                # TODO: do I want a different "become KO'd" method?
+                self.take_damage(self.stats[Stats.HP])
+
+            if details['remaining'] > 1:
+                new_statuses[status] = {
+                    'remaining': details['remaining'] - 1,
+                    'existed': details['existed'] + 1,
+                }
+            elif status == Statuses.asleep:
+                # Don't need to check either alerted or immune isn't in statuses
+                # because it's impossible to have had one and also be asleep.
+                new_statuses[Statuses.alerted] = {'remaining': 1, 'existed': 0}
+
+        self.statuses = new_statuses
+
+        # update overexertion
+        if self.overexerted:
+            self.overexerted -= 1
+
+        # update stamina
+        live_sta = self.live_stats[Stats.Sta]
+        sta = self.stats[Stats.sta]
+        denom = 5 if self.resting else 20
+        self.live_stats[Stats.Sta] = min(sta, live_sta + 1 + ceil(sta / denom))
+        self.resting = False
+
+    def take_damage(self, damage):
+        '''
+        take damage or heal
+        '''
+        if self.fainted or not damage:
+            return
+
+        assert isinstance(damage, int)
+
+        self.live_stats[Stats.HP] -= damage
+
+        if self.live_stats[Stats.HP] <= 0:
+            self.fainted = True
+            self.live_stats[Stats.HP] = 0
+        elif self.live_stats[Stats.HP] > self.stats[Stats.HP]:
+            # can't heal above max HP
+            self.live_stats[Stats.HP] = self.stats[Stats.HP]
+
+    # import / export functions
     @classmethod
     def from_importable(cls, importable):
         """
@@ -213,10 +326,6 @@ class TemTem:
 
         return res
 
-    @property
-    def fainted(self):
-        return self.live_stats[Stats.HP] > 0
-
 
 def gen_tems(inpt):
     if isinstance(inpt, str):
@@ -255,9 +364,26 @@ def test_temtem_class():
         KINU_TEM,
     )
 
+    # test stat calculation
     assert GYALIS_TEM.stats == GYALIS_STATS
+
+    # test boost application and TemTem._calc_live_stats
+    GYALIS_TEM.apply_boost(Stats.Atk, 2)
+    assert GYALIS_TEM.live_stats[Stats.Atk] == 302
+    GYALIS_TEM.apply_boost(Stats.Atk, 1)
+    assert GYALIS_TEM.live_stats[Stats.Atk] == 377
+    GYALIS_TEM.apply_boost(Stats.Def, -6)
+    assert GYALIS_TEM.boosts[Stats.Def] == -5
+    assert GYALIS_TEM.live_stats[Stats.Def] == 23
+    GYALIS_TEM.clear_boosts()
+    assert GYALIS_TEM.live_stats == GYALIS_STATS
+
+    # TODO: test clear_boosts, apply_boost, apply_status, end_turn, take_damage
+
+    # test TemTem.export
     assert GYALIS_TEM.export() == GYALIS_IMPORT
 
+    # test TemTem.from_importable
     gyalis_import = TemTem.from_importable(GYALIS_IMPORT)
     kinu_import = TemTem.from_importable(KINU_IMPORT)
     for imported, tem in ((gyalis_import, GYALIS_TEM), (kinu_import, KINU_TEM)):

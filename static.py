@@ -53,6 +53,25 @@ class Types(Enum):
     toxic = 12
 
 
+class Statuses(Enum):
+    cold = 1
+    frozen = 2
+    asleep = 3
+    trapped = 4
+    doomed = 5
+    seized = 6
+    poisoned = 7
+    burned = 8
+    exhausted = 9
+    vigorized = 10
+    immune = 11
+    regenerated = 12
+    nullified = 13
+    evading = 14
+    alerted = 15
+    exiled = 16
+
+
 STAT_CONSTS = {
     Stats.HP: (80, 20_000, 15),
     Stats.Sta: (200, 25_000, 20),

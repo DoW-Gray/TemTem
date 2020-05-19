@@ -22,6 +22,14 @@ Python3.8 was chosen for a number of reasons:
     should be pretty simple to translate over.
  - It's the most fun to use, and the language I'm most used to using.
 
+## Contributing
+Please feel free to add to this codebase! I haven't created github issues for
+what still needs to be done, but please reach out to me if you'd like to know
+what needs to be worked on, or have an idea you'd like to build.
+
+Pull requests are also welcome! It would be great if you could confirm that
+pytest and flake8 pass.
+
 ## Licensing and Credits
 All code is copyright (c) DoW 2020, and licensed under GPL 2.0.
 

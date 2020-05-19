@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from static import (
     Stats,
+    Statuses,
     TYPE_EFFECTIVENESS,
     lookup_attack,
 )
@@ -30,15 +31,20 @@ def calc_damage(attacker, attack, target):
         attack = lookup_attack(attack)
 
     damage = attacker.level * attack['DMG']
+    if Statuses.burned in attacker.statuses:
+        damage *= 0.7
+
     if (cl := attack['Class']) == 'Status':
         return 0
     elif cl == 'Physical':
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
     else:
         damage *= attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
+
     damage /= 200
     damage += 7
     damage *= effectiveness(attack['Type'], target)
+
     if attack['Type'] in attacker.types:
         damage *= 1.5  # STAB
 
@@ -46,6 +52,9 @@ def calc_damage(attacker, attack, target):
 
 
 def effectiveness(attack_type, target):
+    if Statuses.nullified in target.statuses:
+        return 1.0
+
     return (
         TYPE_EFFECTIVENESS[attack_type][target.types[0]]
         * (
@@ -82,3 +91,10 @@ def test_calc_damage():
     assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 51
     assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 149
     assert calc_damage(GYALIS_TEM, 'Earth Wave', KINU_TEM) == 18
+
+    GYALIS_TEM.apply_status(Statuses.burned, 2)
+    assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 110
+    GYALIS_TEM.statuses = {}
+    KINU_TEM.apply_status(Statuses.burned, 2)
+    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 39
+    KINU_TEM.statuses = {}
