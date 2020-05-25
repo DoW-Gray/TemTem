@@ -281,7 +281,7 @@ def load_temtem_data():
 
 
 def load_attack_data():
-    from yaml import load
+    import yaml
     global ATTACK_DATA
 
     def apply_effect_enums(effects):
@@ -301,7 +301,7 @@ def load_attack_data():
         return tmp_dict
 
     with open(ATTACK_YAML, 'r') as fp:
-        data = load(fp)
+        data = yaml.load(fp, Loader=yaml.FullLoader)
 
     for attack, atk_data in data.items():
         atk_data['type'] = Types[atk_data['type']]
