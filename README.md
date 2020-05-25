@@ -22,13 +22,28 @@ Python3.8 was chosen for a number of reasons:
     should be pretty simple to translate over.
  - It's the most fun to use, and the language I'm most used to using.
 
+## Completeness
+- [x] Import / Export TemTems from the text format
+- [x] Correct stat calculation, including boosts
+- [x] Static data for all tems and attacks, which can be read into python
+- [x] Damage calculation, excluding weird things like Traits, Items, or
+    Hyperkinetic Strike
+- [ ] Statuses (mostly done, but a few things left to handle)
+- [ ] Handling stamina (mostly done)
+- [ ] Most move effects e.g. boosting stats (shouldn't take much effort)
+- [ ] Handling Traits
+- [ ] Handling Items
+- [ ] Actually simulating a whole battle - there's a few more things that need
+    to be coded for this, e.g. attack targeting, move priority, move hold, what
+    happens to tems that are switched out, etc.
+
 ## Contributing
-Please feel free to add to this codebase! I haven't created github issues for
-what still needs to be done, but please reach out to me if you'd like to know
-what needs to be worked on, or have an idea you'd like to build.
+Please feel free to add to this codebase! If you'd like to work on one of the
+above points, or have an idea you'd like to build, please feel free to talk to
+me about it, or even just start working on it!
 
 Pull requests are also welcome! It would be great if you could confirm that
-pytest and flake8 pass.
+pytest and flake8 pass. Adding your own tests would also be helpful!
 
 ## Licensing and Credits
 All code is copyright (c) DoW 2020, and licensed under GPL 2.0.
