@@ -30,22 +30,22 @@ def calc_damage(attacker, attack, target):
     if isinstance(attack, str):
         attack = lookup_attack(attack)
 
-    damage = attacker.level * attack['DMG']
+    if (cl := attack['class']) == 'Status':
+        return 0
+    elif cl == 'Physical':
+        damage = attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
+    else:
+        damage = attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
+
+    damage *= attacker.level * attack['damage']
     if Statuses.burned in attacker.statuses:
         damage *= 0.7
 
-    if (cl := attack['Class']) == 'Status':
-        return 0
-    elif cl == 'Physical':
-        damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
-    else:
-        damage *= attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
-
     damage /= 200
     damage += 7
-    damage *= effectiveness(attack['Type'], target)
+    damage *= effectiveness(attack['type'], target)
 
-    if attack['Type'] in attacker.types:
+    if attack['type'] in attacker.types:
         damage *= 1.5  # STAB
 
     return max(1, int(damage))

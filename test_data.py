@@ -19,7 +19,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 # For static.py
-from static import Stats, Types
+from static import Stats, Types, Statuses
 from temtem import TemTem
 
 GYALIS_DATA = (
@@ -47,34 +47,63 @@ PIGEPIC_DATA = (
     (Types.wind, None),
 )
 BETA_BURST_DATA = {
-    'Name': 'Beta Burst',
-    'Type': Types.mental,
-    'Synergy Type': None,
-    'Class': 'Special',
-    'DMG': 100,
-    'STA': 23,
-    'Hold': 0,
-    'Priority': 2,
+    'type': Types.mental,
+    'class': 'Special',
+    'damage': 100,
+    'stamina': 23,
+    'hold': 0,
+    'priority': 2,
+    'target': 'other',
 }
 HIGHPRESSURE_WATER_DATA = {
-    'Name': 'High-pressure Water',
-    'Type': Types.water,
-    'Synergy Type': Types.fire,
-    'Class': 'Special',
-    'DMG': 50,
-    'STA': 15,
-    'Hold': 1,
-    'Priority': 2,
+    'type': Types.water,
+    'synergy type': Types.fire,
+    'class': 'Special',
+    'damage': 50,
+    'stamina': 15,
+    'hold': 1,
+    'priority': 2,
+    'target': 'other',
+}
+HIGHPRESS_WATER_DATA_FIRE = {
+    'type': Types.water,
+    'class': 'Special',
+    'damage': 50,
+    'stamina': 15,
+    'hold': 1,
+    'priority': 2,
+    'target': 'other',
+    'effects': {
+        Statuses.burned: 3,
+    },
 }
 STONE_WALL_DATA = {
-    'Name': 'Stone Wall',
-    'Type': Types.earth,
-    'Synergy Type': None,
-    'Class': 'Status',
-    'DMG': 0,
-    'STA': 18,
-    'Hold': 1,
-    'Priority': 1,
+    'type': Types.earth,
+    'class': 'Status',
+    'damage': 0,
+    'stamina': 18,
+    'hold': 1,
+    'priority': 1,
+    'target': 'single',
+    'effects': {
+        Stats.Def: 2,
+        Stats.SpD: 1,
+    },
+}
+STARE_DATA = {
+    'type': Types.mental,
+    'class': 'Status',
+    'damage': 0,
+    'stamina': 6,
+    'hold': 0,
+    'priority': 2,
+    'target': 'other',
+    'effects': {
+        Stats.Def: -1,
+    },
+    'self': {
+        Statuses.alerted: 2,
+    },
 }
 
 # for temtem.py

@@ -25,7 +25,7 @@ from log import error
 TEMTEM_DATA = None
 TEMTEM_CSV = 'temtem.csv'
 ATTACK_DATA = None
-ATTACK_CSV = 'attacks.csv'
+ATTACK_YAML = 'attacks.yaml'
 
 
 class Stats(Enum):
@@ -281,26 +281,41 @@ def load_temtem_data():
 
 
 def load_attack_data():
-    from csv import DictReader
+    from yaml import load
     global ATTACK_DATA
-    data = {}
-    with open(ATTACK_CSV, 'r') as fp:
-        for row in DictReader(fp):
-            res = {}
-            for col, cell in row.items():
-                if col in ('DMG', 'STA', 'Hold', 'Priority'):
-                    res[col] = 0 if cell == '-' else int(cell)
-                elif col.endswith('Type'):
-                    res[col] = Types[cell] if cell else None
-                else:
-                    res[col] = cell
-            data[row['Name']] = res
 
-    # sanity checks
-    if ATTACK_DATA is not None:
-        for attack in ATTACK_DATA:
-            if attack not in data:
-                error('Lost data on %s when reloading attacks.csv' % attack)
+    def apply_effect_enums(effects):
+        """
+        Change strings like 'Def' or 'burned' to enums like Stats.Def or
+        Statuses.burned
+        """
+        tmp_dict = {}
+        for key, value in effects.items():
+            try:
+                tmp_dict[Stats[key]] = value
+            except KeyError:
+                try:
+                    tmp_dict[Statuses[key]] = value
+                except KeyError:
+                    tmp_dict[key] = value
+        return tmp_dict
+
+    with open(ATTACK_YAML, 'r') as fp:
+        data = load(fp)
+
+    for attack, atk_data in data.items():
+        atk_data['type'] = Types[atk_data['type']]
+        if 'synergy type' in atk_data:
+            atk_data['synergy type'] = Types[atk_data['synergy type']]
+
+        if 'damage' not in atk_data:
+            atk_data['damage'] = 0
+
+        if 'effects' in atk_data:
+            atk_data['effects'] = apply_effect_enums(atk_data['effects'])
+
+        if 'self' in atk_data:
+            atk_data['self'] = apply_effect_enums(atk_data['self'])
 
     ATTACK_DATA = data
 
