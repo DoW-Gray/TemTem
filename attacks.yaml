@@ -19,11 +19,13 @@ Psychic Collaborator:
 Psychic Collaborator +mental:
     class: Special
     type: mental
+    synergy move: true
     damage: 170
     stamina: 19
     hold: 1
     priority: 2
     target: other
+    synergy move: true
 Cold Breeze:
     class: Special
     type: wind
@@ -77,7 +79,7 @@ Novice Punch:
     priority: 2
     target: single
     synergy type: melee
-Novice Punch +Melee:
+Novice Punch +melee:
     class: Physical
     type: neutral
     damage: 51
@@ -85,6 +87,7 @@ Novice Punch +Melee:
     hold: 0
     priority: 2
     target: single
+    synergy move: true
 Kick:
     class: Physical
     type: neutral
@@ -176,7 +179,7 @@ Urushiol:
     priority: 2
     target: other
     synergy type: toxic
-Urushiol +Toxic:
+Urushiol +toxic:
     class: Physical
     type: toxic
     damage: 41
@@ -186,6 +189,7 @@ Urushiol +Toxic:
     target: other
     effects:
         poisoned: 4
+    synergy move: true
 Shrill Voice:
     class: Special
     type: neutral
@@ -211,7 +215,7 @@ Energy Manipulation:
     priority: 3
     target: other
     synergy type: nature
-Energy Manipulation +Nature:
+Energy Manipulation +nature:
     class: Special
     type: mental
     damage: 60
@@ -221,6 +225,7 @@ Energy Manipulation +Nature:
     target: other
     effects:
         exhausted: 1
+    synergy move: true
 Chain Lightning:
     class: Special
     type: electric
@@ -264,7 +269,7 @@ Toxic Plume:
     effects:
         poisoned: 1
     synergy type: crystal
-Toxic Plume +Crystal:
+Toxic Plume +crystal:
     class: Special
     type: toxic
     damage: 50
@@ -275,6 +280,7 @@ Toxic Plume +Crystal:
     effects:
         poisoned: 1
         Atk: -1
+    synergy move: true
 Rend:
     class: Special
     type: neutral
@@ -294,7 +300,7 @@ High-pressure Water:
     priority: 2
     target: other
     synergy type: fire
-High-pressure Water +Fire:
+High-pressure Water +fire:
     class: Special
     type: water
     damage: 50
@@ -304,6 +310,7 @@ High-pressure Water +Fire:
     target: other
     effects:
         burned: 3
+    synergy move: true
 Toxic Slime:
     class: Physical
     type: toxic
@@ -355,7 +362,7 @@ Ice Cubes:
     priority: 2
     target: other
     synergy type: water
-Ice Cubes +Water:
+Ice Cubes +water:
     class: Physical
     type: water
     damage: 54
@@ -363,6 +370,7 @@ Ice Cubes +Water:
     hold: 0
     priority: 2
     target: other
+    synergy move: true
 Mechanical Heat:
     class: Physical
     type: fire
@@ -422,7 +430,7 @@ Crystal Dust:
     priority: 3
     target: other
     synergy type: wind
-Crystal Dust +Wind:
+Crystal Dust +wind:
     class: Special
     type: crystal
     damage: 80
@@ -430,6 +438,7 @@ Crystal Dust +Wind:
     hold: 0
     priority: 4
     target: other
+    synergy move: true
 Tentacle Whip:
     class: Physical
     type: neutral
@@ -475,7 +484,7 @@ Rampage:
     priority: 1
     target: whole team
     synergy type: melee
-Rampage +Melee:
+Rampage +melee:
     class: Physical
     type: neutral
     damage: 85
@@ -483,6 +492,7 @@ Rampage +Melee:
     hold: 1
     priority: 1
     target: whole team
+    synergy move: true
 Aqua Bullet Hell:
     class: Special
     type: water
@@ -500,7 +510,7 @@ Tsunami:
     priority: 2
     target: team or ally
     synergy type: wind
-Tsunami +Wind:
+Tsunami +wind:
     class: Special
     type: water
     damage: 80
@@ -510,6 +520,7 @@ Tsunami +Wind:
     target: team or ally
     effects:
         cold: 3
+    synergy move: true
 Magma Cannon:
     class: Special
     type: fire
@@ -545,7 +556,7 @@ Meteor Swarm:
     priority: 1
     target: team or ally
     synergy type: fire
-Meteor Swarm +Fire:
+Meteor Swarm +fire:
     class: Physical
     type: fire
     damage: 75
@@ -555,6 +566,7 @@ Meteor Swarm +Fire:
     target: team or ally
     effects:
         burned: 1
+    synergy move: true
 Electric Storm:
     class: Special
     type: electric
@@ -596,7 +608,7 @@ Aqua Stone:
     priority: 2
     target: other
     synergy type: earth
-Aqua Stone +Earth:
+Aqua Stone +earth:
     class: Physical
     type: water
     damage: 104
@@ -604,6 +616,7 @@ Aqua Stone +Earth:
     hold: 1
     priority: 2
     target: other
+    synergy move: true
 Toxic Ink:
     class: Physical
     type: toxic
@@ -701,7 +714,7 @@ Awful Song:
     priority: 2
     target: other
     synergy type: neutral
-Awful Song +Neutral:
+Awful Song +neutral:
     class: Special
     type: neutral
     damage: 96
@@ -709,6 +722,7 @@ Awful Song +Neutral:
     hold: 1
     priority: 2
     target: team or ally
+    synergy move: true
 Psy Surge:
     class: Special
     type: mental
@@ -726,7 +740,7 @@ Water Cannon:
     priority: 2
     target: other
     synergy type: toxic
-Water Cannon +Toxic:
+Water Cannon +toxic:
     class: Special
     type: water
     damage: 100
@@ -736,6 +750,7 @@ Water Cannon +Toxic:
     target: other
     effects:
         poisoned: 2
+    synergy move: true
 Noxious Bomb:
     class: Physical
     type: toxic
@@ -809,7 +824,7 @@ Water Cutting Lily:
     priority: 3
     target: single
     synergy type: water
-Water Cutting Lily +Water:
+Water Cutting Lily +water:
     class: Physical
     type: nature
     damage: 144
@@ -817,6 +832,7 @@ Water Cutting Lily +Water:
     hold: 0
     priority: 3
     target: single
+    synergy move: true
 Hypoxia:
     class: Special
     type: wind
@@ -842,7 +858,7 @@ Stone Ball:
     priority: 1
     target: single
     synergy type: fire
-Stone Ball +Fire:
+Stone Ball +fire:
     class: Physical
     type: earth
     damage: 130
@@ -852,6 +868,7 @@ Stone Ball +Fire:
     target: single
     effects:
         burned: 2
+    synergy move: true
 Crystal Plume Gatling:
     class: Physical
     type: crystal
@@ -1010,7 +1027,7 @@ Paralysing Poison:
         poisoned: 2
         trapped: 2
     synergy type: toxic
-Paralysing Poison +Poison:
+Paralysing Poison +toxic:
     class: Status
     type: toxic
     stamina: 20
@@ -1020,6 +1037,7 @@ Paralysing Poison +Poison:
     effects:
         poisoned: 4
         trapped: 4
+    synergy move: true
 Toxic Spores:
     class: Status
     type: toxic
@@ -1228,7 +1246,7 @@ Misogi:
     effects:
         misogi: true
     synergy type: water
-Misogi +Water:
+Misogi +water:
     class: Status
     type: water
     stamina: 22
@@ -1238,6 +1256,7 @@ Misogi +Water:
     effects:
         misogi: true
         immune: 3
+    synergy move: true
 Tenderness:
     class: Status
     type: neutral
@@ -1257,7 +1276,7 @@ Flood:
     effects:
         Spd: -1
     synergy type: earth
-Flood +Earth:
+Flood +earth:
     class: Status
     type: water
     stamina: 22
@@ -1266,6 +1285,7 @@ Flood +Earth:
     target: team or ally
     effects:
         Spd: -2
+    synergy move: true
 Confiscate:
     class: Status
     type: neutral
@@ -1351,7 +1371,7 @@ Revitalize:
     effects:
         HP: 0.25
     synergy type: nature
-Revitalize +Nature:
+Revitalize +nature:
     class: Status
     type: nature
     stamina: 11
@@ -1362,6 +1382,7 @@ Revitalize +Nature:
         HP: 0.25
     self:
         HP: 0.1
+    synergy move: true
 Turbo Choreography:
     class: Status
     type: wind
@@ -1372,7 +1393,7 @@ Turbo Choreography:
     effects:
         Spd: 1
     synergy type: wind
-Turbo Choreography +Wind:
+Turbo Choreography +wind:
     class: Status
     type: wind
     stamina: 27
@@ -1381,6 +1402,7 @@ Turbo Choreography +Wind:
     target: whole team
     effects:
         Spd: 2
+    synergy move: true
 Show Off:
     class: Status
     type: melee
@@ -1391,7 +1413,7 @@ Show Off:
     effects:
         Atk: 1
     synergy type: melee
-Show Off +Melee:
+Show Off +melee:
     class: Status
     type: melee
     stamina: 7
@@ -1401,6 +1423,7 @@ Show Off +Melee:
     effects:
         Atk: 1
         vigorized: 3
+    synergy move: true
 Cage:
     class: Status
     type: neutral
@@ -1432,6 +1455,7 @@ Hallucination +mental:
     effects:
         exhausted: 2
         trapped: 2
+    synergy move: true
 Intimidation:
     class: Status
     type: mental

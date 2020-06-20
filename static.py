@@ -256,6 +256,22 @@ TYPE_EFFECTIVENESS = {
 
 DEFAULT_LEVEL = 48
 
+ITEM_DAMAGE_TYPES = {
+    Types.fire: ('Fire Chip', 'ICe Cube'),
+    Types.wind: ('Hand Fan', 'Coat'),
+    Types.electric: ('NO SUCH ITEM', 'Lightning Rod'),
+    Types.water: ('NO SUCH ITEM', 'Umbrella'),
+    Types.crystal: ('NO SUCH ITEM', 'Rock Shield'),
+    Types.toxic: ('NO SUCH ITEM', 'Tucma Mask'),
+}
+
+STATUS_ITEMS = {
+    Statuses.burned: 'Pansunscreen',
+    Statuses.doomed: 'Talisman',
+    Statuses.asleep: 'Energy Drink',
+    Statuses.trapped: 'Grease',
+}
+
 
 def load_temtem_data():
     from csv import DictReader
@@ -304,6 +320,7 @@ def load_attack_data():
         data = yaml.load(fp, Loader=yaml.FullLoader)
 
     for attack, atk_data in data.items():
+        atk_data['name'] = attack
         atk_data['type'] = Types[atk_data['type']]
         if 'synergy type' in atk_data:
             atk_data['synergy type'] = Types[atk_data['synergy type']]

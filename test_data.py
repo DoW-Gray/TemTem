@@ -47,6 +47,7 @@ PIGEPIC_DATA = (
     (Types.wind, None),
 )
 BETA_BURST_DATA = {
+    'name': 'Beta Burst',
     'type': Types.mental,
     'class': 'Special',
     'damage': 100,
@@ -56,6 +57,7 @@ BETA_BURST_DATA = {
     'target': 'other',
 }
 HIGHPRESSURE_WATER_DATA = {
+    'name': 'High-pressure Water',
     'type': Types.water,
     'synergy type': Types.fire,
     'class': 'Special',
@@ -66,6 +68,7 @@ HIGHPRESSURE_WATER_DATA = {
     'target': 'other',
 }
 HIGHPRESS_WATER_DATA_FIRE = {
+    'name': 'High-pressure Water +Fire',
     'type': Types.water,
     'class': 'Special',
     'damage': 50,
@@ -78,6 +81,7 @@ HIGHPRESS_WATER_DATA_FIRE = {
     },
 }
 STONE_WALL_DATA = {
+    'name': 'Stone Wall',
     'type': Types.earth,
     'class': 'Status',
     'damage': 0,
@@ -91,6 +95,7 @@ STONE_WALL_DATA = {
     },
 }
 STARE_DATA = {
+    'name': 'Stare',
     'type': Types.mental,
     'class': 'Status',
     'damage': 0,
@@ -149,4 +154,11 @@ KINU_TEM = TemTem(
     'Protector',
     tvs={'HP': 500, 'Def': 455, 'SpA': 45},
     item='Grease',
+)
+VOLAREND_TEM = TemTem(
+    'Volarend',
+    ['Wind Blade', 'Hyperkinetic Strike', 'Blizzard', 'Toxic Plume'],
+    'Aerobic',
+    tvs={'HP': 408, 'Sta': 90, 'Spe': 500, 'Def': 1, 'SpA': 1},
+    item='Hand Fan',
 )
