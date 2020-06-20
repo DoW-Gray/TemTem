@@ -28,11 +28,11 @@ Python3.8 was chosen for a number of reasons:
 - [x] Static data for all tems and attacks, which can be read into python
 - [x] Damage calculation, excluding weird things like Traits, Items, or
     Hyperkinetic Strike
-- [ ] Statuses (mostly done, but a few things left to handle)
+- [x] Statuses (mostly done, but a few things left to handle)
 - [ ] Handling stamina (mostly done)
-- [ ] Most move effects e.g. boosting stats (shouldn't take much effort)
-- [ ] Handling Traits
-- [ ] Handling Items
+- [x] Most move effects e.g. boosting stats (shouldn't take much effort)
+- [x] Handling Traits
+- [x] Handling Items
 - [ ] Actually simulating a whole battle - there's a few more things that need
     to be coded for this, e.g. attack targeting, move priority, move hold, what
     happens to tems that are switched out, etc.
