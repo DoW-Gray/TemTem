@@ -1,6 +1,6 @@
 Gyalis @ Ice Cube
 Trait: Resistant
-TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
+TVs: 347 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
 - Heat Up
 - Crystal Bite
 - Haito Uchi
@@ -8,7 +8,7 @@ TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
 
 Raize @ Umbrella
 Trait: Demoralize
-TVs: 500 HP / 500 SpD
+TVs: 497 HP / 13 Spe / 490 SpD
 - Embers
 - King's Roar
 - Roar
@@ -16,7 +16,7 @@ TVs: 500 HP / 500 SpD
 
 Volarend @ Hand Fan
 Trait: Aerobic
-TVs: 408 HP / 90 Sta / 500 Spe / 1 Def / 1 SpA
+TVs: 404 HP / 90 Sta / 498 Spe / 1 Def / 1 SpA
 - Wind Blade
 - Hyperkinetic Strike
 - Blizzard
@@ -24,7 +24,7 @@ TVs: 408 HP / 90 Sta / 500 Spe / 1 Def / 1 SpA
 
 Volarend @ Hand Fan
 Trait: Anaerobic
-TVs: 500 HP / 90 Sta / 410 Atk
+TVs: 495 HP / 90 Sta / 410 Atk / 1 Def
 - Feather Gatling
 - Noxious Bomb
 - Toxic Plume
@@ -32,7 +32,7 @@ TVs: 500 HP / 90 Sta / 410 Atk
 
 Kinu @ Grease
 Trait: Protector
-TVs: 500 HP / 455 Def / 45 SpA
+TVs: 498 HP / 453 Def / 45 SpA
 - Beta Burst
 - Revitalize
 - Stone Wall
@@ -48,7 +48,7 @@ TVs: 495 HP / 2 Sta / 493 Spe / 2 Def / 2 SpD
 
 Nidrasil @ Ice Cube
 Trait: Tri-Apothecary
-TVs: 500 HP / 500 Def
+TVs: 498 HP / 6 Sta / 1 Spe / 494 Def
 - Allergic Spread
 - Bark Shield
 - Toxic Ink
@@ -56,7 +56,7 @@ TVs: 500 HP / 500 Def
 
 Zenoreth @ Ice Cube
 Trait: Channeler
-TVs: 190 HP / 310 Spe / 500 SpA
+TVs: 185 HP / 320 Spe / 492 SpA
 - Madness Buff
 - Crystal Spikes
 - Footwork
@@ -64,7 +64,7 @@ TVs: 190 HP / 310 Spe / 500 SpA
 
 Valash @ Energy Drink
 Trait: Scavenger
-TVs: 500 Spe / 500 SpA
+TVs: 390 HP / 73 Sta / 34 Spe / 498 SpA
 - Crystal Spikes
 - Crystal Dust
 - Footwork
@@ -72,7 +72,7 @@ TVs: 500 Spe / 500 SpA
 
 Valash @ Energy Drink
 Trait: Determined
-TVs: 500 Spe / 500 Atk
+TVs: 10 Sta / 492 Spe / 498 Atk
 - Crystal Bite
 - Ninja Jutsu
 - Footwork
@@ -80,7 +80,7 @@ TVs: 500 Spe / 500 Atk
 
 Myx @ Sweatband
 Trait: Puppet Master
-TVs: 393 HP / 1 Sta / 13 Spe / 95 Def / 493 SpA / 5 SpD
+TVs: 393 HP / 13 Spe / 95 Def / 493 SpA / 5 SpD
 - Crystal Spikes
 - Energy Manipulation
 - Psy Surge
@@ -88,7 +88,7 @@ TVs: 393 HP / 1 Sta / 13 Spe / 95 Def / 493 SpA / 5 SpD
 
 Saipat @ Energy Drink
 Trait: Toxic Affinity
-TVs: 500 Spe / 500 Atk
+TVs: 10 HP / 496 Spe / 494 Atk
 - Ice Shuriken
 - Toxic Ink
 - Nicho Sai
@@ -96,7 +96,7 @@ TVs: 500 Spe / 500 Atk
 
 Ukama @ Lightning Rod
 Trait: Hydrologist
-TVs: 500 Spe / 500 SpA
+TVs: 7 HP / 500 Spe / 493 SpA
 - Water Cannon
 - Flood
 - Blizzard
@@ -104,7 +104,7 @@ TVs: 500 Spe / 500 SpA
 
 Tuvine @ Ice Cube
 Trait: Determined
-TVs: 200 HP / 500 Atk / 300 SpD
+TVs: 198 HP / 2 Sta / 13 Spe / 492 Atk / 1 Def / 294 SpD
 - Crystal Plume Gatling
 - Diamond Fort
 - Feather Gatling
@@ -112,7 +112,7 @@ TVs: 200 HP / 500 Atk / 300 SpD
 
 Vulcrane @ Talisman
 Trait: Vigorous
-TVs: 500 HP / 500 Atk
+TVs: 497 HP / 5 Spe / 498 Atk
 - Stone Ball
 - Embers
 - Ninja Jutsu
@@ -120,7 +120,7 @@ TVs: 500 HP / 500 Atk
 
 Mudrid @ Sweatband
 Trait: Resistant
-TVs: 500 Spe / 500 Atk
+TVs: 4 Sta / 496 Spe / 498 Atk
 - Crystal Bite
 - Stone Ball
 - Head Ram
@@ -128,7 +128,7 @@ TVs: 500 Spe / 500 Atk
 
 Raican @ Umbrella
 Trait: Motivator
-TVs: 500 HP / 300 Def / 200 SpD
+TVs: 498 HP / 6 Atk / 298 Def / 198 SpD
 - King's Roar
 - Embers
 - Meteor Swarm
@@ -136,7 +136,7 @@ TVs: 500 HP / 300 Def / 200 SpD
 
 Raican @ Fire Chip
 Trait: Prideful
-TVs: 500 Spe / 400 Atk / 100 SpA
+TVs: 8 Sta / 498 Spe / 392 Atk / 97 SpA
 - King's Roar
 - Fire Tornado
 - Meteor Swarm
@@ -144,7 +144,7 @@ TVs: 500 Spe / 400 Atk / 100 SpA
 
 Baboong @ Energy Drink
 Trait: Brawny
-TVs: 500 Spe / 500 Atk
+TVs: 4 HP / 1 Sta / 500 Spe / 491 Atk / 3 Def
 - Heat Up
 - Intimidation
 - Earth Wave
@@ -152,7 +152,7 @@ TVs: 500 Spe / 500 Atk
 
 Gazuma @ Rock Shield
 Trait: Receptive
-TVs: 500 Spe / 500 SpA
+TVs: 5 HP / 498 Spe / 497 SpA
 - Tesla Prison
 - Noxious Bomb
 - Electric Storm
@@ -160,7 +160,7 @@ TVs: 500 Spe / 500 SpA
 
 Anahir @ Energy Drink
 Trait: Flawed Crystal
-TVs: 500 HP / 500 Atk
+TVs: 495 HP / 1 Sta / 500 Atk / 3 SpD
 - Heat Up
 - Meteor Swarm
 - Crystal Bite
@@ -168,15 +168,15 @@ TVs: 500 HP / 500 Atk
 
 Platimous @ Coat
 Trait: Zen
-TVs: 385 HP / 105 Spe / 320 Atk / 190 SpA
+TVs: 385 HP / 104 Spe / 320 Atk / 190 SpA
 - Noxious Bomb
 - Aquatic Whirlwind
-- Paralyzing Poison
+- Paralysing Poison
 - Flood
 
 Skunch @ Pansunscreen
 Trait: Brawny
-TVs: 500 Spe / 500 Atk
+TVs: 2 HP / 500 Spe / 496 Atk
 - Haito Uchi
 - Oshi-Dashi
 - Fierce Claw
@@ -184,7 +184,7 @@ TVs: 500 Spe / 500 Atk
 
 Saku @ Sweatband
 Trait: Air Specialist
-TVs: 500 HP / 500 SpA
+TVs: 494 HP / 3 Spe / 4 Def / 495 SpA
 - Lifeful Sap
 - Urushiol
 - Bark Shield
@@ -200,7 +200,7 @@ TVs: 500 HP / 35 Sta / 263 Spe / 117 Def / 85 SpD
 
 Oceara @ Lightning Rod
 Trait: Hydrologist
-TVs: 500 Spe / 500 SpA
+TVs: 500 Spe / 498 SpA
 - Ice Shuriken
 - Blizzard
 - Aquatic Whirlwind
@@ -208,7 +208,7 @@ TVs: 500 Spe / 500 SpA
 
 Shuine @ Energy Drink
 Trait: Guardian
-TVs: 500 HP / 500 Def
+TVs: 495 HP / 498 Def
 - Crystal Bite
 - Flood
 - Relax
@@ -216,7 +216,7 @@ TVs: 500 HP / 500 Def
 
 Tental @ Sweatband
 Trait: Avenger
-TVs: 500 Spe / 500 SpA
+TVs: 10 HP / 493 Spe / 497 SpA
 - Beta Burst
 - Energy Manipulation
 - Madness Buff
@@ -224,15 +224,15 @@ TVs: 500 Spe / 500 SpA
 
 Tental @ Rock Shield
 Trait: Water Affinity
-TVs: 500 HP / 500 Spe
+TVs: 493 HP / 14 Sta / 493 Spe
 - Beta Burst
 - Block
 - Madness Buff
-- High-pressure Water 
+- High-pressure Water
 
 Noxolotl @ Pillow
 Trait: Trance
-TVs: 300 HP / 350 SpA / 350 SpD
+TVs: 294 HP / 12 Spe / 1 Atk / 342 SpA / 350 SpD
 - Narcoleptic Hit
 - Madness Buff
 - Hallucination
