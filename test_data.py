@@ -22,8 +22,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 from static import Stats, Types, Statuses
 from temtem import TemTem
 
-GYALIS_DATA = (
-    {
+GYALIS_DATA = {
+    'Stats': {
         Stats.HP: 86,
         Stats.Sta: 44,
         Stats.Spe: 100,
@@ -32,10 +32,26 @@ GYALIS_DATA = (
         Stats.SpA: 23,
         Stats.SpD: 61,
     },
-    (Types.crystal, Types.melee),
-)
-PIGEPIC_DATA = (
-    {
+    'Types': (Types.crystal, Types.melee),
+    'Traits': ('Mirroring', 'Resistant'),
+    'Moves': {
+        'Egg': ['Crystal Spikes', 'Crystallize', 'Heat Up', 'Earth Wave', 'Haito Uchi'],
+        'Level Up': [
+            'Glass Blade',
+            'Kick',
+            'Show Off',
+            'Sharp Stabs',
+            'Footwork',
+            'Block',
+            'Drill Impact',
+            'Crystal Bite',
+            'Ninja Jutsu'
+        ],
+        'TC': ['Awful Song', 'Antitoxins', 'Rend', 'Major Slash'],
+    },
+}
+PIGEPIC_DATA = {
+    'Stats': {
         Stats.HP: 54,
         Stats.Sta: 72,
         Stats.Spe: 58,
@@ -44,8 +60,31 @@ PIGEPIC_DATA = (
         Stats.SpA: 45,
         Stats.SpD: 72,
     },
-    (Types.wind, None),
-)
+    'Types': (Types.wind, None),
+    'Traits': ('Friendship', 'Fainted Curse'),
+    'Moves': {
+        'Egg': ['Hypnosis', 'Head Charge', 'Sharp Rain'],
+        'Level Up': [
+            'Bamboozle',
+            'Scratch',
+            'Nibble',
+            'Nimble',
+            'Heavy Blow',
+            'Wind Burst',
+            'Tornado',
+            'Oshi-Dashi',
+        ],
+        'TC': [
+            'Stone Wall',
+            'Turbo Choreography',
+            'Wake Up',
+            'Misogi',
+            'Confiscate',
+            'Relax',
+            'Major Slash'
+        ],
+    },
+}
 BETA_BURST_DATA = {
     'name': 'Beta Burst',
     'type': Types.mental,

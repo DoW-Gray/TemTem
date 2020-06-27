@@ -18,14 +18,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
+import os
+
 from enum import Enum
+import yaml
 
 from log import error
 
 TEMTEM_DATA = None
-TEMTEM_CSV = 'temtem.csv'
+TEMTEM_YAML = os.path.join('data', 'temtem.yaml')
 ATTACK_DATA = None
-ATTACK_YAML = 'attacks.yaml'
+ATTACK_YAML = os.path.join('data', 'attacks.yaml')
 
 
 class Stats(Enum):
@@ -274,30 +277,31 @@ STATUS_ITEMS = {
 
 
 def load_temtem_data():
-    from csv import DictReader
     global TEMTEM_DATA
-    data = {}
-    with open(TEMTEM_CSV, 'r') as fp:
-        for row in DictReader(fp):
-            base_stats = {}
-            for stat in Stats:
-                base_stats[stat] = int(row[stat.name])
-            t1 = row['Type 1']
-            t2 = row['Type 2']
-            types = (Types[t1], Types[t2] if t2 else None)
-            data[row['Name']] = (base_stats, types)
+    with open(TEMTEM_YAML, 'r') as fp:
+        data = yaml.load(fp, Loader=yaml.FullLoader)
+    for tem, tem_data in data.items():
+        tem_data['Stats'] = {}
+        for stat in Stats:
+            tem_data['Stats'][stat] = tem_data[stat.name]
+            del tem_data[stat.name]
+        t1 = tem_data['Type 1']
+        t2 = tem_data['Type 2']
+        tem_data['Types'] = (Types[t1], Types[t2] if t2 else None)
+        del tem_data['Type 1']
+        del tem_data['Type 2']
+        tem_data['Traits'] = tuple(tem_data['Traits'])
 
     # sanity checks
     if TEMTEM_DATA is not None:
         for tem in TEMTEM_DATA:
             if tem not in data:
-                error('Lost data on %s when reloading base_stats.csv' % tem)
+                error(f'Lost data on {tem} when reloading {TEMTEM_YAML}')
 
     TEMTEM_DATA = data
 
 
 def load_attack_data():
-    import yaml
     global ATTACK_DATA
 
     def apply_effect_enums(effects):
@@ -354,30 +358,13 @@ def lookup_attack(name):
 
 
 # Tests
-def test_load_temtem_data():
-    from test_data import GYALIS_DATA, PIGEPIC_DATA
-
-    load_temtem_data()
-
-    assert TEMTEM_DATA['Gyalis'] == GYALIS_DATA
-    assert TEMTEM_DATA['Pigepic'] == PIGEPIC_DATA
-
-
-def test_load_attack_data():
-    from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA
-
-    load_attack_data()
-
-    assert ATTACK_DATA['Beta Burst'] == BETA_BURST_DATA
-    assert ATTACK_DATA['High-pressure Water'] == HIGHPRESSURE_WATER_DATA
-    assert ATTACK_DATA['Stone Wall'] == STONE_WALL_DATA
-
-
 def test_lookup_temtem():
     from test_data import GYALIS_DATA, PIGEPIC_DATA
 
-    assert lookup_temtem_data('Gyalis') == GYALIS_DATA
-    assert lookup_temtem_data('Pigepic') == PIGEPIC_DATA
+    for test_data, name in (GYALIS_DATA, 'Gyalis'), (PIGEPIC_DATA, 'Pigepic'):
+        tem_data = lookup_temtem_data(name)
+        for key, value in test_data.items():
+            assert tem_data[key] == value
 
 
 def test_lookup_attack():

@@ -1,0 +1,2605 @@
+Adoroboros:
+  Atk: 29
+  BST: 443
+  Def: 42
+  HP: 66
+  Moves:
+    Egg:
+    - Hypnosis
+    - Held Anger
+    - Inner Spirit
+    Level Up:
+    - Tail Strike
+    - Energy Manipulation
+    - Toxic Ink
+    - Psychic Collaborator
+    - Beta Burst
+    - Pollution
+    - Lullaby
+    - Sacrifice
+    TC:
+    - Wake Up
+    - Misogi
+    - Noxious Bomb
+    - Antitoxins
+    - Confiscate
+    - Relax
+  Name: Adoroboros
+  No.: 129
+  SpA: 70
+  SpD: 110
+  Spe: 60
+  Sta: 66
+  Traits:
+  - Synergy Master
+  - Toxic Skin
+  Type 1: toxic
+  Type 2: mental
+Anahir:
+  Atk: 50
+  BST: 423
+  Def: 101
+  HP: 54
+  Moves:
+    Egg: []
+    Level Up:
+    - Glass Blade
+    - Fire Flame
+    - Head Charge
+    - Chains Hit
+    - Meteor Swarm
+    - Rampage
+    - Heat Up
+    - Crystal Bite
+    TC:
+    - Magma Cannon
+  Name: Anahir
+  No.: 161
+  SpA: 50
+  SpD: 101
+  Spe: 31
+  Sta: 36
+  Traits:
+  - Trauma
+  - Flawed Crystal
+  Type 1: crystal
+  Type 2: fire
+Azuroc:
+  Atk: 58
+  BST: 397
+  Def: 69
+  HP: 64
+  Moves:
+    Egg:
+    - Diamond Fort
+    Level Up:
+    - Scratch
+    - Nibble
+    - Glass Blade
+    - Tail Strike
+    - Sharp Stabs
+    - Crystal Spikes
+    - Madness Buff
+    - Crystal Bite
+    TC:
+    - Rend
+    - Footwork
+  Name: Azuroc
+  No.: 40
+  SpA: 60
+  SpD: 62
+  Spe: 50
+  Sta: 34
+  Traits:
+  - Mirroring
+  - Fainted Curse
+  Type 1: crystal
+  Type 2: null
+Babawa:
+  Atk: 79
+  BST: 448
+  Def: 57
+  HP: 85
+  Moves:
+    Egg:
+    - Bubbles
+    - Ice Cubes
+    - Toxic Slime
+    Level Up:
+    - Nibble
+    - Shy Shield
+    - Sharp Leaf
+    - Slime
+    - Water Cutting Lily
+    - Iced Stalactite
+    - Aqua Stone
+    - Harmful Lick
+    TC:
+    - Wake Up
+    - Misogi
+    - Antitoxins
+  Name: Babawa
+  No.: 45
+  SpA: 51
+  SpD: 44
+  Spe: 40
+  Sta: 92
+  Traits:
+  - Mucous
+  - Withdrawal
+  Type 1: nature
+  Type 2: water
+Baboong:
+  Atk: 79
+  BST: 402
+  Def: 51
+  HP: 54
+  Moves:
+    Egg:
+    - Earth Wave
+    Level Up:
+    - Kick
+    - Martial Strike
+    - Tail Strike
+    - Sand Splatter
+    - Show Off
+    - Uppercut
+    - Intimidation
+    - Perfect Jab
+    - Heat Up
+    - Inner Spirit
+    - Footwork
+    TC:
+    - Stone Wall
+    - Misogi
+  Name: Baboong
+  No.: 93
+  SpA: 41
+  SpD: 41
+  Spe: 75
+  Sta: 61
+  Traits:
+  - Brawny
+  - Warm-Blooded
+  Type 1: melee
+  Type 2: null
+Banapi:
+  Atk: 50
+  BST: 333
+  Def: 50
+  HP: 42
+  Moves:
+    Egg:
+    - Roar
+    Level Up:
+    - Kick
+    - Heavy Blow
+    - Warm Cuddle
+    - Sand Splatter
+    - Head Ram
+    - Embers
+    - Rampage
+    - Fire Tornado
+    - Heat Up
+    TC:
+    - Magma Cannon
+    - Block
+  Name: Banapi
+  No.: 37
+  SpA: 40
+  SpD: 41
+  Spe: 70
+  Sta: 40
+  Traits:
+  - Pyromaniac
+  - Settling
+  Type 1: fire
+  Type 2: null
+Barnshe:
+  Atk: 60
+  BST: 420
+  Def: 40
+  HP: 50
+  Moves:
+    Egg:
+    - Beta Burst
+    - Lullaby
+    - Energy Manipulation
+    Level Up:
+    - Peck
+    - Sand Splatter
+    - Wind Blade
+    - Wind Burst
+    - Bamboozle
+    - Intimidation
+    - Hypoxia
+    - Psy Surge
+    - Tornado
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+    - Noxious Bomb
+    - Relax
+  Name: Barnshe
+  No.: 53
+  SpA: 75
+  SpD: 79
+  Spe: 65
+  Sta: 51
+  Traits:
+  - Neutrality
+  - Air Specialist
+  Type 1: mental
+  Type 2: wind
+Bigu:
+  Atk: 65
+  BST: 329
+  Def: 38
+  HP: 55
+  Moves:
+    Egg:
+    - Bubbles
+    - Ice Cubes
+    - Toxic Slime
+    Level Up:
+    - Nibble
+    - Shy Shield
+    - Sharp Leaf
+    - Slime
+    - Water Cutting Lily
+    TC:
+    - Wake Up
+    - Misogi
+    - Antitoxins
+  Name: Bigu
+  No.: 44
+  SpA: 41
+  SpD: 42
+  Spe: 20
+  Sta: 68
+  Traits:
+  - Warm-Blooded
+  - Amphibian
+  Type 1: nature
+  Type 2: null
+Blooze:
+  Atk: 43
+  BST: 346
+  Def: 52
+  HP: 68
+  Moves:
+    Egg: []
+    Level Up:
+    - Nibble
+    - Novice Punch
+    - Shy Shield
+    - Heavy Blow
+    - Toxic Slime
+    - Toxic Ink
+    TC: []
+  Name: Blooze
+  No.: 107
+  SpA: 46
+  SpD: 54
+  Spe: 33
+  Sta: 50
+  Traits:
+  - Toxic Skin
+  - Bully
+  Type 1: toxic
+  Type 2: null
+Bunbun:
+  Atk: 50
+  BST: 374
+  Def: 36
+  HP: 72
+  Moves:
+    Egg:
+    - Dust Vortex
+    - Crystal Bite
+    Level Up:
+    - Scratch
+    - Nibble
+    - Tenderness
+    - Crystal Dust
+    - Sand Splatter
+    - Mud Shower
+    - Head Ram
+    - Stone Ball
+    TC: []
+  Name: Bunbun
+  No.: 21
+  SpA: 64
+  SpD: 43
+  Spe: 69
+  Sta: 40
+  Traits:
+  - Caffeinated
+  - Resilient
+  Type 1: earth
+  Type 2: crystal
+Capyre:
+  Atk: 71
+  BST: 429
+  Def: 68
+  HP: 55
+  Moves:
+    Egg:
+    - Roar
+    Level Up:
+    - Kick
+    - Heavy Blow
+    - Warm Cuddle
+    - Sand Splatter
+    - Head Ram
+    - Embers
+    - Rampage
+    - Fire Tornado
+    - Heat Up
+    - Extinction
+    TC:
+    - Magma Cannon
+    - Block
+  Name: Capyre
+  No.: 38
+  SpA: 45
+  SpD: 47
+  Spe: 88
+  Sta: 55
+  Traits:
+  - Last Rush
+  - Resilient
+  Type 1: fire
+  Type 2: null
+Cerneaf:
+  Atk: 60
+  BST: 451
+  Def: 88
+  HP: 91
+  Moves:
+    Egg:
+    - Spores
+    - Frond Whip
+    Level Up:
+    - Shy Shield
+    - Nibble
+    - Roots
+    - Sharp Leaf
+    - Allergic Spread
+    - Double Kick
+    - Rampage
+    - Revitalize
+    - Water Cutting Lily
+    TC: []
+  Name: Cerneaf
+  No.: 104
+  SpA: 43
+  SpD: 46
+  Spe: 79
+  Sta: 44
+  Traits:
+  - Callosity
+  - Settling
+  Type 1: nature
+  Type 2: null
+Crystle:
+  Atk: 61
+  BST: 352
+  Def: 69
+  HP: 60
+  Moves:
+    Egg: []
+    Level Up:
+    - Glass Blade
+    - Mirror Shell
+    - Nibble
+    - Crystal Dust
+    - Head Ram
+    - Crystallize
+    - Crystal Spikes
+    - Rampage
+    TC:
+    - Stone Wall
+  Name: Crystle
+  No.: 72
+  SpA: 46
+  SpD: 42
+  Spe: 33
+  Sta: 41
+  Traits:
+  - Amphibian
+  - Rested
+  Type 1: crystal
+  Type 2: null
+Deendre:
+  Atk: 48
+  BST: 391
+  Def: 74
+  HP: 80
+  Moves:
+    Egg:
+    - Spores
+    - Frond Whip
+    Level Up:
+    - Shy Shield
+    - Nibble
+    - Roots
+    - Sharp Leaf
+    - Allergic Spread
+    - Double Kick
+    - Rampage
+    - Revitalize
+    TC: []
+  Name: Deendre
+  No.: 103
+  SpA: 42
+  SpD: 35
+  Spe: 70
+  Sta: 42
+  Traits:
+  - Mithridatism
+  - Settling
+  Type 1: nature
+  Type 2: null
+Fomu:
+  Atk: 30
+  BST: 340
+  Def: 35
+  HP: 40
+  Moves:
+    Egg:
+    - Ice Shuriken
+    - Lullaby
+    - Sharp Rain
+    Level Up:
+    - Bubbles
+    - Head Charge
+    - Tenderness
+    - Ice Cubes
+    - Drill Impact
+    TC:
+    - Tsunami
+    - Noxious Bomb
+    - Awful Song
+  Name: Fomu
+  No.: 25
+  SpA: 65
+  SpD: 70
+  Spe: 40
+  Sta: 60
+  Traits:
+  - Amphibian
+  - Hydrologist
+  Type 1: water
+  Type 2: null
+Ganki:
+  Atk: 57
+  BST: 375
+  Def: 38
+  HP: 38
+  Moves:
+    Egg:
+    - Tesla Prison
+    Level Up:
+    - Sparks
+    - Nimble
+    - Wind Blade
+    - DC Beam
+    - Chain Lightning
+    - Drill Impact
+    - Electric Storm
+    TC:
+    - Turbo Choreography
+    - Misogi
+    - Noxious Bomb
+  Name: Ganki
+  No.: 113
+  SpA: 62
+  SpD: 73
+  Spe: 61
+  Sta: 46
+  Traits:
+  - Botanophobia
+  - Cold-Natured
+  Type 1: electric
+  Type 2: wind
+Gazuma:
+  Atk: 68
+  BST: 449
+  Def: 43
+  HP: 46
+  Moves:
+    Egg:
+    - Tesla Prison
+    Level Up:
+    - Sparks
+    - Nimble
+    - Wind Blade
+    - DC Beam
+    - Chain Lightning
+    - Drill Impact
+    - Electric Storm
+    - Turbo Charge
+    TC:
+    - Turbo Choreography
+    - Misogi
+    - Noxious Bomb
+    - Cage
+  Name: Gazuma
+  No.: 114
+  SpA: 81
+  SpD: 91
+  Spe: 67
+  Sta: 53
+  Traits:
+  - Receptive
+  - Fast Charge
+  Type 1: electric
+  Type 2: wind
+Goolder:
+  Atk: 64
+  BST: 444
+  Def: 56
+  HP: 120
+  Moves:
+    Egg: []
+    Level Up:
+    - Nibble
+    - Novice Punch
+    - Shy Shield
+    - Heavy Blow
+    - Toxic Slime
+    - Toxic Ink
+    - Bamboozle
+    - Pollution
+    - Harmful Lick
+    TC:
+    - Antitoxins
+    - Confiscate
+    - Madness Buff
+  Name: Goolder
+  No.: 108
+  SpA: 68
+  SpD: 56
+  Spe: 10
+  Sta: 70
+  Traits:
+  - Strong Liver
+  - Punching Bag
+  Type 1: toxic
+  Type 2: null
+Granpah:
+  Atk: 55
+  BST: 437
+  Def: 61
+  HP: 69
+  Moves:
+    Egg:
+    - Hyperkinetic Strike
+    - Humiliating Slap
+    Level Up:
+    - Peck
+    - Stare
+    - Hypnosis
+    - Wind Blade
+    - Wind Burst
+    - Cheer Up
+    - Feather Gatling
+    - Hypoxia
+    - Tornado
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+    - Confiscate
+  Name: Granpah
+  No.: 18
+  SpA: 72
+  SpD: 66
+  Spe: 78
+  Sta: 36
+  Traits:
+  - Last Rush
+  - Bully
+  Type 1: wind
+  Type 2: null
+Gyalis:
+  Atk: 85
+  BST: 460
+  Def: 61
+  HP: 86
+  Moves:
+    Egg:
+    - Crystal Spikes
+    - Crystallize
+    - Heat Up
+    - Earth Wave
+    - Haito Uchi
+    Level Up:
+    - Glass Blade
+    - Kick
+    - Show Off
+    - Sharp Stabs
+    - Footwork
+    - Block
+    - Drill Impact
+    - Crystal Bite
+    - Ninja Jutsu
+    TC:
+    - Awful Song
+    - Antitoxins
+    - Rend
+    - Major Slash
+  Name: Gyalis
+  No.: 54
+  SpA: 23
+  SpD: 61
+  Spe: 100
+  Sta: 44
+  Traits:
+  - Mirroring
+  - Resistant
+  Type 1: crystal
+  Type 2: melee
+Hidody:
+  Atk: 42
+  BST: 356
+  Def: 39
+  HP: 49
+  Moves:
+    Egg:
+    - Spores
+    - Lullaby
+    - Water Cutting Lily
+    - Sacrifice
+    - Hypoxia
+    Level Up:
+    - Scratch
+    - Sand Splatter
+    - Sharp Leaf
+    - Cheer Up
+    - Allergic Spread
+    - Gaia
+    - Bark Shield
+    TC:
+    - Wake Up
+    - Misogi
+    - Antitoxins
+    - Cage
+    - Relax
+  Name: Hidody
+  No.: 23
+  SpA: 62
+  SpD: 55
+  Spe: 39
+  Sta: 70
+  Traits:
+  - Electric Synthesize
+  - Botanist
+  Type 1: nature
+  Type 2: null
+Hocus:
+  Atk: 55
+  BST: 353
+  Def: 34
+  HP: 49
+  Moves:
+    Egg: []
+    Level Up:
+    - Beta Burst
+    - Telekinetic Shrapnel
+    - Gamma Burst
+    TC: []
+  Name: Hocus
+  No.: 79
+  SpA: 55
+  SpD: 34
+  Spe: 65
+  Sta: 61
+  Traits:
+  - Soft Touch
+  - Mirroring
+  Type 1: mental
+  Type 2: null
+Houchic:
+  Atk: 40
+  BST: 353
+  Def: 41
+  HP: 38
+  Moves:
+    Egg: []
+    Level Up:
+    - Hypnosis
+    - Psy Wave
+    - Kick
+    - Tenderness
+    - Energy Manipulation
+    - Telekinetic Shrapnel
+    - Beta Burst
+    - Psy Surge
+    - Humiliating Slap
+    - Lullaby
+    TC: []
+  Name: Houchic
+  No.: 32
+  SpA: 72
+  SpD: 52
+  Spe: 66
+  Sta: 44
+  Traits:
+  - Mental Alliance
+  - Soft Touch
+  Type 1: mental
+  Type 2: null
+Kaku:
+  Atk: 35
+  BST: 357
+  Def: 60
+  HP: 69
+  Moves:
+    Egg:
+    - Bark Shield
+    - Lifeful Sap
+    Level Up:
+    - Shy Shield
+    - Toxic Spores
+    - Nimble
+    - Urushiol
+    - Sharp Leaf
+    - Wind Burst
+    - Narcoleptic Hit
+    - Boomerang
+    - Allergic Spread
+    TC:
+    - Wake Up
+    - Noxious Bomb
+  Name: Kaku
+  No.: 48
+  SpA: 60
+  SpD: 50
+  Spe: 35
+  Sta: 48
+  Traits:
+  - Caffeinated
+  - Mithridatism
+  Type 1: nature
+  Type 2: null
+Kalabyss:
+  Atk: 75
+  BST: 451
+  Def: 100
+  HP: 82
+  Moves:
+    Egg:
+    - Iced Stalactite
+    - Toxic Slime
+    - Clinch
+    Level Up:
+    - Bubbles
+    - Tentacle Whip
+    - Water Blade
+    - Strangle
+    - Aqua Stone
+    - Toxic Ink
+    - High-pressure Water
+    - Humiliating Slap
+    - Flood
+    TC:
+    - Tsunami
+    - Wake Up
+    - Major Slash
+  Name: Kalabyss
+  No.: 128
+  SpA: 65
+  SpD: 55
+  Spe: 37
+  Sta: 37
+  Traits:
+  - Botanophobia
+  - Loneliness
+  Type 1: water
+  Type 2: toxic
+Kalazu:
+  Atk: 54
+  BST: 321
+  Def: 70
+  HP: 63
+  Moves:
+    Egg:
+    - Iced Stalactite
+    - Toxic Slime
+    - Clinch
+    Level Up:
+    - Bubbles
+    - Tentacle Whip
+    - Water Blade
+    - Strangle
+    - Aqua Stone
+    - High-pressure Water
+    - Humiliating Slap
+    TC:
+    - Tsunami
+    - Wake Up
+  Name: Kalazu
+  No.: 127
+  SpA: 38
+  SpD: 44
+  Spe: 28
+  Sta: 24
+  Traits:
+  - Mithridatism
+  - Hydrologist
+  Type 1: water
+  Type 2: null
+Kinu:
+  Atk: 53
+  BST: 454
+  Def: 41
+  HP: 47
+  Moves:
+    Egg:
+    - Lullaby
+    Level Up:
+    - Scratch
+    - Sharp Leaf
+    - Hypnosis
+    - Psy Wave
+    - Revitalize
+    - Beta Burst
+    - Gaia
+    - Lifeful Sap
+    - Sacrifice
+    TC:
+    - Stone Wall
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+  Name: Kinu
+  No.: 137
+  SpA: 69
+  SpD: 96
+  Spe: 74
+  Sta: 74
+  Traits:
+  - Protector
+  - Benefactor
+  Type 1: nature
+  Type 2: mental
+Lapinite:
+  Atk: 44
+  BST: 353
+  Def: 63
+  HP: 58
+  Moves:
+    Egg:
+    - Diamond Fort
+    Level Up:
+    - Scratch
+    - Nibble
+    - Glass Blade
+    - Tail Strike
+    - Sharp Stabs
+    - Crystal Spikes
+    TC:
+    - Footwork
+  Name: Lapinite
+  No.: 39
+  SpA: 55
+  SpD: 56
+  Spe: 46
+  Sta: 31
+  Traits:
+  - Scavenger
+  - Electric Synthesize
+  Type 1: crystal
+  Type 2: null
+Loali:
+  Atk: 60
+  BST: 485
+  Def: 50
+  HP: 55
+  Moves:
+    Egg:
+    - Spores
+    - Hypoxia
+    Level Up:
+    - Shy Shield
+    - Tenderness
+    - Urushiol
+    - Wind Blade
+    - Toxic Spores
+    - Nimble
+    - Photosynthesis
+    - Blizzard
+    - Bark Shield
+    - Allergic Spread
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+  Name: Loali
+  No.: 11
+  SpA: 70
+  SpD: 90
+  Spe: 80
+  Sta: 80
+  Traits:
+  - Botanist
+  - Toxic Farewell
+  Type 1: nature
+  Type 2: wind
+Magmis:
+  Atk: 55
+  BST: 317
+  Def: 42
+  HP: 52
+  Moves:
+    Egg: []
+    Level Up:
+    - Tenderness
+    - Fire Flame
+    - Jaw Strike
+    - Rage
+    - Warm Cuddle
+    - Embers
+    TC: []
+  Name: Magmis
+  No.: 86
+  SpA: 45
+  SpD: 35
+  Spe: 37
+  Sta: 51
+  Traits:
+  - Caffeinated
+  - Thick Skin
+  Type 1: fire
+  Type 2: null
+Mastione:
+  Atk: 91
+  BST: 438
+  Def: 65
+  HP: 69
+  Moves:
+    Egg: []
+    Level Up:
+    - Tenderness
+    - Fire Flame
+    - Jaw Strike
+    - Rage
+    - Warm Cuddle
+    - Embers
+    - Meteor Swarm
+    TC:
+    - Magma Cannon
+    - Cage
+    - Rend
+    - Block
+    - Footwork
+    - Major Slash
+  Name: Mastione
+  No.: 87
+  SpA: 62
+  SpD: 37
+  Spe: 52
+  Sta: 62
+  Traits:
+  - Bully
+  - Pyromaniac
+  Type 1: fire
+  Type 2: null
+Mudrid:
+  Atk: 60
+  BST: 456
+  Def: 42
+  HP: 85
+  Moves:
+    Egg:
+    - Dust Vortex
+    - Crystal Bite
+    Level Up:
+    - Scratch
+    - Nibble
+    - Tenderness
+    - Crystal Dust
+    - Sand Splatter
+    - Mud Shower
+    - Head Ram
+    - Stone Ball
+    - Earth Wave
+    TC:
+    - Turbo Choreography
+    - Rend
+    - Footwork
+  Name: Mudrid
+  No.: 22
+  SpA: 80
+  SpD: 50
+  Spe: 95
+  Sta: 44
+  Traits:
+  - Receptive
+  - Resistant
+  Type 1: earth
+  Type 2: crystal
+Mushi:
+  Atk: 48
+  BST: 310
+  Def: 36
+  HP: 48
+  Moves:
+    Egg:
+    - Inner Spirit
+    - Intimidation
+    Level Up:
+    - Nibble
+    - Tenderness
+    - Urushiol
+    - Toxic Spores
+    - Shrill Voice
+    - Humiliating Slap
+    - Paralysing Poison
+    TC: []
+  Name: Mushi
+  No.: 84
+  SpA: 48
+  SpD: 29
+  Spe: 68
+  Sta: 33
+  Traits:
+  - Resistant
+  - Resilient
+  Type 1: toxic
+  Type 2: null
+Mushook:
+  Atk: 81
+  BST: 444
+  Def: 80
+  HP: 67
+  Moves:
+    Egg:
+    - Inner Spirit
+    - Intimidation
+    Level Up:
+    - Nibble
+    - Tenderness
+    - Urushiol
+    - Toxic Spores
+    - Shrill Voice
+    - Humiliating Slap
+    - Paralysing Poison
+    - Perfect Jab
+    - Uppercut
+    - Footwork
+    TC:
+    - Turbo Choreography
+    - Confiscate
+    - Cage
+    - Block
+  Name: Mushook
+  No.: 85
+  SpA: 49
+  SpD: 41
+  Spe: 81
+  Sta: 45
+  Traits:
+  - Parrier
+  - Tireless
+  Type 1: toxic
+  Type 2: melee
+Myx:
+  Atk: 51
+  BST: 443
+  Def: 43
+  HP: 51
+  Moves:
+    Egg:
+    - Psy Surge
+    - Humiliating Slap
+    Level Up:
+    - Novice Punch
+    - Glass Blade
+    - Crystallize
+    - Heavy Blow
+    - Energy Manipulation
+    - Head Ram
+    - Crystal Bite
+    - Clinch
+    - Hallucination
+    - Crystal Spikes
+    TC:
+    - Cage
+    - Rend
+  Name: Myx
+  No.: 56
+  SpA: 94
+  SpD: 80
+  Spe: 65
+  Sta: 59
+  Traits:
+  - Puppet Master
+  - Rejuvenate
+  Type 1: crystal
+  Type 2: mental
+Nessla:
+  Atk: 76
+  BST: 437
+  Def: 50
+  HP: 45
+  Moves:
+    Egg: []
+    Level Up:
+    - Bubbles
+    - Water Blade
+    - Chain Lightning
+    - Sparks
+    - Strangle
+    - Tesla Prison
+    - Stare
+    - Iced Stalactite
+    - Electric Storm
+    TC:
+    - Wake Up
+    - Rend
+  Name: Nessla
+  No.: 123
+  SpA: 70
+  SpD: 72
+  Spe: 66
+  Sta: 58
+  Traits:
+  - Electric Synthesize
+  - Hydrologist
+  Type 1: water
+  Type 2: electric
+Nidrasil:
+  Atk: 88
+  BST: 445
+  Def: 80
+  HP: 77
+  Moves:
+    Egg:
+    - Narcoleptic Hit
+    - Photosynthesis
+    - Bark Shield
+    Level Up:
+    - Nibble
+    - Hypnosis
+    - Toxic Fang
+    - Spores
+    - Sharp Leaf
+    - Roots
+    - Toxic Ink
+    - Allergic Spread
+    - Hallucination
+    TC:
+    - Wake Up
+    - Antitoxins
+    - Madness Buff
+    - Held Anger
+  Name: Nidrasil
+  No.: 36
+  SpA: 36
+  SpD: 51
+  Spe: 61
+  Sta: 52
+  Traits:
+  - Toxic Farewell
+  - Tri-Apothecary
+  Type 1: nature
+  Type 2: toxic
+Noxolotl:
+  Atk: 61
+  BST: 451
+  Def: 78
+  HP: 72
+  Moves:
+    Egg:
+    - Narcoleptic Hit
+    Level Up:
+    - Scratch
+    - Hypnosis
+    - Stare
+    - Venomous Claws
+    - Toxic Ink
+    - Tentacle Whip
+    - Harmful Lick
+    - Hallucination
+    TC:
+    - Turbo Choreography
+    - Noxious Bomb
+    - Madness Buff
+  Name: Noxolotl
+  No.: 106
+  SpA: 85
+  SpD: 45
+  Spe: 61
+  Sta: 49
+  Traits:
+  - Trance
+  - Toxic Skin
+  Type 1: toxic
+  Type 2: null
+Occlura:
+  Atk: 45
+  BST: 330
+  Def: 43
+  HP: 50
+  Moves:
+    Egg:
+    - Psy Surge
+    - Humiliating Slap
+    Level Up:
+    - Novice Punch
+    - Glass Blade
+    - Crystallize
+    - Heavy Blow
+    - Energy Manipulation
+    - Head Ram
+    - Crystal Bite
+    TC: []
+  Name: Occlura
+  No.: 55
+  SpA: 38
+  SpD: 65
+  Spe: 50
+  Sta: 39
+  Traits:
+  - Warm-Blooded
+  - Scavenger
+  Type 1: crystal
+  Type 2: null
+Oceara:
+  Atk: 54
+  BST: 486
+  Def: 51
+  HP: 64
+  Moves:
+    Egg: []
+    Level Up:
+    - Kick
+    - High-pressure Water
+    - Tsunami
+    - Ice Shuriken
+    - Blizzard
+    - Flood
+    - Aquatic Whirlwind
+    TC: []
+  Name: Oceara
+  No.: 115
+  SpA: 110
+  SpD: 65
+  Spe: 100
+  Sta: 42
+  Traits:
+  - Hydrologist
+  - Mithridatism
+  Type 1: water
+  Type 2: null
+Oree:
+  Atk: 65
+  BST: 342
+  Def: 44
+  HP: 61
+  Moves:
+    Egg: []
+    Level Up:
+    - Data Burst
+    - Mechanical Heat
+    - Cold Breeze
+    - Tesla Prison
+    - Heat Up
+    TC: []
+  Name: Oree
+  No.: 2
+  SpA: 32
+  SpD: 31
+  Spe: 35
+  Sta: 74
+  Traits:
+  - Attack T
+  Type 1: digital
+  Type 2: null
+Orphyll:
+  Atk: 68
+  BST: 364
+  Def: 64
+  HP: 42
+  Moves:
+    Egg:
+    - Narcoleptic Hit
+    - Photosynthesis
+    - Bark Shield
+    Level Up:
+    - Nibble
+    - Hypnosis
+    - Toxic Fang
+    - Spores
+    - Sharp Leaf
+    - Roots
+    - Toxic Ink
+    - Allergic Spread
+    TC:
+    - Wake Up
+    - Antitoxins
+    - Madness Buff
+    - Held Anger
+  Name: Orphyll
+  No.: 35
+  SpA: 27
+  SpD: 40
+  Spe: 75
+  Sta: 48
+  Traits:
+  - Toxic Affinity
+  - Apothecary
+  Type 1: nature
+  Type 2: toxic
+Paharac:
+  Atk: 50
+  BST: 385
+  Def: 55
+  HP: 60
+  Moves:
+    Egg:
+    - Hyperkinetic Strike
+    - Humiliating Slap
+    Level Up:
+    - Peck
+    - Stare
+    - Hypnosis
+    - Wind Blade
+    - Wind Burst
+    - Cheer Up
+    - Feather Gatling
+    - Hypoxia
+    - Tornado
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+  Name: Paharac
+  No.: 17
+  SpA: 60
+  SpD: 60
+  Spe: 70
+  Sta: 30
+  Traits:
+  - Caffeinated
+  - Camaraderie
+  Type 1: wind
+  Type 2: null
+Paharo:
+  Atk: 40
+  BST: 306
+  Def: 40
+  HP: 48
+  Moves:
+    Egg:
+    - Hyperkinetic Strike
+    - Humiliating Slap
+    Level Up:
+    - Peck
+    - Stare
+    - Hypnosis
+    - Wind Blade
+    - Wind Burst
+    - Cheer Up
+    - Feather Gatling
+    - Hypoxia
+    - Tornado
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+  Name: Paharo
+  No.: 16
+  SpA: 50
+  SpD: 50
+  Spe: 60
+  Sta: 18
+  Traits:
+  - Hover
+  - Friendship
+  Type 1: wind
+  Type 2: null
+Pewki:
+  Atk: 42
+  BST: 263
+  Def: 45
+  HP: 70
+  Moves:
+    Egg:
+    - High-pressure Water
+    - Flood
+    - Revitalize
+    Level Up:
+    - Head Charge
+    - Bubbles
+    - Finbeat
+    - Water Blade
+    - Jaw Strike
+    - Cheer Up
+    - Humiliating Slap
+    - Aquatic Whirlwind
+    TC:
+    - Tsunami
+    - Noxious Bomb
+  Name: Pewki
+  No.: 60
+  SpA: 31
+  SpD: 10
+  Spe: 33
+  Sta: 32
+  Traits:
+  - Hydrologist
+  - Rested
+  Type 1: water
+  Type 2: null
+Pigepic:
+  Atk: 60
+  BST: 433
+  Def: 72
+  HP: 54
+  Moves:
+    Egg:
+    - Hypnosis
+    - Head Charge
+    - Sharp Rain
+    Level Up:
+    - Bamboozle
+    - Scratch
+    - Nibble
+    - Nimble
+    - Heavy Blow
+    - Wind Burst
+    - Tornado
+    - Oshi-Dashi
+    TC:
+    - Stone Wall
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+    - Confiscate
+    - Relax
+    - Major Slash
+  Name: Pigepic
+  No.: 141
+  SpA: 45
+  SpD: 72
+  Spe: 58
+  Sta: 72
+  Traits:
+  - Friendship
+  - Fainted Curse
+  Type 1: wind
+  Type 2: null
+Piraniant:
+  Atk: 77
+  BST: 449
+  Def: 85
+  HP: 80
+  Moves:
+    Egg:
+    - High-pressure Water
+    - Flood
+    - Revitalize
+    Level Up:
+    - Head Charge
+    - Bubbles
+    - Finbeat
+    - Water Blade
+    - Jaw Strike
+    - Cheer Up
+    - Humiliating Slap
+    - Aquatic Whirlwind
+    - Rend
+    TC:
+    - Tsunami
+    - Noxious Bomb
+  Name: Piraniant
+  No.: 61
+  SpA: 65
+  SpD: 37
+  Spe: 55
+  Sta: 50
+  Traits:
+  - Patient
+  - Energy Reserves
+  Type 1: water
+  Type 2: null
+Platimous:
+  Atk: 56
+  BST: 457
+  Def: 39
+  HP: 71
+  Moves:
+    Egg:
+    - Urushiol
+    - Antitoxins
+    - Sharp Rain
+    - Flood
+    - Intimidation
+    - Shrill Voice
+    Level Up:
+    - Finbeat
+    - Water Blade
+    - Venomous Claws
+    - Sand Splatter
+    - Cheer Up
+    - Aqua Bullet Hell
+    - Tsunami
+    - Toxic Fang
+    - Paralysing Poison
+    - Aquatic Whirlwind
+    TC:
+    - Misogi
+    - Noxious Bomb
+    - Rend
+    - Footwork
+    - Held Anger
+    - Major Slash
+  Name: Platimous
+  No.: 9
+  SpA: 90
+  SpD: 70
+  Spe: 82
+  Sta: 49
+  Traits:
+  - Zen
+  - Determined
+  Type 1: water
+  Type 2: toxic
+Platox:
+  Atk: 50
+  BST: 404
+  Def: 35
+  HP: 62
+  Moves:
+    Egg:
+    - Urushiol
+    - Antitoxins
+    - Sharp Rain
+    - Flood
+    - Intimidation
+    - Shrill Voice
+    Level Up:
+    - Finbeat
+    - Water Blade
+    - Venomous Claws
+    - Sand Splatter
+    - Cheer Up
+    - Aqua Bullet Hell
+    - Tsunami
+    - Toxic Fang
+    - Paralysing Poison
+    TC:
+    - Misogi
+    - Noxious Bomb
+    - Rend
+    - Footwork
+    - Held Anger
+    - Major Slash
+  Name: Platox
+  No.: 8
+  SpA: 76
+  SpD: 63
+  Spe: 74
+  Sta: 44
+  Traits:
+  - Resistant
+  - Resilient
+  Type 1: water
+  Type 2: toxic
+Platypet:
+  Atk: 45
+  BST: 358
+  Def: 31
+  HP: 55
+  Moves:
+    Egg:
+    - Urushiol
+    - Antitoxins
+    - Sharp Rain
+    - Flood
+    - Intimidation
+    - Shrill Voice
+    Level Up:
+    - Finbeat
+    - Water Blade
+    - Venomous Claws
+    - Sand Splatter
+    - Cheer Up
+    - Aqua Bullet Hell
+    - Tsunami
+    TC: []
+  Name: Platypet
+  No.: 7
+  SpA: 67
+  SpD: 56
+  Spe: 65
+  Sta: 39
+  Traits:
+  - Toxic Affinity
+  - Amphibian
+  Type 1: water
+  Type 2: toxic
+Pocus:
+  Atk: 69
+  BST: 431
+  Def: 36
+  HP: 60
+  Moves:
+    Egg: []
+    Level Up:
+    - Ninja Jutsu
+    TC: []
+  Name: Pocus
+  No.: 80
+  SpA: 77
+  SpD: 38
+  Spe: 78
+  Sta: 73
+  Traits:
+  - Dreaded Alarm
+  - Rejuvenate
+  Type 1: mental
+  Type 2: null
+Raiber:
+  Atk: 40
+  BST: 332
+  Def: 61
+  HP: 57
+  Moves:
+    Egg:
+    - Rampage
+    Level Up:
+    - Scratch
+    - Sand Splatter
+    - Fire Flame
+    - Roar
+    - Fierce Claw
+    - Embers
+    - Fire Tornado
+    TC: []
+  Name: Raiber
+  No.: 57
+  SpA: 59
+  SpD: 38
+  Spe: 42
+  Sta: 35
+  Traits:
+  - Camaraderie
+  - Rested
+  Type 1: fire
+  Type 2: null
+Raican:
+  Atk: 77
+  BST: 441
+  Def: 77
+  HP: 77
+  Moves:
+    Egg:
+    - Rampage
+    Level Up:
+    - Scratch
+    - Sand Splatter
+    - Fire Flame
+    - Roar
+    - Fierce Claw
+    - Embers
+    - Fire Tornado
+    - Kings Roar
+    - Meteor Swarm
+    TC:
+    - Held Anger
+  Name: Raican
+  No.: 59
+  SpA: 51
+  SpD: 50
+  Spe: 60
+  Sta: 49
+  Traits:
+  - Prideful
+  - Motivator
+  Type 1: fire
+  Type 2: null
+Raize:
+  Atk: 46
+  BST: 384
+  Def: 74
+  HP: 66
+  Moves:
+    Egg:
+    - Rampage
+    Level Up:
+    - Scratch
+    - Sand Splatter
+    - Fire Flame
+    - Roar
+    - Fierce Claw
+    - Embers
+    - Fire Tornado
+    - Kings Roar
+    TC: []
+  Name: Raize
+  No.: 58
+  SpA: 69
+  SpD: 43
+  Spe: 40
+  Sta: 46
+  Traits:
+  - Furor
+  - Demoralize
+  Type 1: fire
+  Type 2: null
+Saipat:
+  Atk: 80
+  BST: 444
+  Def: 50
+  HP: 92
+  Moves:
+    Egg:
+    - Toxic Ink
+    - Ice Shuriken
+    Level Up:
+    - Martial Strike
+    - Water Blade
+    - Rage
+    - Stare
+    - Venomous Claws
+    - High-pressure Water
+    - Held Anger
+    - Nicho Sai
+    - Iced Stalactite
+    - Ninja Jutsu
+    TC:
+    - Tsunami
+    - Misogi
+  Name: Saipat
+  No.: 69
+  SpA: 70
+  SpD: 40
+  Spe: 70
+  Sta: 42
+  Traits:
+  - Amphibian
+  - Toxic Affinity
+  Type 1: water
+  Type 2: melee
+Saku:
+  Atk: 40
+  BST: 420
+  Def: 62
+  HP: 82
+  Moves:
+    Egg:
+    - Bark Shield
+    - Lifeful Sap
+    Level Up:
+    - Shy Shield
+    - Toxic Spores
+    - Nimble
+    - Urushiol
+    - Sharp Leaf
+    - Wind Burst
+    - Narcoleptic Hit
+    - Boomerang
+    - Allergic Spread
+    - Tornado
+    TC:
+    - Wake Up
+    - Noxious Bomb
+    - Held Anger
+    - Relax
+  Name: Saku
+  No.: 49
+  SpA: 66
+  SpD: 70
+  Spe: 40
+  Sta: 60
+  Traits:
+  - Air Specialist
+  - Botanist
+  Type 1: nature
+  Type 2: wind
+Sherald:
+  Atk: 69
+  BST: 402
+  Def: 78
+  HP: 68
+  Moves:
+    Egg: []
+    Level Up:
+    - Glass Blade
+    - Mirror Shell
+    - Nibble
+    - Crystal Dust
+    - Head Ram
+    - Crystallize
+    - Crystal Spikes
+    - Rampage
+    - Diamond Fort
+    TC:
+    - Stone Wall
+    - Cage
+  Name: Sherald
+  No.: 73
+  SpA: 51
+  SpD: 48
+  Spe: 43
+  Sta: 45
+  Traits:
+  - Mirroring
+  - Provident
+  Type 1: crystal
+  Type 2: null
+Shuine:
+  Atk: 67
+  BST: 462
+  Def: 49
+  HP: 43
+  Moves:
+    Egg: []
+    Level Up:
+    - Nibble
+    - Glass Blade
+    - Aqua Bullet Hell
+    - Iced Stalactite
+    - Flood
+    - Crystal Bite
+    - Ninja Jutsu
+    - Sacrifice
+    TC:
+    - Antitoxins
+    - Confiscate
+    - Relax
+  Name: Shuine
+  No.: 122
+  SpA: 72
+  SpD: 60
+  Spe: 81
+  Sta: 90
+  Traits:
+  - Immunity
+  - Guardian
+  Type 1: crystal
+  Type 2: water
+Skail:
+  Atk: 45
+  BST: 328
+  Def: 50
+  HP: 57
+  Moves:
+    Egg:
+    - Perfect Jab
+    - Oshi-Dashi
+    Level Up:
+    - Tail Strike
+    - Scratch
+    - Sand Splatter
+    - Held Anger
+    - Fierce Claw
+    - Haito Uchi
+    TC:
+    - Stone Wall
+    - Wake Up
+    - Misogi
+  Name: Skail
+  No.: 27
+  SpA: 32
+  SpD: 41
+  Spe: 60
+  Sta: 43
+  Traits:
+  - Furor
+  - Scavenger
+  Type 1: neutral
+  Type 2: null
+Skunch:
+  Atk: 70
+  BST: 454
+  Def: 70
+  HP: 72
+  Moves:
+    Egg:
+    - Perfect Jab
+    - Oshi-Dashi
+    Level Up:
+    - Tail Strike
+    - Scratch
+    - Martial Strike
+    - Sand Splatter
+    - Held Anger
+    - Fierce Claw
+    - Haito Uchi
+    - Inner Spirit
+    - Ninja Jutsu
+    TC:
+    - Stone Wall
+    - Wake Up
+    - Misogi
+    - Cage
+  Name: Skunch
+  No.: 28
+  SpA: 45
+  SpD: 60
+  Spe: 75
+  Sta: 62
+  Traits:
+  - Brawny
+  - Bully
+  Type 1: neutral
+  Type 2: melee
+Smazee:
+  Atk: 69
+  BST: 357
+  Def: 44
+  HP: 49
+  Moves:
+    Egg:
+    - Earth Wave
+    Level Up:
+    - Kick
+    - Martial Strike
+    - Tail Strike
+    - Sand Splatter
+    - Show Off
+    - Uppercut
+    - Intimidation
+    - Perfect Jab
+    - Heat Up
+    TC:
+    - Stone Wall
+    - Misogi
+  Name: Smazee
+  No.: 92
+  SpA: 37
+  SpD: 37
+  Spe: 66
+  Sta: 55
+  Traits:
+  - Fever Rush
+  - Friendship
+  Type 1: melee
+  Type 2: null
+Sparzy:
+  Atk: 85
+  BST: 454
+  Def: 46
+  HP: 70
+  Moves:
+    Egg: []
+    Level Up:
+    - Novice Punch
+    - Shrill Voice
+    - DC Beam
+    - Held Anger
+    - Tesla Prison
+    - Electric Storm
+    TC: []
+  Name: Sparzy
+  No.: 82
+  SpA: 42
+  SpD: 46
+  Spe: 85
+  Sta: 80
+  Traits:
+  - Last Rush
+  Type 1: electric
+  Type 2: null
+Spriole:
+  Atk: 42
+  BST: 355
+  Def: 70
+  HP: 72
+  Moves:
+    Egg:
+    - Spores
+    - Frond Whip
+    Level Up:
+    - Shy Shield
+    - Nibble
+    - Roots
+    - Sharp Leaf
+    - Allergic Spread
+    - Rampage
+    - Revitalize
+    TC: []
+  Name: Spriole
+  No.: 102
+  SpA: 37
+  SpD: 31
+  Spe: 65
+  Sta: 38
+  Traits:
+  - Camaraderie
+  - Botanist
+  Type 1: nature
+  Type 2: null
+Swali:
+  Atk: 50
+  BST: 349
+  Def: 40
+  HP: 44
+  Moves:
+    Egg:
+    - Spores
+    - Hypoxia
+    Level Up:
+    - Shy Shield
+    - Tenderness
+    - Urushiol
+    - Toxic Spores
+    - Nimble
+    - Photosynthesis
+    - Bark Shield
+    - Allergic Spread
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Misogi
+  Name: Swali
+  No.: 10
+  SpA: 55
+  SpD: 60
+  Spe: 35
+  Sta: 65
+  Traits:
+  - Shared Pain
+  - Mithridatism
+  Type 1: nature
+  Type 2: null
+Taifu:
+  Atk: 50
+  BST: 461
+  Def: 45
+  HP: 60
+  Moves:
+    Egg:
+    - Spores
+    - Lullaby
+    - Water Cutting Lily
+    - Sacrifice
+    - Hypoxia
+    Level Up:
+    - Scratch
+    - Sand Splatter
+    - Sharp Leaf
+    - Cheer Up
+    - Allergic Spread
+    - Gaia
+    - Bark Shield
+    - Dust Vortex
+    - Frond Whip
+    TC:
+    - Wake Up
+    - Misogi
+    - Antitoxins
+    - Cage
+    - Relax
+    - Major Slash
+  Name: Taifu
+  No.: 24
+  SpA: 85
+  SpD: 89
+  Spe: 45
+  Sta: 87
+  Traits:
+  - Toxic Farewell
+  - Resilient
+  Type 1: nature
+  Type 2: null
+Tateru:
+  Atk: 78
+  BST: 488
+  Def: 66
+  HP: 79
+  Moves:
+    Egg:
+    - Inner Spirit
+    - Held Anger
+    - Perfect Jab
+    Level Up:
+    - Tenderness
+    - Scratch
+    - Nibble
+    - Heavy Blow
+    - Sand Splatter
+    - Rage
+    - Fierce Claw
+    - Lullaby
+    - Stone Ball
+    TC:
+    - Turbo Choreography
+    - Wake Up
+    - Noxious Bomb
+    - Confiscate
+    - Cage
+    - Rend
+    - Held Anger
+    - Major Slash
+  Name: Tateru
+  No.: 12
+  SpA: 54
+  SpD: 66
+  Spe: 60
+  Sta: 85
+  Traits:
+  - Soft Touch
+  - Resilient
+  Type 1: neutral
+  Type 2: null
+Tental:
+  Atk: 42
+  BST: 403
+  Def: 50
+  HP: 41
+  Moves:
+    Egg: []
+    Level Up:
+    - Hypnosis
+    - Psy Wave
+    - Kick
+    - Tenderness
+    - Energy Manipulation
+    - Telekinetic Shrapnel
+    - Beta Burst
+    - Psy Surge
+    - Humiliating Slap
+    - High-pressure Water
+    - Lullaby
+    - Ninja Jutsu
+    TC:
+    - Awful Song
+    - Confiscate
+    - Block
+    - Madness Buff
+  Name: Tental
+  No.: 33
+  SpA: 81
+  SpD: 62
+  Spe: 76
+  Sta: 51
+  Traits:
+  - Water Affinity
+  - Avenger
+  Type 1: mental
+  Type 2: null
+Toxolotl:
+  Atk: 50
+  BST: 362
+  Def: 64
+  HP: 59
+  Moves:
+    Egg:
+    - Narcoleptic Hit
+    Level Up:
+    - Scratch
+    - Hypnosis
+    - Stare
+    - Venomous Claws
+    - Toxic Ink
+    - Tentacle Whip
+    - Harmful Lick
+    TC:
+    - Turbo Choreography
+    - Noxious Bomb
+    - Madness Buff
+  Name: Toxolotl
+  No.: 105
+  SpA: 65
+  SpD: 37
+  Spe: 47
+  Sta: 40
+  Traits:
+  - Power Nap
+  - Toxic Farewell
+  Type 1: toxic
+  Type 2: null
+Tuvine:
+  Atk: 65
+  BST: 448
+  Def: 111
+  HP: 57
+  Moves:
+    Egg: []
+    Level Up:
+    - Peck
+    - Wind Blade
+    - Shrill Voice
+    - Feather Gatling
+    - Wind Burst
+    - Multiple Pecks
+    - Humiliating Slap
+    - Tornado
+    - Crystal Plume Gatling
+    - Diamond Fort
+    TC:
+    - Noxious Bomb
+  Name: Tuvine
+  No.: 133
+  SpA: 56
+  SpD: 47
+  Spe: 65
+  Sta: 47
+  Traits:
+  - Receptive
+  - Determined
+  Type 1: wind
+  Type 2: crystal
+Tuwai:
+  Atk: 62
+  BST: 373
+  Def: 45
+  HP: 54
+  Moves:
+    Egg: []
+    Level Up:
+    - Peck
+    - Wind Blade
+    - Shrill Voice
+    - Feather Gatling
+    - Wind Burst
+    - Multiple Pecks
+    - Humiliating Slap
+    - Tornado
+    TC:
+    - Noxious Bomb
+  Name: Tuwai
+  No.: 130
+  SpA: 60
+  SpD: 47
+  Spe: 58
+  Sta: 47
+  Traits:
+  - Spoilsport
+  - Resilient
+  Type 1: wind
+  Type 2: null
+Ukama:
+  Atk: 34
+  BST: 473
+  Def: 51
+  HP: 68
+  Moves:
+    Egg:
+    - Flood
+    Level Up:
+    - Finbeat
+    - Water Blade
+    - Nimble
+    - Cooperation
+    - Water Cannon
+    - Sharp Rain
+    - Aqua Bullet Hell
+    - Aquatic Whirlwind
+    - Blizzard
+    TC:
+    - Tsunami
+    - Turbo Choreography
+    - Major Slash
+  Name: Ukama
+  No.: 89
+  SpA: 76
+  SpD: 54
+  Spe: 100
+  Sta: 90
+  Traits:
+  - Hydrologist
+  - Plethoric
+  Type 1: water
+  Type 2: null
+Umishi:
+  Atk: 21
+  BST: 370
+  Def: 34
+  HP: 51
+  Moves:
+    Egg:
+    - Flood
+    Level Up:
+    - Finbeat
+    - Water Blade
+    - Nimble
+    - Cooperation
+    - Water Cannon
+    - Sharp Rain
+    - Aqua Bullet Hell
+    - Aquatic Whirlwind
+    TC:
+    - Tsunami
+    - Turbo Choreography
+  Name: Umishi
+  No.: 88
+  SpA: 63
+  SpD: 45
+  Spe: 80
+  Sta: 76
+  Traits:
+  - Shared Pain
+  - Caffeinated
+  Type 1: water
+  Type 2: null
+Valash:
+  Atk: 74
+  BST: 465
+  Def: 56
+  HP: 58
+  Moves:
+    Egg:
+    - Clinch
+    - Ninja Jutsu
+    Level Up:
+    - Scratch
+    - Glass Blade
+    - Crystal Dust
+    - Sharp Stabs
+    - Crystal Bite
+    - Crystal Spikes
+    - Rend
+    - Held Anger
+    TC:
+    - Stone Wall
+    - Block
+    - Madness Buff
+    - Footwork
+    - Major Slash
+  Name: Valash
+  No.: 50
+  SpA: 74
+  SpD: 56
+  Spe: 90
+  Sta: 57
+  Traits:
+  - Scavenger
+  - Determined
+  Type 1: neutral
+  Type 2: crystal
+Volarend:
+  Atk: 51
+  BST: 452
+  Def: 61
+  HP: 64
+  Moves:
+    Egg:
+    - Feather Gatling
+    Level Up:
+    - Scratch
+    - Wind Blade
+    - Venomous Claws
+    - Multiple Pecks
+    - Blizzard
+    - Toxic Plume
+    - Tornado
+    - Hyperkinetic Strike
+    TC:
+    - Noxious Bomb
+    - Rend
+  Name: Volarend
+  No.: 110
+  SpA: 68
+  SpD: 96
+  Spe: 74
+  Sta: 38
+  Traits:
+  - Aerobic
+  - Anaerobic
+  Type 1: toxic
+  Type 2: wind
+Vulcrane:
+  Atk: 74
+  BST: 473
+  Def: 86
+  HP: 76
+  Moves:
+    Egg:
+    - Earth Wave
+    - Extinction
+    Level Up:
+    - Scratch
+    - Stare
+    - Sand Splatter
+    - Fire Flame
+    - Head Ram
+    - Embers
+    - Double Kick
+    - Stone Ball
+    - Ninja Jutsu
+    TC:
+    - Wake Up
+    - Magma Cannon
+    - Rend
+    - Major Slash
+  Name: Vulcrane
+  No.: 140
+  SpA: 64
+  SpD: 35
+  Spe: 73
+  Sta: 65
+  Traits:
+  - Receptive
+  - Vigorous
+  Type 1: fire
+  Type 2: earth
+Vulor:
+  Atk: 49
+  BST: 388
+  Def: 71
+  HP: 65
+  Moves:
+    Egg:
+    - Earth Wave
+    - Extinction
+    Level Up:
+    - Scratch
+    - Stare
+    - Sand Splatter
+    - Fire Flame
+    - Head Ram
+    - Embers
+    - Double Kick
+    - Stone Ball
+    TC:
+    - Wake Up
+    - Magma Cannon
+    - Rend
+  Name: Vulor
+  No.: 139
+  SpA: 49
+  SpD: 32
+  Spe: 63
+  Sta: 59
+  Traits:
+  - Pyromaniac
+  - Individualist
+  Type 1: fire
+  Type 2: earth
+Vulvir:
+  Atk: 47
+  BST: 359
+  Def: 64
+  HP: 59
+  Moves:
+    Egg:
+    - Earth Wave
+    - Extinction
+    Level Up:
+    - Scratch
+    - Stare
+    - Sand Splatter
+    - Fire Flame
+    - Head Ram
+    - Embers
+    TC:
+    - Wake Up
+    - Magma Cannon
+  Name: Vulvir
+  No.: 138
+  SpA: 47
+  SpD: 31
+  Spe: 57
+  Sta: 54
+  Traits:
+  - Camaraderie
+  - Caffeinated
+  Type 1: fire
+  Type 2: earth
+Wiplump:
+  Atk: 40
+  BST: 481
+  Def: 50
+  HP: 66
+  Moves:
+    Egg:
+    - Ice Shuriken
+    - Lullaby
+    - Sharp Rain
+    Level Up:
+    - Bubbles
+    - Head Charge
+    - Tenderness
+    - Ice Cubes
+    - Blizzard
+    - Cold Breeze
+    - Drill Impact
+    - Tornado
+    TC:
+    - Tsunami
+    - Noxious Bomb
+    - Awful Song
+  Name: Wiplump
+  No.: 26
+  SpA: 95
+  SpD: 80
+  Spe: 70
+  Sta: 80
+  Traits:
+  - Plethoric
+  - Patient
+  Type 1: water
+  Type 2: wind
+Zaobian:
+  Atk: 84
+  BST: 436
+  Def: 50
+  HP: 75
+  Moves:
+    Egg: []
+    Level Up:
+    - Data Burst
+    - Mechanical Heat
+    - Cold Breeze
+    - Tesla Prison
+    - Heat Up
+    TC: []
+  Name: Zaobian
+  No.: 3
+  SpA: 42
+  SpD: 44
+  Spe: 51
+  Sta: 90
+  Traits:
+  - Attack T
+  Type 1: digital
+  Type 2: null
+Zenoreth:
+  Atk: 67
+  BST: 450
+  Def: 87
+  HP: 71
+  Moves:
+    Egg:
+    - Diamond Fort
+    Level Up:
+    - Scratch
+    - Nibble
+    - Glass Blade
+    - Tail Strike
+    - Sharp Stabs
+    - Crystal Spikes
+    - Madness Buff
+    - Crystal Bite
+    TC:
+    - Rend
+    - Footwork
+  Name: Zenoreth
+  No.: 41
+  SpA: 65
+  SpD: 69
+  Spe: 56
+  Sta: 35
+  Traits:
+  - Channeler
+  - Wrecked Farewell
+  Type 1: crystal
+  Type 2: null
+Zephyruff:
+  Atk: 43
+  BST: 351
+  Def: 47
+  HP: 58
+  Moves:
+    Egg:
+    - Feather Gatling
+    Level Up:
+    - Scratch
+    - Wind Blade
+    - Venomous Claws
+    - Multiple Pecks
+    - Blizzard
+    - Toxic Plume
+    - Tornado
+    TC: []
+  Name: Zephyruff
+  No.: 109
+  SpA: 50
+  SpD: 51
+  Spe: 68
+  Sta: 34
+  Traits:
+  - Toxic Affinity
+  - Air Specialist
+  Type 1: toxic
+  Type 2: wind
+

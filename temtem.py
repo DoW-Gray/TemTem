@@ -18,6 +18,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
+import os
+
 from math import ceil, floor
 
 from static import (
@@ -33,7 +35,7 @@ from static import (
 
 from log import error
 
-SAMPLE_SETS = 'sets.txt'
+SAMPLE_SETS = os.path.join('data', 'sets.txt')
 
 
 class TemTem:
@@ -50,7 +52,9 @@ class TemTem:
         self.species = species
         self.moves = moves
         self.trait = trait
-        self.base_stats, self.types = lookup_temtem_data(species)
+        base_tem_data = lookup_temtem_data(species)
+        self.base_stats = base_tem_data['Stats']
+        self.types = base_tem_data['Types']
         self.level = int(level)
 
         self.svs = {}
@@ -201,6 +205,8 @@ class TemTem:
                 del self.statuses[Statuses.burned]
 
         elif status == Statuses.burned:
+            if Types.fire in self.types:
+                return
             if self.ally and self.ally.trait == 'Guardian':
                 return
 
@@ -209,12 +215,18 @@ class TemTem:
                 del self.statuses[Statuses.frozen]
 
         elif status == Statuses.asleep:
+            if Types.mental in self.types:
+                return
+            if Statuses.alerted in self.statuses:
+                return
             if self.trait == 'Caffeinated':
                 return
             if self.trait == 'Zen':
                 self.apply_boost(Stats.Def, 1)
                 self.apply_boost(Stats.SpD, 1)
         elif status == Statuses.poisoned:
+            if Types.toxic in self.types:
+                return
             if self.trait == 'Mithridatism':
                 return
             if self.ally and self.ally.trait == 'Guardian':
