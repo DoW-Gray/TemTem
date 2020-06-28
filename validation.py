@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Types, Statuses, lookup_attack
+from static import Types, Statuses, lookup_attack, lookup_temtem_data
 
 TEMTEM_CHECKS = {}
 TEAM_CHECKS = {}
@@ -81,6 +81,31 @@ def sv_limits(temtem):
             raise ValidationFailure(f'{temtem.species} has an sv of {sv} > 50.')
         if sv < 1:
             raise ValidationFailure(f'{temtem.species} has an sv of {sv} < 1.')
+
+
+@temtem_check
+def tem_moves(temtem):
+    tem_data = lookup_temtem_data(temtem.species)
+    all_moves = {move for learnset in tem_data['Moves'].values() for move in learnset}
+    for move in temtem.moves:
+        if move not in all_moves:
+            raise ValidationFailure(f'{temtem.species} does not learn {move}')
+
+
+@temtem_check
+def move_count(temtem):
+    if len(temtem.moves) > 4:
+        # I think this should be `!= min(4, len(tem_data.moves['Level Up']))`
+        # but I'd have to work out which moves the tem learns at that level.
+        # Considering having too few moves is never an issue, I'm not bothering.
+        raise ValidationFailure(f'{temtem.species} has more than 4 moves.')
+
+
+@temtem_check
+def tem_trait(temtem):
+    tem_data = lookup_temtem_data(temtem.species)
+    if temtem.trait not in tem_data['Traits']:
+        raise ValidationFailure(f'{temtem.species} can\'t have trait {temtem.trait}')
 
 
 @team_check

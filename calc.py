@@ -39,8 +39,6 @@ def calc_damage(attacker, attack, target, modifiers=1.0):
         damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
     else:
         damage *= attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
-    if attack['name'] == 'Hyperkinetic Strike':
-        damage += 64 * attacker.live_stats[Stats.Spe] / target.live_stats[Stats.SpD]
 
     damage *= attacker.level
 
@@ -51,10 +49,20 @@ def calc_damage(attacker, attack, target, modifiers=1.0):
     damage += 7
     damage *= effectiveness(attack['type'], target)
 
+    damage *= modifiers
+
+    if attack['name'] == 'Hyperkinetic Strike':
+        # Currently modifiers above here in the code aren't included in the
+        # game, but this is a bug. I'm informed the move should also use ceil
+        # rather than floor, and 64 for the base damge of this part.
+        damage += (
+            (attacker.level / 200)
+            * (attacker.live_stats[Stats.Spe] / target.live_stats[Stats.SpD])
+            * 59
+        )
+
     if attack['type'] in attacker.types:
         damage *= 1.5  # STAB
-
-    damage *= modifiers
 
     if abs(damage) < 1 and damage != 0.0:
         # Damage should always be at least 1, unless target is immune
@@ -223,10 +231,9 @@ def test_calc_damage():
     assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 39
     KINU_TEM.statuses = {}
 
-    # Hyperkinetic Strike weirdness
-    # Note: this calculation disagrees with TesTem. At the time TesTem 0.5.1 was
-    # released, the wiki stated 59 * Spe / SpD (rather than 64); this info is
-    # out of date. So I'm confident my answer is correct, even though I haven't
-    # double-checked in-game.
-    assert calc_damage(VOLAREND_TEM, 'Hyperkinetic Strike', KINU_TEM) == 56
+    # Very weird, currently buggy Hyperkinetic Strike. I've confirmed this value
+    # is currently correct against the game, as well as the tem.team calc, but
+    # I'm told the current behaviour is considered buggy, and may well change
+    # in the near future (but to something simpler).
+    assert calc_damage(VOLAREND_TEM, 'Hyperkinetic Strike', KINU_TEM) == 54
     # Note: the above does not include the Hand Fan modifier.

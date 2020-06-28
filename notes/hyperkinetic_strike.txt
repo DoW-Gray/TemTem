@@ -1,0 +1,29 @@
+[20:44] DoW: Hi, I was doing some research into Aerobic Volarend's Hyperkinetic Strike because the damage wasn't matching up to what I expected. The main issue seems to be that Aerobic activates before the move damage is calculated (I'd assumed it would happen after, mostly because that's what happens in pokemon), but factoring that in I get an answer higher than seems to make sense.
+Currently the wiki says the damage should be ceil((7 + level / 200 * (59 * SpA / SpD + 64 * Spe / SpD)) * modifiers), but my research matched up to floor((7 + level / 200 * (59 * SpA / SpD + 59 * Spe / SpD)) * modifiers).
+Would there be any issues with me updating the wiki with this? And is there a way to add a citation for "own research"?
+[20:44] TMTrainer: iirc it's a bug
+[20:44] TMTrainer: Hyperkinetic isn't calculating as intended from what I remember
+[20:45] DoW: Is that documented anywhere? This seems kinda important for competitive, considering how important the move is
+[20:46] TMTrainer: Not current, but from what I know most calculators are calculating the damage correctly, I don't know if your specific example is correct so I'm not going to pin it, but there was some sort of discussion about it I'll try to dig up.
+[20:47] DoW: Yeah, I saw the tem.team calc matched up to what I saw in-game, although the defunct TesTem has some very old logic that matches up to what the wiki's history says used to be the case a while ago
+[20:48] Eskwyre: Wasn't that fixed in the alpha? @TMTrainer
+[20:48] DoW: I guess I could update the wiki to state what currently happens, but point out that it's a bug?
+[20:48] TMTrainer: @Eskwyre it was fixed, sorta?
+[20:49] TMTrainer: I'm not entirely sure.
+[20:49] TMTrainer: This bug has been present for a while in EA though
+[20:49] TMTrainer: @DoW that sounds like a fine idea.
+[20:49] DoW: Cool, thanks for the info here!
+[20:52] Tylo: You can verify using the temteam calc
+[20:52] Tylo: I'm pretty sure its working as in game right now
+[20:53] Tylo: Basically what happens is that both speed and spatk are calculated seperately, where speed doesnt get modified by gears and traits,
+[20:55] DoW: Oh, so Hand Fan is also done incorrectly? That's just ugly then
+[20:59] QAngel: I'll tell you on Monday, there's report in the forums but I asked Yaw yesterday about something related to this and he told me that everything was fine but I'll verify again with the report on Monday
+[21:01] DoW: Well, it shouldn't be too hard to work out. My setup was just to use only hyperkinetic strike on a tem, catch it, and see what its HP is after the move and what its SVs are. So I guess I'll just try that again but with Hand Fan this time
+[21:02] Tylo: It's been tested and hand fan does not affect the speed part
+[21:03] DoW: Ok, cool.
+[21:03] Tylo: Someone noticed it after being blown up while wearing coat
+[21:04] Tylo: While my calc (which does let the item impact the speed calc) showed that the temtem wouldnt be blown up
+[21:07] DoW: Ok, cool. But the STAB modifier is applied to the Speed part, righ?
+[21:13] Tylo: Yes
+[21:13] Tylo: And resistance as well
+[21:16] DoW: Great, I think I understand now, I'll see if I can get a concise explanation on the wiki. Thanks for the help!

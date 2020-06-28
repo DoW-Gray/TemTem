@@ -232,17 +232,39 @@ class TemTem:
             if self.ally and self.ally.trait == 'Guardian':
                 return
 
+        if self.trait == 'Fever Rush':
+            self.apply_boost(Stats.Atk, 1)
+
         if len(self.statuses) == 2:
             # remove oldest status to replace with new status condition
             del self.statuses[
                 sorted(self.statuses, key=lambda x: self.statuses[x]['existed'])[0]
             ]
 
+        if self.trait == 'Receptive' and status in {
+            Statuses.vigorized,
+            Statuses.regenerated,
+            Statuses.evading,
+            Statuses.alerted,
+        }:  # TODO: check if Immune is also boosted
+            turns += 1
+        elif self.trait == 'Resistant' and status in {
+            Statuses.cold,
+            Statuses.frozen,
+            Statuses.asleep,
+            Statuses.trapped,
+            Statuses.poisoned,
+            Statuses.burned,
+            Statuses.exhausted,
+        }:
+            turns -= 1
+            if not turns:
+                # Based on what data I have, this logic seems to come after
+                # removing the oldest status if there's 2 already
+                return
+
         # TODO: handle receptive and resistant traits
         self.statuses[status] = {'remaining': turns, 'existed': 0}
-
-        if self.trait == 'Fever Rush':
-            self.apply_boost(Stats.Atk, 1)
 
     def start_turn(self):
         '''
