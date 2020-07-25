@@ -235,5 +235,5 @@ def test_calc_damage():
     # is currently correct against the game, as well as the tem.team calc, but
     # I'm told the current behaviour is considered buggy, and may well change
     # in the near future (but to something simpler).
-    assert calc_damage(VOLAREND_TEM, 'Hyperkinetic Strike', KINU_TEM) == 54
+    assert calc_damage(VOLAREND_TEM, 'Hyperkinetic Strike', KINU_TEM) == 56
     # Note: the above does not include the Hand Fan modifier.

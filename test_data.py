@@ -35,11 +35,10 @@ GYALIS_DATA = {
     'Types': (Types.crystal, Types.melee),
     'Traits': ('Mirroring', 'Resistant'),
     'Moves': {
-        'Egg': ['Crystal Spikes', 'Crystallize', 'Heat Up', 'Earth Wave', 'Haito Uchi'],
+        'Egg': ['Crystal Spikes', 'Crystallize', 'Earth Wave'],
         'Level Up': [
-            'Glass Blade',
             'Kick',
-            'Show Off',
+            'Glass Blade',
             'Sharp Stabs',
             'Footwork',
             'Block',
@@ -47,7 +46,7 @@ GYALIS_DATA = {
             'Crystal Bite',
             'Ninja Jutsu'
         ],
-        'TC': ['Awful Song', 'Antitoxins', 'Rend', 'Major Slash'],
+        'TC': ['Awful Song', 'Antitoxins', 'Rend', 'Footwork'],
     },
 }
 PIGEPIC_DATA = {
@@ -63,7 +62,7 @@ PIGEPIC_DATA = {
     'Types': (Types.wind, None),
     'Traits': ('Friendship', 'Fainted Curse'),
     'Moves': {
-        'Egg': ['Hypnosis', 'Head Charge', 'Sharp Rain'],
+        'Egg': ['Head Charge', 'Sharp Rain'],
         'Level Up': [
             'Bamboozle',
             'Scratch',
@@ -153,6 +152,7 @@ STARE_DATA = {
 # for temtem.py
 GYALIS_IMPORT = '''Gyalis @ Ice Cube
 Trait: Resistant
+Level: 48
 TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD
 SVs: 1 SpA
 - Heat Up
@@ -162,6 +162,7 @@ SVs: 1 SpA
 '''
 KINU_IMPORT = ''' Kinu @ Grease
 Trait: Protector
+Level: 48
 TVs: 500 HP / 455 Def / 45 SpA
 - Beta Burst
 - Revitalize
@@ -186,6 +187,7 @@ GYALIS_TEM = TemTem(
     svs={'SpA': 1},
     tvs={'HP': 350, 'Sta': 4, 'Spe': 146, 'Atk': 498, 'Def': 1, 'SpD': 1},
     item='Ice Cube',
+    level=48,
 )
 KINU_TEM = TemTem(
     'Kinu',
@@ -193,6 +195,7 @@ KINU_TEM = TemTem(
     'Protector',
     tvs={'HP': 500, 'Def': 455, 'SpA': 45},
     item='Grease',
+    level=48,
 )
 VOLAREND_TEM = TemTem(
     'Volarend',
@@ -200,4 +203,5 @@ VOLAREND_TEM = TemTem(
     'Aerobic',
     tvs={'HP': 408, 'Sta': 90, 'Spe': 500, 'Def': 1, 'SpA': 1},
     item='Hand Fan',
+    level=48,
 )
