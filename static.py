@@ -257,7 +257,7 @@ TYPE_EFFECTIVENESS = {
     },
 }
 
-DEFAULT_LEVEL = 48
+DEFAULT_LEVEL = 58
 
 ITEM_DAMAGE_TYPES = {
     Types.fire: ('Fire Chip', 'ICe Cube'),

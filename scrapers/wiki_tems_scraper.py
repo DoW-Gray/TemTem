@@ -31,7 +31,9 @@ import yaml
 sys.path.append('..')  # I'm pretty sure there's a better way to do this
 import static  # noqa: E402
 
-OUT_FILE = os.path.join('..', 'data', 'temtem.yaml')
+os.chdir('..')
+
+OUT_FILE = os.path.join('data', 'temtem.yaml')
 
 LEARN_TYPE_LOOKUP = {
     'by Leveling\n': 'Level Up',
@@ -91,7 +93,7 @@ class WikiParser(HTMLParser):
 def raw_tem_data():
     from csv import DictReader
 
-    tem_csv = os.path.join('..', 'data', 'temtem.csv')
+    tem_csv = os.path.join('data', 'temtem.csv')
     data = {}
     with open(tem_csv, 'r') as fp:
         for row in DictReader(fp):
