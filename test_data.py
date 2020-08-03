@@ -186,7 +186,7 @@ GYALIS_TEM = TemTem(
     'Resistant',
     svs={'SpA': 1},
     tvs={'HP': 350, 'Sta': 4, 'Spe': 146, 'Atk': 498, 'Def': 1, 'SpD': 1},
-    item='Ice Cube',
+    gear='Ice Cube',
     level=48,
 )
 KINU_TEM = TemTem(
@@ -194,7 +194,7 @@ KINU_TEM = TemTem(
     ['Beta Burst', 'Revitalize', 'Stone Wall', 'Turbo Choreography'],
     'Protector',
     tvs={'HP': 500, 'Def': 455, 'SpA': 45},
-    item='Grease',
+    gear='Grease',
     level=48,
 )
 VOLAREND_TEM = TemTem(
@@ -202,6 +202,6 @@ VOLAREND_TEM = TemTem(
     ['Wind Blade', 'Hyperkinetic Strike', 'Blizzard', 'Toxic Plume'],
     'Aerobic',
     tvs={'HP': 408, 'Sta': 90, 'Spe': 500, 'Def': 1, 'SpA': 1},
-    item='Hand Fan',
+    gear='Hand Fan',
     level=48,
 )

@@ -118,12 +118,12 @@ def species_clause(team):
 
 
 @team_check
-def item_clause(team):
-    items = set()
+def gear_clause(team):
+    all_gear = set()
     for tem in team:
-        if tem.item in items:
-            raise ValidationFailure(f'Can\'t have more than one {tem.item}.')
-        items.add(tem.item)
+        if tem.gear in all_gear:
+            raise ValidationFailure(f'Can\'t have more than one {tem.gear}.')
+        all_gear.add(tem.gear)
 
 
 @team_check

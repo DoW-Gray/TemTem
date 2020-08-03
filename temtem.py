@@ -46,7 +46,7 @@ class TemTem:
             trait,
             svs={},
             tvs={},
-            item=None,
+            gear=None,
             level=DEFAULT_LEVEL
     ):
         self.species = species
@@ -74,7 +74,7 @@ class TemTem:
                 self.tvs[stat] = 0
         self._calc_stats()
 
-        self.item = item
+        self.gear = gear
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self._calc_live_stats()
 
@@ -86,6 +86,7 @@ class TemTem:
         # non-normal states we need to represent at end of turn.
         # So use 2 = used too much sta this turn, 1 = overexerted, 0 = normal
         self.fainted = False
+        self.trait_counter = 0  # meaning is trait-specific
 
         self.ally = None
 
@@ -102,7 +103,7 @@ class TemTem:
             and self.trait == other.trait
             and self.svs == other.svs
             and self.tvs == other.tvs
-            and self.item == other.item
+            and self.gear == other.gear
             and self.level == other.level
             and self.boosts == other.boosts
         )
@@ -173,7 +174,7 @@ class TemTem:
 
         with suppress(KeyError):
             if (
-                self.item == STATUS_ITEMS[status]
+                self.gear == STATUS_ITEMS[status]
                 and Statuses.seized not in self.statuses
             ):
                 return
@@ -272,13 +273,13 @@ class TemTem:
         '''
         if (
             Statuses.asleep in self.statuses
-            and self.item == 'Pillow'
+            and self.gear == 'Pillow'
             and Statuses.seized not in self.statuses
         ):
             # TODO: check that `floor` is correct here
             self.take_damage(-floor(self.stats[Stats.HP] / 10))
 
-        if self.item == 'Sweatband' and Statuses.seized not in self.statuses:
+        if self.gear == 'Sweatband' and Statuses.seized not in self.statuses:
             max_sta = self.stats[Stats.sta]
             self.live_stats[Stats.sta] = min(floor(max_sta * 1.15), max_sta)
 
@@ -290,6 +291,7 @@ class TemTem:
         '''
         # update status conditions
         new_statuses = {}
+        apply_alerted = False
         for status, details in self.statuses.items():
             if status == Statuses.poisoned:
                 self.take_damage(ceil(self.stats[Stats.HP] / 8))
@@ -307,11 +309,11 @@ class TemTem:
                     'existed': details['existed'] + 1,
                 }
             elif status == Statuses.asleep:
-                # Don't need to check either alerted or immune isn't in statuses
-                # because it's impossible to have had one and also be asleep.
-                new_statuses[Statuses.alerted] = {'remaining': 1, 'existed': 0}
+                apply_alerted = True
 
         self.statuses = new_statuses
+        if apply_alerted:
+            self.apply_status(Statuses.alerted, 1)
 
         # TODO: check this is the right place to check energy reserve
         if (
@@ -397,7 +399,7 @@ class TemTem:
 
         if (
             attack['type'] == Types.toxic
-            and self.item == 'Shuine\'s Horn'
+            and self.gear == 'Shuine\'s Horn'
             and Statuses.seized not in self.statuses
         ):
             attack = copy.copy(attack)
@@ -505,13 +507,13 @@ class TemTem:
         while not (line := next(lines)).strip():
             pass  # strip leading blank lines
 
-        # line 1: nickname (species) @ item
+        # line 1: nickname (species) @ gear
         if '@' in line:
             parts = line.strip().split('@')
-            item = parts[1].strip() or None
+            gear = parts[1].strip() or None
             line = parts[0]
         else:
-            item = None
+            gear = None
 
         if '(' in line:
             parts = line.split('(')
@@ -544,10 +546,10 @@ class TemTem:
                 break  # ignore lines after the final move
             moves.append(line.lstrip('-').strip())
 
-        return cls(species, moves, trait, svs, tvs, item, level)
+        return cls(species, moves, trait, svs, tvs, gear, level)
 
     def export(self):
-        res = '%s %s\n' % (self.species, '@ %s' % self.item if self.item else '')
+        res = '%s %s\n' % (self.species, '@ %s' % (self.gear or ''))
         res += 'Trait: %s\n' % self.trait
         if self.level != DEFAULT_LEVEL:
             res += 'Level: %s\n' % self.level
@@ -632,7 +634,7 @@ def test_temtem_class():
         assert imported == tem
         assert imported.stats == tem.stats
         assert imported.moves == tem.moves
-        assert imported.item == tem.item
+        assert imported.gear == tem.gear
         assert imported.trait == tem.trait
         assert imported.level == tem.level
 

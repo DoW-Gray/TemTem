@@ -199,7 +199,7 @@ class Battle:
 
     def _process_attack(self, side, tem_slot, choice):
         from contextlib import suppress
-        from calc import trait_modifiers, item_modifiers, calc_damage
+        from calc import trait_modifiers, gear_modifiers, calc_damage
 
         attacker = self.active_tem(side, tem_slot)
         attack = attacker.lookup_attack(choice.detail)
@@ -217,8 +217,8 @@ class Battle:
             targets.append(target)
             if attack['class'] != 'Status':
                 trait_mod = trait_modifiers(attacker, attack, target)
-                item_mod = item_modifiers(attacker, attack, target)
-                total_mod = trait_mod * item_mod * clockwise_mod
+                gear_mod = gear_modifiers(attacker, attack, target)
+                total_mod = trait_mod * gear_mod * clockwise_mod
                 damage = calc_damage(attacker, attack, target, total_mod)
                 target.take_damage(damage)
             for effect, num in attack['effects'].items():

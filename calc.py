@@ -179,17 +179,17 @@ def trait_modifiers(attacker, attack, target):
     return res
 
 
-def item_modifiers(attacker, attack, target):
+def gear_modifiers(attacker, attack, target):
     from contextlib import suppress
     res = 1.0
     with suppress(KeyError):
-        atk_item, def_item = ITEM_DAMAGE_TYPES[attack['type']]
+        atk_gear, def_gear = ITEM_DAMAGE_TYPES[attack['type']]
         if (
-            (attacker.item == atk_item and Statuses.seized not in attacker.statuses)
-            and (target.item != 'Snare' and Statuses.seized not in target.statuses)
+            (attacker.gear == atk_gear and Statuses.seized not in attacker.statuses)
+            and (target.gear != 'Snare' and Statuses.seized not in target.statuses)
         ):
             res *= 1.1
-        if target.item == def_item and Statuses.seized not in target.statuses:
+        if target.gear == def_gear and Statuses.seized not in target.statuses:
             res *= 0.8
     return res
 
