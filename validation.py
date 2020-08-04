@@ -202,7 +202,7 @@ def switch_already_trapped(choices, team_idx, battle):
     for choice, tem_no in enumerate(choices):
         if choice.action == 'switch':
             this_tem = battle.active_tem(team_idx, tem_no)
-            if Statuses.trapped in this_tem.statuses:
+            if this_tem.trapped:
                 raise ValidationFailure(
                     f'Tem {this_tem.species} can\'t try to switch when it\'s '
                     'trapped at the start of the turn.'

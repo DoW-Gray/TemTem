@@ -182,7 +182,7 @@ class Battle:
 
     def _process_switch(self, side, tem_slot, choice):
         switcher = self.active_tem(side, tem_slot)
-        if Statuses.trapped in switcher.statuses:
+        if switcher.trapped:
             return
         target = self.teams[side][choice.target]
         if (ally := switcher.ally) is not None:

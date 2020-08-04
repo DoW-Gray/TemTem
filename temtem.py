@@ -173,10 +173,7 @@ class TemTem:
             status = Statuses[status]
 
         with suppress(KeyError):
-            if (
-                self.gear == STATUS_ITEMS[status]
-                and Statuses.seized not in self.statuses
-            ):
+            if self.gear == STATUS_ITEMS[status] and self.seized:
                 return
 
         # TODO: check if a tem can have both vigorized and exhausted at once
@@ -192,7 +189,7 @@ class TemTem:
                 return
 
         elif status == Statuses.cold:
-            if Statuses.frozen in self.statuses:
+            if self.frozen:
                 return
             if self.trait in ('Mucous', 'Warm-Blooded'):
                 return
@@ -218,7 +215,7 @@ class TemTem:
         elif status == Statuses.asleep:
             if Types.mental in self.types:
                 return
-            if Statuses.alerted in self.statuses:
+            if self.alerted:
                 return
             if self.trait == 'Caffeinated':
                 return
@@ -271,15 +268,11 @@ class TemTem:
         '''
         Handle various things that need to be done at the start of each turn.
         '''
-        if (
-            Statuses.asleep in self.statuses
-            and self.gear == 'Pillow'
-            and Statuses.seized not in self.statuses
-        ):
+        if self.asleep and self.gear == 'Pillow' and not self.seized:
             # TODO: check that `floor` is correct here
             self.take_damage(-floor(self.stats[Stats.HP] / 10))
 
-        if self.gear == 'Sweatband' and Statuses.seized not in self.statuses:
+        if self.gear == 'Sweatband' not self.seized:
             max_sta = self.stats[Stats.sta]
             self.live_stats[Stats.sta] = min(floor(max_sta * 1.15), max_sta)
 
@@ -357,9 +350,9 @@ class TemTem:
         # TODO: handle waking up, soft touch
 
     def use_stamina(self, stamina):
-        if Statuses.vigorized in self.statuses:
+        if self.vigorized:
             stamina //= 2  # TesTem uses floor here
-        if Statuses.exhausted in self.statuses:
+        if self.exhausted:
             # TODO: if can't be exhausted and vigorized, should be elif
             stamina = floor(stamina * 1.5)  # TesTem uses floor here
 
@@ -400,7 +393,7 @@ class TemTem:
         if (
             attack['type'] == Types.toxic
             and self.gear == 'Shuine\'s Horn'
-            and Statuses.seized not in self.statuses
+            and not self.seized
         ):
             attack = copy.copy(attack)
             # Don't need copy.deepcopy, as we only change a top-level
@@ -447,7 +440,7 @@ class TemTem:
             and self.live_stats[Stats.HP] < self.stats[Stats.HP] / 3
         ):
             self.apply_status(Statuses.asleep, 2)
-            self.apply_status(Statuses.regenerating, 2)
+            self.apply_status(Statuses.regenerated, 2)
             self.apply_boost(Stats.SpA, 2)
             self.apply_boost(Stats.SpD, 2)
         elif self.trait == 'Trauma':
@@ -458,12 +451,12 @@ class TemTem:
 
         if attacker.trait == 'Apothecary' and attack['class'] == 'Special':
             if attacker is self.ally:
-                self.apply_status(Statuses.regenerating, 1)
+                self.apply_status(Statuses.regenerated, 1)
             else:
                 self.apply_status(Statuses.poisoned, 1)
         elif attacker.trait == 'Tri-Apothecary' and attack['class'] == 'Special':
             if attacker is self.ally:
-                self.apply_status(Statuses.regenerating, 3)
+                self.apply_status(Statuses.regenerated, 3)
             else:
                 self.apply_status(Statuses.poisoned, 3)
         elif attacker.trait == 'Prideful' and self.live_stats[Stats.HP] <= 0:
@@ -474,9 +467,75 @@ class TemTem:
         if self.ally and self.ally.trait == 'Benefactor' and damage > 0:
             self.ally.take_damage(self.ally.stats[Stats.HP] // 10)
 
-        if Statuses.asleep in self.statuses and attacker.trait != 'Soft Touch':
+        if self.asleep and attacker.trait != 'Soft Touch':
             # TODO: wake up, handling alerted
             raise NotImplementedError()
+
+    # shorthand methods to check statuses
+
+    @property
+    def cold(self):
+        return Statuses.cold in self.statuses
+
+    @property
+    def frozen(self):
+        return Statuses.frozen in self.statuses
+
+    @property
+    def asleep(self):
+        return Statuses.asleep in self.statuses
+
+    @property
+    def trapped(self):
+        return Statuses.trapped in self.statuses
+
+    @property
+    def doomed(self):
+        return Statuses.doomed in self.statuses
+
+    @property
+    def seized(self):
+        return Statuses.seized in self.statuses
+
+    @property
+    def poisoned(self):
+        return Statuses.poisoned in self.statuses
+
+    @property
+    def burned(self):
+        return Statuses.burned in self.statuses
+
+    @property
+    def exhausted(self):
+        return Statuses.exhausted in self.statuses
+
+    @property
+    def vigorized(self):
+        return Statuses.vigorized in self.statuses
+
+    @property
+    def immune(self):
+        return Statuses.immune in self.statuses
+
+    @property
+    def regenerated(self):
+        return Statuses.regenerated in self.statuses
+
+    @property
+    def nullified(self):
+        return Statuses.nullified in self.statuses
+
+    @property
+    def evading(self):
+        return Statuses.evading in self.statuses
+
+    @property
+    def alerted(self):
+        return Statuses.alerted in self.statuses
+
+    @property
+    def exiled(self):
+        return Statuses.exiled in self.statuses
 
     # import / export functions
 

@@ -42,7 +42,7 @@ def calc_damage(attacker, attack, target, modifiers=1.0):
 
     damage *= attacker.level
 
-    if Statuses.burned in attacker.statuses:
+    if attacker.burned:
         damage *= 0.7
 
     damage /= 200
@@ -71,7 +71,7 @@ def calc_damage(attacker, attack, target, modifiers=1.0):
 
 
 def effectiveness(attack_type, target):
-    if Statuses.nullified in target.statuses:
+    if target.nullified:
         return 1.0
 
     return (
@@ -185,11 +185,11 @@ def gear_modifiers(attacker, attack, target):
     with suppress(KeyError):
         atk_gear, def_gear = ITEM_DAMAGE_TYPES[attack['type']]
         if (
-            (attacker.gear == atk_gear and Statuses.seized not in attacker.statuses)
-            and (target.gear != 'Snare' and Statuses.seized not in target.statuses)
+            (attacker.gear == atk_gear and not attacker.seized)
+            and (target.gear != 'Snare' and not target.seized)
         ):
             res *= 1.1
-        if target.gear == def_gear and Statuses.seized not in target.statuses:
+        if target.gear == def_gear and not target.seized:
             res *= 0.8
     return res
 
