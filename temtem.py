@@ -272,7 +272,7 @@ class TemTem:
             # TODO: check that `floor` is correct here
             self.take_damage(-floor(self.stats[Stats.HP] / 10))
 
-        if self.gear == 'Sweatband' not self.seized:
+        if self.gear == 'Sweatband' and not self.seized:
             max_sta = self.stats[Stats.sta]
             self.live_stats[Stats.sta] = min(floor(max_sta * 1.15), max_sta)
 
