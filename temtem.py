@@ -28,10 +28,12 @@ from static import (
     Statuses,
     STAT_CONSTS,
     DEFAULT_LEVEL,
-    STATUS_ITEMS,
     lookup_temtem_data,
     lookup_attack,
 )
+
+from gear import lookup_gear
+from traits import lookup_trait
 
 from log import error
 
@@ -51,7 +53,7 @@ class TemTem:
     ):
         self.species = species
         self.moves = moves
-        self.trait = trait
+        self.trait = lookup_trait(trait)
         base_tem_data = lookup_temtem_data(species)
         self.base_stats = base_tem_data['Stats']
         self.types = base_tem_data['Types']
@@ -74,7 +76,7 @@ class TemTem:
                 self.tvs[stat] = 0
         self._calc_stats()
 
-        self.gear = gear
+        self.gear = lookup_gear(gear)
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self._calc_live_stats()
 
@@ -91,7 +93,7 @@ class TemTem:
         self.ally = None
 
     def __repr__(self):
-        return "<TemTem %s>" % self.species
+        return f'<TemTem {self.species}>'
 
     def __eq__(self, other):
         if not isinstance(other, TemTem):
@@ -165,51 +167,56 @@ class TemTem:
 
     def apply_status(self, status, turns):
         from contextlib import suppress
-
-        if self.trait == 'Neutrality':
-            return
+        from effects import DontApplyStatus
 
         if isinstance(status, str):
+            # TODO: deprecate the ability to use a string rather than enum
             status = Statuses[status]
 
-        with suppress(KeyError):
-            if self.gear == STATUS_ITEMS[status] and self.seized:
+        # TODO: check gear applies before trait
+        if not self.seized:
+            gear_effect = self.gear.on_status(self, status, turns)
+            try:
+                gear_effect.apply(target=self)
+            except DontApplyStatus:
+                return
+
+        trait_effect = self.trait.on_status(self, status, turns)
+        try:
+            trait_effect.apply(target=self)
+        except DontApplyStatus:
+            return
+
+        if self.ally:
+            ally_effect = self.ally.trait.on_ally_status(
+                self.ally, self, status, turns
+            )
+            try:
+                ally_effect.apply(target=self.ally, ally=self)
+            except DontApplyStatus:
                 return
 
         # TODO: check if a tem can have both vigorized and exhausted at once
 
+        # Check if a type or current status changes what's being applied
         if status in self.statuses:
             if status != Statuses.cold:
                 return
             self.statuses[Statuses.frozen] = self.statuses[Statuses.cold]
             del self.statuses[Statuses.cold]
-            if self.trait == 'Fever Rush':
-                # There's definitely a better way of doing this
-                self.apply_boost(Stats.Atk, 1)
-                return
 
         elif status == Statuses.cold:
             if self.frozen:
                 return
-            if self.trait in ('Mucous', 'Warm-Blooded'):
-                return
-            if self.trait == 'Cold-Natured':
-                status = Statuses.frozen
-            if self.ally and self.ally.trait == 'Guardian':
-                # TODO: check if guardian stops frozen on a cold-natured ally
-                return
-
             with suppress(KeyError):
                 del self.statuses[Statuses.burned]
 
         elif status == Statuses.burned:
             if Types.fire in self.types:
                 return
-            if self.ally and self.ally.trait == 'Guardian':
-                return
-
             with suppress(KeyError):
                 del self.statuses[Statuses.cold]
+            with suppress(KeyError):
                 del self.statuses[Statuses.frozen]
 
         elif status == Statuses.asleep:
@@ -217,64 +224,26 @@ class TemTem:
                 return
             if self.alerted:
                 return
-            if self.trait == 'Caffeinated':
-                return
-            if self.trait == 'Zen':
-                self.apply_boost(Stats.Def, 1)
-                self.apply_boost(Stats.SpD, 1)
         elif status == Statuses.poisoned:
             if Types.toxic in self.types:
                 return
-            if self.trait == 'Mithridatism':
-                return
-            if self.ally and self.ally.trait == 'Guardian':
-                return
 
-        if self.trait == 'Fever Rush':
-            self.apply_boost(Stats.Atk, 1)
-
+        # Handle applying a status when there are already 2
         if len(self.statuses) == 2:
             # remove oldest status to replace with new status condition
             del self.statuses[
                 sorted(self.statuses, key=lambda x: self.statuses[x]['existed'])[0]
             ]
 
-        if self.trait == 'Receptive' and status in {
-            Statuses.vigorized,
-            Statuses.regenerated,
-            Statuses.evading,
-            Statuses.alerted,
-        }:  # TODO: check if Immune is also boosted
-            turns += 1
-        elif self.trait == 'Resistant' and status in {
-            Statuses.cold,
-            Statuses.frozen,
-            Statuses.asleep,
-            Statuses.trapped,
-            Statuses.poisoned,
-            Statuses.burned,
-            Statuses.exhausted,
-        }:
-            turns -= 1
-            if not turns:
-                # Based on what data I have, this logic seems to come after
-                # removing the oldest status if there's 2 already
-                return
-
-        # TODO: handle receptive and resistant traits
         self.statuses[status] = {'remaining': turns, 'existed': 0}
 
     def start_turn(self):
         '''
-        Handle various things that need to be done at the start of each turn.
+        Handle all effects that occur at the start of each turn.
         '''
-        if self.asleep and self.gear == 'Pillow' and not self.seized:
-            # TODO: check that `floor` is correct here
-            self.take_damage(-floor(self.stats[Stats.HP] / 10))
-
-        if self.gear == 'Sweatband' and not self.seized:
-            max_sta = self.stats[Stats.sta]
-            self.live_stats[Stats.sta] = min(floor(max_sta * 1.15), max_sta)
+        if not self.seized:
+            self.gear.on_turn_start(self).apply(target=self)
+        self.trait.on_turn_start(self).apply(target=self)
 
     def end_turn(self):
         '''
@@ -308,12 +277,9 @@ class TemTem:
         if apply_alerted:
             self.apply_status(Statuses.alerted, 1)
 
-        # TODO: check this is the right place to check energy reserve
-        if (
-            self.trait == 'Energy Reserve'
-            and self.live_stats[Stats.HP] < self.stats[Stats.HP] / 4
-        ):
-            self.apply_status(Statuses.vigorized, 2)
+        if not self.seized:
+            self.gear.on_turn_end(self).apply(target=self)
+        self.trait.on_turn_end(self).apply(target=self)
 
         # update overexertion
         if self.overexerted:
@@ -325,12 +291,12 @@ class TemTem:
         denom = 5 if self.resting else 20
         self.live_stats[Stats.Sta] = min(sta, live_sta + 1 + ceil(sta / denom))
         self.resting = False
-
-        # TODO: various other effects like energy reserve trait
+        # NOTE: trait/gear .on_rest method is handled elsewhere, before this point.
 
     def take_damage(self, damage):
         '''
         take damage or heal
+        Note: trait / gear .on_take_damage is handled before this point
         '''
         if self.fainted or not damage:
             return
@@ -346,10 +312,11 @@ class TemTem:
             # can't heal above max HP
             self.live_stats[Stats.HP] = self.stats[Stats.HP]
 
-        # TODO: handle benefactor trait
         # TODO: handle waking up, soft touch
 
     def use_stamina(self, stamina):
+        from traits import Resiliant, Tireless, Vigorous
+
         if self.vigorized:
             stamina //= 2  # TesTem uses floor here
         if self.exhausted:
@@ -361,13 +328,15 @@ class TemTem:
             return
 
         damage = stamina - self.live_stats[Stats.Sta]
-        if self.trait == 'Resilient':
+        if self.trait is Resiliant:
             damage = min(damage, self.live_stats[Stats.HP] - 1)
         self.take_damage(damage)
         self.live_stats[Stats.Sta] = 0
 
-        if self.trait != 'Tireless':
+        if self.trait is not Tireless:
             self.overexerted = 2
+            if self.trait is Vigorous:
+                self.trait_counter = 1
 
     def lookup_attack(self, atk_name):
         '''
@@ -376,6 +345,7 @@ class TemTem:
         like Shuine's Horn.
         '''
         from copy import copy
+        from gear import ShuinesHorn
 
         attack = lookup_attack(atk_name)
         if 'synergy type' in attack:
@@ -392,7 +362,7 @@ class TemTem:
 
         if (
             attack['type'] == Types.toxic
-            and self.gear == 'Shuine\'s Horn'
+            and self.gear is ShuinesHorn
             and not self.seized
         ):
             attack = copy.copy(attack)
@@ -401,75 +371,6 @@ class TemTem:
             attack['type'] = Types.water
 
         return attack
-
-    def post_attack(self, attack):
-        if self.trait == 'Aerobic' and attack['type'] == Types.wind:
-            self.apply_boost(Stats.Spe, 1)
-            self.apply_boost(Stats.SpD, -1)
-        elif self.trait == 'Anaerobic' and attack['type'] == Types.toxic:
-            self.apply_boost(Stats.SpD, 1)
-            self.apply_boost(Stats.SpA, -1)
-        elif self.trait == 'Patient' and attack['hold']:
-            max_sta = self.stats[Stats.Sta]
-            self.live_stats[Stats.Sta] = min(
-                max_sta, self.live_stats[Stats.Sta] + max_sta // 10
-            )
-        elif self.trait == 'Rejuvenate' and attack['status'] == 'Physical':
-            self.take_damage(-floor(self.stats[Stats.HP] * 0.15))
-
-    def post_hit(self, attacker, attack, damage):
-        if self.trait == 'Amphibian' and attack['type'] == Types.water:
-            self.apply_boost(Stats.Spe, 1)
-        elif self.trait == 'Callosity' and attack['class'] == 'Physical':
-            self.apply_boost(Stats.Def, 1)
-        elif self.trait == 'Fainted Curse' and self.live_stats[Stats.HP] <= 0:
-            attacker.take_damage(floor(attacker.stats[Stats.HP] * 0.4))
-        elif self.trait == 'Mirroring' and damage > 0:
-            attacker.take_damage(damage // 5)
-        elif (
-            self.trait == 'Provident'
-            and attack['type'] in (Types.fire, Types.earth, Types.melee)
-        ):
-            self.apply_boost(Stats.SpD, 1)
-        elif self.trait == 'Toxic Farewell' and self.live_stats[Stats.HP] <= 0:
-            attacker.apply_status(Statuses.poisoned, 3)
-        elif self.trait == 'Toxic Skin' and attack['class'] == 'Physical':
-            attacker.apply_status(Statuses.poisoned, 2)
-        elif (
-            self.trait == 'Trance'
-            and self.live_stats[Stats.HP] < self.stats[Stats.HP] / 3
-        ):
-            self.apply_status(Statuses.asleep, 2)
-            self.apply_status(Statuses.regenerated, 2)
-            self.apply_boost(Stats.SpA, 2)
-            self.apply_boost(Stats.SpD, 2)
-        elif self.trait == 'Trauma':
-            if attack['class'] == 'Physical':
-                self.apply_boost(Stats.Def, -1)
-            elif attack['class'] == 'Special':
-                self.apply_boost(Stats.SpD, -1)
-
-        if attacker.trait == 'Apothecary' and attack['class'] == 'Special':
-            if attacker is self.ally:
-                self.apply_status(Statuses.regenerated, 1)
-            else:
-                self.apply_status(Statuses.poisoned, 1)
-        elif attacker.trait == 'Tri-Apothecary' and attack['class'] == 'Special':
-            if attacker is self.ally:
-                self.apply_status(Statuses.regenerated, 3)
-            else:
-                self.apply_status(Statuses.poisoned, 3)
-        elif attacker.trait == 'Prideful' and self.live_stats[Stats.HP] <= 0:
-            attacker.apply_boost(Stats.Atk, 1)
-            attacker.apply_boost(Stats.SpA, 1)
-            attacker.apply_boost(Stats.Spe, 1)
-
-        if self.ally and self.ally.trait == 'Benefactor' and damage > 0:
-            self.ally.take_damage(self.ally.stats[Stats.HP] // 10)
-
-        if self.asleep and attacker.trait != 'Soft Touch':
-            # TODO: wake up, handling alerted
-            raise NotImplementedError()
 
     # shorthand methods to check statuses
 
@@ -608,24 +509,24 @@ class TemTem:
         return cls(species, moves, trait, svs, tvs, gear, level)
 
     def export(self):
-        res = '%s %s\n' % (self.species, '@ %s' % (self.gear or ''))
-        res += 'Trait: %s\n' % self.trait
+        res = f'{self.species} {f"@ {self.gear.__name__}" or ""}\n'
+        res += f'Trait: {self.trait.__name__}\n'
         if self.level != DEFAULT_LEVEL:
-            res += 'Level: %s\n' % self.level
+            res += f'Level: {self.level}\n'
 
         tvs = ' / '.join(
-            '%d %s' % (val, stat.name) for stat, val in self.tvs.items() if val
+            f'{val} {stat.name}' for stat, val in self.tvs.items() if val
         )
         if tvs:
-            res += 'TVs: %s\n' % tvs
+            res += f'TVs: {tvs}\n'
         svs = ' / '.join(
-            '%d %s' % (val, stat.name) for stat, val in self.svs.items() if val != 50
+            f'{val} {stat.name}' for stat, val in self.svs.items() if val != 50
         )
         if svs:
-            res += 'SVs: %s\n' % svs
+            res += f'SVs: {svs}\n'
 
         for move in self.moves:
-            res += '- %s\n' % move
+            res += f'- {move}\n'
 
         return res
 

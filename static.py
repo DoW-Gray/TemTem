@@ -76,6 +76,7 @@ class Statuses(Enum):
 
 
 STAT_CONSTS = {
+    # used in stat calculation
     Stats.HP: (80, 20_000, 15),
     Stats.Sta: (200, 25_000, 20),
     Stats.Spe: (100, 25_000, 10),
@@ -259,22 +260,6 @@ TYPE_EFFECTIVENESS = {
 
 DEFAULT_LEVEL = 58
 
-ITEM_DAMAGE_TYPES = {
-    Types.fire: ('Fire Chip', 'ICe Cube'),
-    Types.wind: ('Hand Fan', 'Coat'),
-    Types.electric: ('NO SUCH ITEM', 'Lightning Rod'),
-    Types.water: ('NO SUCH ITEM', 'Umbrella'),
-    Types.crystal: ('NO SUCH ITEM', 'Rock Shield'),
-    Types.toxic: ('NO SUCH ITEM', 'Tucma Mask'),
-}
-
-STATUS_ITEMS = {
-    Statuses.burned: 'Pansunscreen',
-    Statuses.doomed: 'Talisman',
-    Statuses.asleep: 'Energy Drink',
-    Statuses.trapped: 'Grease',
-}
-
 
 def load_temtem_data():
     global TEMTEM_DATA
@@ -302,13 +287,11 @@ def load_temtem_data():
 
 
 def load_attack_data():
+    from effects import Effect
+
     global ATTACK_DATA
 
-    def apply_effect_enums(effects):
-        """
-        Change strings like 'Def' or 'burned' to enums like Stats.Def or
-        Statuses.burned
-        """
+    def gen_effect_dict(effects):
         tmp_dict = {}
         for key, value in effects.items():
             try:
@@ -332,11 +315,10 @@ def load_attack_data():
         if 'damage' not in atk_data:
             atk_data['damage'] = 0
 
-        if 'effects' in atk_data:
-            atk_data['effects'] = apply_effect_enums(atk_data['effects'])
-
-        if 'self' in atk_data:
-            atk_data['self'] = apply_effect_enums(atk_data['self'])
+        atk_data['effects'] = Effect(
+            attacker=gen_effect_dict(atk_data.get('self', {})),
+            target=gen_effect_dict(atk_data.get('effects', {})),
+        )
 
     ATTACK_DATA = data
 
@@ -368,8 +350,22 @@ def test_lookup_temtem():
 
 
 def test_lookup_attack():
-    from test_data import BETA_BURST_DATA, HIGHPRESSURE_WATER_DATA, STONE_WALL_DATA
+    from contextlib import suppress
+    from test_data import (
+        BETA_BURST_DATA,
+        HIGHPRESSURE_WATER_DATA,
+        STONE_WALL_DATA,
+        STARE_DATA,
+    )
 
-    assert lookup_attack('Beta Burst') == BETA_BURST_DATA
-    assert lookup_attack('High-pressure Water') == HIGHPRESSURE_WATER_DATA
-    assert lookup_attack('Stone Wall') == STONE_WALL_DATA
+    for name, data in (
+        ('Beta Burst', BETA_BURST_DATA),
+        ('High-pressure Water', HIGHPRESSURE_WATER_DATA),
+        ('Stone Wall', STONE_WALL_DATA),
+        ('Stare', STARE_DATA),
+    ):
+        lookup_data = lookup_attack(name)
+        del lookup_data['effects']
+        with suppress(KeyError):
+            del lookup_data['self']
+        assert lookup_data == data

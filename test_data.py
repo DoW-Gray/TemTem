@@ -127,10 +127,6 @@ STONE_WALL_DATA = {
     'hold': 1,
     'priority': 1,
     'target': 'single',
-    'effects': {
-        Stats.Def: 2,
-        Stats.SpD: 1,
-    },
 }
 STARE_DATA = {
     'name': 'Stare',
@@ -141,16 +137,10 @@ STARE_DATA = {
     'hold': 0,
     'priority': 2,
     'target': 'other',
-    'effects': {
-        Stats.Def: -1,
-    },
-    'self': {
-        Statuses.alerted: 2,
-    },
 }
 
 # for temtem.py
-GYALIS_IMPORT = '''Gyalis @ Ice Cube
+GYALIS_IMPORT = '''Gyalis @ IceCube
 Trait: Resistant
 Level: 48
 TVs: 350 HP / 4 Sta / 146 Spe / 498 Atk / 1 Def / 1 SpD

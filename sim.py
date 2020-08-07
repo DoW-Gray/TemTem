@@ -18,9 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Stats, Types, Statuses, lookup_attack
-
-from math import ceil, floor
+from static import Stats, lookup_attack
 
 
 class Choice:
@@ -167,19 +165,6 @@ class Battle:
 
         return True
 
-    def _handle_switchin_traits(self, switchin, side):
-        if switchin.trait == 'Demoralize':
-            for tem_slot in self.active[other(side)]:
-                self.teams[other(side)][tem_slot].apply_boost(Stats.Spe, -1)
-        elif switchin.trait == 'Protector' and switchin.ally:
-            switchin.ally.apply_boost(Stats.Def)
-            switchin.ally.apply_boost(Stats.SpD)
-        if (
-            Types.digital in switchin.types
-            and switchin.ally and switchin.ally.trait == 'Fast Charge'
-        ):
-            switchin.ally.apply_boost(Stats.Spe, 2)
-
     def _process_switch(self, side, tem_slot, choice):
         switcher = self.active_tem(side, tem_slot)
         if switcher.trapped:
@@ -189,17 +174,29 @@ class Battle:
             ally.ally = target
         self.active[side][tem_slot] = choice.target
 
-        self._handle_switchin_traits(target, side)
+        opposing_team = [
+            self.active_tem(other(side), 0), self.active_tem(other(side), 1)
+        ]
+
+        for handler in (target.trait, target.gear):
+            handler.on_switch_in(target=target).apply(
+                target=target, ally=ally, opposing_team=opposing_team
+            )
+        for handler in (ally.trait, ally.gear):
+            handler.on_ally_switch_in(target=ally, ally=target).apply(
+                target=ally, ally=target, opposing_team=opposing_team
+            )
 
     def _handle_ko(self, tem, side, tem_slot):
         tem.fainted = True
         if (ally := tem.ally) is not None:
             ally.ally = None
         del self.active[side][tem_slot]
+        # TODO: handle wins here?
 
     def _process_attack(self, side, tem_slot, choice):
-        from contextlib import suppress
-        from calc import trait_modifiers, gear_modifiers, calc_damage
+        from effects import Unaffected, RedirectAttack
+        from calc import calc_damage
 
         attacker = self.active_tem(side, tem_slot)
         attack = attacker.lookup_attack(choice.detail)
@@ -208,63 +205,88 @@ class Battle:
             return
 
         attacker.use_stamina(attack['stamina'])
+        # This is done before the attack for e.g. vigorous.
 
         # Deal damage
+        targets = [
+            self.active_tem(target_side, tem) for target_side, tem in choice.target
+        ]
         clockwise_mod = 1.0
-        targets = []
-        for target_side, tem in choice.target:
-            target = self.active_tem(target_side, tem)
-            targets.append(target)
-            if attack['class'] != 'Status':
-                trait_mod = trait_modifiers(attacker, attack, target)
-                gear_mod = gear_modifiers(attacker, attack, target)
-                total_mod = trait_mod * gear_mod * clockwise_mod
-                damage = calc_damage(attacker, attack, target, total_mod)
-                target.take_damage(damage)
-            for effect, num in attack['effects'].items():
-                if effect in Statuses:
-                    target.apply_status(effect, num)
-                elif effect in Stats:
-                    target.apply_boost(effect, num)
-                else:
-                    # TODO: weird effects like strangle
-                    raise NotImplementedError()
-            if attack['target'] == 'clockwise':
-                with suppress(NameError):
-                    if damage <= 0:
-                        # stop chaining if no damage e.g. electric synthesize
-                        break
-                    clockwise_mod = 0.7 if clockwise_mod == 1.0 else 0.6
+        for target in targets:
+            # First, handle effects from traits, gear, and the move itself
+            # I confirmed aerobic applies before the attack.
+            # TODO: I need to check everything works this way.
+            ally = target.ally
+            can_redirect = True
+            continue_flag = False
+            # TODO: test redirects happen once, similar to magic coat in mons
+            effects = []
+            handlers = [target.trait.on_hit, target.gear.on_hit]
+            if ally:
+                handlers.extend([ally.trait.on_ally_hit, ally.gear.on_ally_hit])
+            for handler in handlers:
+                # handle these separately due to possible redirects or
+                # being unaffected by the moves
+                try:
+                    effects.append(handler(attacker, target, attack))
+                except Unaffected:
+                    continue_flag = True
+                    break
+                except RedirectAttack as redir:
+                    if not can_redirect:
+                        continue
+                    if redir.new_target != 'ally':
+                        raise RuntimeError(
+                            'Don\'t know how to handle new target '
+                            f'{redir.new_target} from handler {handler}'
+                        )
+                    if (not ally) or ally in targets:
+                        # spread moves will continue to hit both
+                        continue
+                    targets.append(ally)
+                    continue_flag = True
+            if continue_flag:
+                continue
 
-            target.post_hit(attacker, attack)
-
-        for effect, num in attack['self'].items():
-            if effect in Statuses:
-                attacker.apply_status(effect, num)
-            elif effect == Stats.HP:
-                # This is for recoil / healing moves. The `num` represents
-                # fraction of hp gained (so -1 == ko yourself).
-                if num > 0:
-                    num = floor(attacker.stats[Stats.HP] * num)
-                else:
-                    num = ceil(attacker.stats[Stats.HP] * num)
-                attacker.take_damage(num)
-            elif effect in Stats:
-                attacker.apply_boost(effect, num)
-            else:
-                # There aren't any non-standard self effects yet
-                raise RuntimeError(
-                    f'Attack {attack["name"]} used by {attacker.species} has '
-                    f'unrecognised effect {effect}.'
+            effects.extend([
+                attacker.trait.on_attack(attacker, target, attack),
+                attacker.gear.on_attack(attacker, target, attack),
+                attack['effects'],
+            ])
+            mod = 1
+            for effect in effects:
+                mod = effect.apply(
+                    attacker=attacker,
+                    target=target,
+                    ally=ally,
+                    damage=mod,
                 )
-        attacker.post_attack(attack)
 
-        if attacker.live_stats[Stats.HP] <= 0:
-            if attacker.trait == 'Wrecked Farewell':
-                for target in targets:
-                    # TODO: confirm this should use floor()
-                    target.take_damage(target.stats[Stats.HP] // 4)
-            self._handle_ko(attacker)
+            # Now apply damage
+            if attacker['class'] != 'Status':
+                damage = calc_damage(attacker, attack, target, mod)
+                opposing_team = [
+                    self.active_tem(other(side), 0), self.active_tem(other(side), 1)
+                ]
+                for effect in (
+                    target.on_take_damage(attacker, target, attack, damage),
+                    ally.on_ally_damage(attacker, target, ally, attack, damage),
+                ):
+                    effect.apply(
+                        attacker=attacker,
+                        target=target,
+                        ally=ally,
+                        opposing_team=opposing_team,
+                    )
+
+                target.take_damage(damage)
+
+                if damage > 0 and attack['target'] == 'clockwise' and clockwise_mod != 0.6:
+                    clockwise_mod = {
+                        1.0: 0.7,
+                        0.7: 0.6,
+                    }[clockwise_mod]
+
         for target in targets:
             if target.live_stats[Stats.HP] <= 0:
                 self._handle_ko(target)
