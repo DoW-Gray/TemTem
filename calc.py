@@ -20,10 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from static import (
     Stats,
-    Types,
     Statuses,
     TYPE_EFFECTIVENESS,
-    ITEM_DAMAGE_TYPES,
     lookup_attack,
 )
 
@@ -81,117 +79,6 @@ def effectiveness(attack_type, target):
             if target.types[1] else 1.0
         )
     )
-
-
-def trait_modifiers(attacker, attack, target):
-    res = 1.0
-
-    # Type-specific traits
-    if attack['type'] == Types.wind:
-        if attacker.trait == 'Air Specialist':
-            res *= 1.15
-    elif attack['type'] == Types.nature:
-        if attacker.trait == 'Botanist':
-            res *= 1.15
-        if target.trait == 'Botanophobia':
-            res *= 1.5
-    elif attack['type'] == Types.fire:
-        if attacker.trait == 'Pyromaniac':
-            res *= 1.15
-        if target.trait == 'Thick Skin':
-            res *= 0.5
-    elif attack['type'] == Types.water:
-        if attacker.trait == 'Hydrologist':
-            res *= 1.15
-        elif attacker.trait == 'Water Affinity':
-            # I'm assuming this stacks with STAB, like Toxic Affinity
-            res *= 1.5
-    elif attack['type'] == Types.electric:
-        if target.trait == 'Mucous':
-            res *= 0.7
-        elif target.trait == 'Flawed Crystal':
-            res *= 1.5
-        elif target.trait == 'Electric Synthesize':
-            res *= -1
-    elif attack['type'] == Types.toxic:
-        if attacker.trait == 'Toxic Affinity':
-            res *= 1.5
-        if target.trait == 'Immunity':
-            return 0.0
-        elif target.trait == 'Flawed Crystal':
-            res *= 1.5
-    elif attack['type'] == Types.mental:
-        if target.trait == 'Flawed Crystal':
-            res *= 1.5
-        elif target.trait == 'Strong Liver':
-            res *= -1
-    elif attack['type'] == Types.earth:
-        if target.trait == 'Hover':
-            res *= 0.5
-    elif attack['type'] == Types.melee:
-        if target.trait == 'Punching Bag':
-            res *= 0.7
-
-    # Other traits
-    # TODO: handle Settling, Rested, Shared Pain, Puppet Master,
-    # Camaraderie, Bully, Last Rush
-    if attack['class'] == 'Physical':
-        if attacker.trait == 'Brawny':
-            res *= 1.2
-        if target.trait == 'Parrier':
-            res *= 0.7
-        elif target.trait == 'Punching Bag':
-            res *= 1.3
-    elif attack['class'] == 'Special':
-        if attacker.trait == 'Channeler':
-            res *= 1.25
-        elif attacker.trait == 'Mental Alliance':
-            if attacker.ally and Types.mental in attacker.ally.types:
-                res *= 1.15
-
-    if attacker.ally is None:
-        # TODO: check Last Rush here
-        pass
-    else:
-        if target is attacker.ally:
-            if attacker.trait == 'Individualist':
-                return 0.0
-            elif target.trait == 'Friendship':
-                return 0.0
-        if target.trait == 'Synergy Master' and 'synergy move' in attack:
-            res *= 1.25
-
-    if (
-        attack['target'] in {'clockwise', 'team or ally', 'whole team', 'all'}
-        and attacker.trait == 'Spoilsport'
-    ):
-        res *= 1.25
-
-    elif attacker.trait == 'Vigorous' and attacker.overexerted:
-        res *= 1.5
-
-    elif (
-        attacker.trait == 'Furor'
-        and attacker.live_stats[Stats.HP] < attacker.stats[Stats.HP] / 3
-    ):
-        res *= 1.33  # TODO: check if this should be + 1/3
-
-    return res
-
-
-def gear_modifiers(attacker, attack, target):
-    from contextlib import suppress
-    res = 1.0
-    with suppress(KeyError):
-        atk_gear, def_gear = ITEM_DAMAGE_TYPES[attack['type']]
-        if (
-            (attacker.gear == atk_gear and Statuses.seized not in attacker.statuses)
-            and (target.gear != 'Snare' and Statuses.seized not in target.statuses)
-        ):
-            res *= 1.1
-        if target.gear == def_gear and Statuses.seized not in target.statuses:
-            res *= 0.8
-    return res
 
 
 def n_hko(attacker, attack, target):

@@ -32,16 +32,19 @@ class ValidationFailure(Exception):
 def temtem_check(func):
     global TEMTEM_CHECKS
     TEMTEM_CHECKS[func.__name__] = func
+    return func
 
 
 def team_check(func):
     global TEAM_CHECKS
     TEAM_CHECKS[func.__name__] = func
+    return func
 
 
 def choice_check(func):
     global CHOICE_CHECKS
     CHOICE_CHECKS[func.__name__] = func
+    return func
 
 
 def check_temtem(temtem, ignore_rules=[]):
