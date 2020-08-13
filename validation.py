@@ -74,13 +74,13 @@ def check_choices(choices, team_idx, battle, ignore_rules=[]):
         if rule not in ignore_rules:
             check(choices, team_idx, battle)
 
-    for tem_idx, choice in enumerate(choices):
+    for tem_no, choice in enumerate(choices):
         if choice.action != 'attack':
             continue
         attack = lookup_attack(choice.detail)
         for rule, check in ATTACK_CHOICE_CHECKS.items():
             if rule not in ignore_rules:
-                check(choice, team_idx, tem_idx, attack, battle)
+                check(choice, team_idx, tem_no, attack, battle)
 
 
 @temtem_check
@@ -228,7 +228,7 @@ def switch_already_trapped(choices, team_idx, battle):
 
 
 @attack_choice_check
-def overexerted_attack(choice, team_idx, tem_idx, attack, battle):
+def overexerted_attack(choice, team_idx, tem_no, attack, battle):
     this_tem = battle.active_tem(team_idx, tem_no)
     if this_tem.overexerted:
         raise ValidationFailure(
@@ -237,7 +237,7 @@ def overexerted_attack(choice, team_idx, tem_idx, attack, battle):
 
 
 @attack_choice_check
-def has_attack(choice, team_idx, tem_idx, attack, battle):
+def has_attack(choice, team_idx, tem_no, attack, battle):
     this_tem = battle.active_tem(team_idx, tem_no)
     if choice.detail.split(' +')[0] not in this_tem.moves:
         raise ValidationFailure(
@@ -246,7 +246,7 @@ def has_attack(choice, team_idx, tem_idx, attack, battle):
 
 
 @attack_choice_check
-def hold_attack_read(choice, team_idx, tem_idx, attack, battle):
+def hold_attack_read(choice, team_idx, tem_no, attack, battle):
     this_tem = battle.active_tem(team_idx, tem_no)
     hold_count = this_tem.moves[attack['name']]
     if hold_count < attack['hold']:
@@ -257,7 +257,7 @@ def hold_attack_read(choice, team_idx, tem_idx, attack, battle):
 
 
 @attack_choice_check
-def correct_synergy(choice, team_idx, tem_idx, attack, battle):
+def correct_synergy(choice, team_idx, tem_no, attack, battle):
     this_tem = battle.active_tem(team_idx, tem_no)
     if 'synergy attack' in attack:
         synergy_type = attack['name'].split(' +')[1]
@@ -276,7 +276,7 @@ def correct_synergy(choice, team_idx, tem_idx, attack, battle):
 
 
 @attack_choice_check
-def valid_attack_target(choice, team_idx, tem_idx, attack, battle):
+def valid_attack_target(choice, team_idx, tem_no, attack, battle):
     targetting = attack['target']
 
     if 'synergy move' in attack:
@@ -303,13 +303,13 @@ def valid_attack_target(choice, team_idx, tem_idx, attack, battle):
                 f'Expected one target for {choice.detail}, but saw '
                 f'{num_targets}.'
             )
-        if targetting == 'other' and choice.targets == [team_idx, tem_idx]:
+        if targetting == 'other' and choice.targets == [team_idx, tem_no]:
             raise ValidationFailure(
                 f'Attack {choice.detail} can\'t target the tem using it.'
             )
 
     elif targetting == 'self':
-        if choice.targets != [team_idx, tem_idx]:
+        if choice.targets != [team_idx, tem_no]:
             raise ValidationFailure(
                 f'Move {choice.detail} must target the tem using it.'
             )
