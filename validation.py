@@ -23,6 +23,7 @@ from static import Types, lookup_attack, lookup_temtem_data
 TEMTEM_CHECKS = {}
 TEAM_CHECKS = {}
 CHOICE_CHECKS = {}
+ATTACK_CHOICE_CHECKS = {}
 
 
 class ValidationFailure(Exception):
@@ -47,6 +48,12 @@ def choice_check(func):
     return func
 
 
+def attack_choice_check(func):
+    global ATTACK_CHOICE_CHECKS
+    ATTACK_CHOICE_CHECKS[func.__name__] = func
+    return func
+
+
 def check_temtem(temtem, ignore_rules=[]):
     for rule, check in TEMTEM_CHECKS.items():
         if rule not in ignore_rules:
@@ -66,6 +73,14 @@ def check_choices(choices, team_idx, battle, ignore_rules=[]):
     for rule, check in CHOICE_CHECKS.items():
         if rule not in ignore_rules:
             check(choices, team_idx, battle)
+
+    for tem_idx, choice in enumerate(choices):
+        if choice.action != 'attack':
+            continue
+        attack = lookup_attack(choice.detail)
+        for rule, check in ATTACK_CHOICE_CHECKS.items():
+            if rule not in ignore_rules:
+                check(choice, team_idx, tem_idx, attack, battle)
 
 
 @temtem_check
@@ -92,7 +107,7 @@ def tem_moves(temtem):
     all_moves = {move for learnset in tem_data['Moves'].values() for move in learnset}
     for move in temtem.moves:
         if move not in all_moves:
-            raise ValidationFailure(f'{temtem.species} does not learn {move}')
+            raise ValidationFailure(f'{temtem.species} does not learn {move}.')
 
 
 @temtem_check
@@ -108,7 +123,7 @@ def move_count(temtem):
 def tem_trait(temtem):
     tem_data = lookup_temtem_data(temtem.species)
     if temtem.trait not in tem_data['Traits']:
-        raise ValidationFailure(f'{temtem.species} can\'t have trait {temtem.trait}')
+        raise ValidationFailure(f'{temtem.species} can\'t have trait {temtem.trait}.')
 
 
 @team_check
@@ -134,7 +149,7 @@ def tem_count(team):
     max_tem_count = 8
     if len(team) > max_tem_count:  # TODO: check if this should be !=
         raise ValidationFailure(
-            f'Team has {len(team)} tems, but the maximum is {max_tem_count}'
+            f'Team has {len(team)} tems, but the maximum is {max_tem_count}.'
         )
 
 
@@ -212,132 +227,127 @@ def switch_already_trapped(choices, team_idx, battle):
                 )
 
 
-@choice_check
-def overexerted_attack(choices, team_idx, battle):
-    for choice, tem_no in enumerate(choices):
-        if choice.action != 'attack':
-            continue
-        this_tem = battle.active_tem(team_idx, tem_no)
-        if this_tem.overexerted:
+@attack_choice_check
+def overexerted_attack(choice, team_idx, tem_idx, attack, battle):
+    this_tem = battle.active_tem(team_idx, tem_no)
+    if this_tem.overexerted:
+        raise ValidationFailure(
+            f'Tem {this_tem.species} is overexerted, but trying to attack.'
+        )
+
+
+@attack_choice_check
+def has_attack(choice, team_idx, tem_idx, attack, battle):
+    this_tem = battle.active_tem(team_idx, tem_no)
+    if choice.detail.split(' +')[0] not in this_tem.moves:
+        raise ValidationFailure(
+            f'Tem {this_tem.species} doesn\'t have move {choice.detail}.'
+        )
+
+
+@attack_choice_check
+def hold_attack_read(choice, team_idx, tem_idx, attack, battle):
+    this_tem = battle.active_tem(team_idx, tem_no)
+    hold_count = this_tem.moves[attack['name']]
+    if hold_count < attack['hold']:
+        raise ValidationFailure(
+            f'Move {attack["name"]} isn\'t ready yet - hold counter is at '
+            f'{hold_count} of {attack["hold"]}.'
+        )
+
+
+@attack_choice_check
+def correct_synergy(choice, team_idx, tem_idx, attack, battle):
+    this_tem = battle.active_tem(team_idx, tem_no)
+    if 'synergy attack' in attack:
+        synergy_type = attack['name'].split(' +')[1]
+        if Types[synergy_type] not in this_tem.ally.types:
             raise ValidationFailure(
-                f'Tem {this_tem.species} is overexerted, but trying to attack.'
+                f'Can\'t use synergy move {choice.detail} because ally '
+                f'{this_tem.ally.species} doesn\'t have type {synergy_type}.'
             )
-
-
-@choice_check
-def has_attack(choices, team_idx, battle):
-    for choice, tem_no in enumerate(choices):
-        if choice.action != 'attack':
-            continue
-        this_tem = battle.active_tem(team_idx, tem_no)
-        if choice.detail.split(' +')[0] not in this_tem.moves:
+    elif 'synergy type' in attack:
+        if attack['synergy type'] in this_tem.ally.types:
             raise ValidationFailure(
-                f'Tem {this_tem.species} doesn\'t have move {choice.detail}'
+                f'Tem {this_tem.species} should choose synergy move '
+                f'{attack["name"] + " +" + attack["synergy type"].name} because '
+                f'of its ally {this_tem.ally.species}\'s typing.'
             )
 
 
-@choice_check
-def correct_synergy(choices, team_idx, battle):
-    for choice, tem_no in enumerate(choices):
-        if choice.action != 'attack':
-            continue
-        this_tem = battle.active_tem(team_idx, tem_no)
-        atk = lookup_attack(choice.detail)
-        if 'synergy attack' in atk:
-            synergy_type = atk['name'].split(' +')[1]
-            if Types[synergy_type] not in this_tem.ally.types:
-                raise ValidationFailure(
-                    f'Can\'t use synergy move {choice.detail} because ally '
-                    f'{this_tem.ally.species} doesn\'t have type {synergy_type}'
-                )
-        elif 'synergy type' in atk:
-            if atk['synergy type'] in this_tem.ally.types:
-                raise ValidationFailure(
-                    f'Tem {this_tem.species} should choose synergy move '
-                    f'{atk["name"] + " +" + atk["synergy type"].name} because '
-                    f'of its ally {this_tem.ally.species}\'s typing.'
-                )
+@attack_choice_check
+def valid_attack_target(choice, team_idx, tem_idx, attack, battle):
+    targetting = attack['target']
 
+    if 'synergy move' in attack:
+        # The following was checked by using Awful Song with a neutral tem
+        # partner.
+        raise ValidationFailure(
+            f'Saw move {attack["name"]}, but expect targetting to be chosen '
+            'based on non-synergy versions of moves.'
+        )
 
-@choice_check
-def valid_attack_target(choices, team_idx, battle):
-    for tem_idx, choice in enumerate(choices):
-        if choice.action != 'attack':
-            continue
-        atk = choice.detail
-        if isinstance(atk, str):
-            atk = lookup_attack(choice.detail)
-        targetting = atk['target']
+    num_targets = len(choice.targets)
+    if not num_targets:
+        raise ValidationFailure(f'{choice.detail} had no targets.')
 
-        if 'synergy move' in atk:
-            # The following was checked by using Awful Song with a neutral tem
-            # partner.
+    if len({tuple(tar) for tar in choice.targets}) != num_targets:
+        raise ValidationFailure(
+            f'{choice.detail} targetted the same tem twice.'
+        )
+
+    if targetting in ('single', 'clockwise', 'other'):
+        # For clockwise, only specify the first target
+        if num_targets != 1:
             raise ValidationFailure(
-                f'Saw move {atk["name"]}, but expect targetting to be chosen '
-                'based on non-synergy versions of moves.'
+                f'Expected one target for {choice.detail}, but saw '
+                f'{num_targets}.'
             )
-
-        num_targets = len(choice.targets)
-        if not num_targets:
-            raise ValidationFailure(f'{choice.detail} had no targets.')
-
-        if len({tuple(tar) for tar in choice.targets}) != num_targets:
+        if targetting == 'other' and choice.targets == [team_idx, tem_idx]:
             raise ValidationFailure(
-                f'{choice.detail} targetted the same tem twice.'
+                f'Attack {choice.detail} can\'t target the tem using it.'
             )
 
-        if targetting in ('single', 'clockwise', 'other'):
-            # For clockwise, only specify the first target
-            if num_targets != 1:
-                raise ValidationFailure(
-                    f'Expected one target for {choice.detail}, but saw '
-                    f'{num_targets}.'
-                )
-            if targetting == 'other' and choice.targets == [team_idx, tem_idx]:
-                raise ValidationFailure(
-                    f'Attack {choice.detail} can\'t target the tem using it.'
-                )
-
-        elif targetting == 'self':
-            if choice.targets != [team_idx, tem_idx]:
-                raise ValidationFailure(
-                    f'Move {choice.detail} must target the tem using it.'
-                )
-
-        elif targetting == 'team or ally':
-            if len({side for side, tem in choice.targets}) > 1:
-                raise ValidationFailure(
-                    f'All targets of {choice.detail} must be on the same team.'
-                )
-            if choice.targets[0][0] == team_idx:
-                if num_targets > 1:
-                    raise ValidationFailure(
-                        f'Can\'t target both yourself and your ally with move '
-                        f'{choice.detail}'
-                    )
-            elif num_targets != len(battle.active[not team_idx]):
-                raise ValidationFailure(
-                    f'If targetting the opposing side with {choice.detail}, '
-                    'must target all opposing tems.'
-                )
-
-        elif targetting == 'whole team':
-            if len({side for side, tem in choice.targets}) > 1:
-                raise ValidationFailure(
-                    f'All targets of {choice.detail} must be on the same team.'
-                )
-            if len(battle.active[choice.targets[0][0]]) != num_targets:
-                raise ValidationFailure(
-                    f'{choice.detail} must target all tems on a team.'
-                )
-
-        elif targetting == 'all':
-            if sum((len(battle.active[i]) for i in (0, 1))) != num_targets:
-                raise ValidationFailure(
-                    f'{choice.detail} must target all tems on the field.'
-                )
-
-        else:
-            raise RuntimeError(
-                f'Unknown target {targetting} for move {choice.detail}'
+    elif targetting == 'self':
+        if choice.targets != [team_idx, tem_idx]:
+            raise ValidationFailure(
+                f'Move {choice.detail} must target the tem using it.'
             )
+
+    elif targetting == 'team or ally':
+        if len({side for side, tem in choice.targets}) > 1:
+            raise ValidationFailure(
+                f'All targets of {choice.detail} must be on the same team.'
+            )
+        if choice.targets[0][0] == team_idx:
+            if num_targets > 1:
+                raise ValidationFailure(
+                    f'Can\'t target both yourself and your ally with move '
+                    f'{choice.detail}.'
+                )
+        elif num_targets != len(battle.active[not team_idx]):
+            raise ValidationFailure(
+                f'If targetting the opposing side with {choice.detail}, '
+                'must target all opposing tems.'
+            )
+
+    elif targetting == 'whole team':
+        if len({side for side, tem in choice.targets}) > 1:
+            raise ValidationFailure(
+                f'All targets of {choice.detail} must be on the same team.'
+            )
+        if len(battle.active[choice.targets[0][0]]) != num_targets:
+            raise ValidationFailure(
+                f'{choice.detail} must target all tems on a team.'
+            )
+
+    elif targetting == 'all':
+        if sum((len(battle.active[i]) for i in (0, 1))) != num_targets:
+            raise ValidationFailure(
+                f'{choice.detail} must target all tems on the field.'
+            )
+
+    else:
+        raise RuntimeError(
+            f'Unknown target {targetting} for move {choice.detail}'
+        )

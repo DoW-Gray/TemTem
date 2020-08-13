@@ -52,7 +52,7 @@ class TemTem:
             level=DEFAULT_LEVEL
     ):
         self.species = species
-        self.moves = moves
+        self.moves = {move: 0 for move in moves}  # {move: hold counter}
         self.trait = lookup_trait(trait)
         base_tem_data = lookup_temtem_data(species)
         self.base_stats = base_tem_data['Stats']
@@ -292,6 +292,10 @@ class TemTem:
         self.live_stats[Stats.Sta] = min(sta, live_sta + 1 + ceil(sta / denom))
         self.resting = False
         # NOTE: trait/gear .on_rest method is handled elsewhere, before this point.
+
+        # update hold counts
+        for move, hold in self.moves.items():
+            self.moves[move] = min(hold + 1, lookup_attack(move)['hold'])
 
     def take_damage(self, damage):
         '''

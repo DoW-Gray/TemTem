@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 """
-traits.py: All instances of Trait class
+traits.py: All instances of the Trait class
 Copyright (C) 2020 DoW
 
 This program is free software; you can redistribute it and/or
@@ -365,8 +365,14 @@ class Furor(Trait):
 class Guardian(Trait):
     @staticmethod
     def on_ally_status(target, ally, status, count):
-        # TODO: check if this also stops Frozen on a cold-natured ally
-        if status in {Statuses.cold, Statuses.burned, Statuses.poisoned, Statuses.doomed}:
+        # Note: this also stops Frozen on a cold-natured ally (tested in-game)
+        if status in {
+            Statuses.cold,
+            Statuses.frozen,
+            Statuses.burned,
+            Statuses.poisoned,
+            Statuses.doomed
+        }:
             return Effect(target={status: -1})
         return no_effect
 

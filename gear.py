@@ -1,6 +1,6 @@
 # vim: set fileencoding=utf-8 :
 """
-gear.py: All instances of Gear class
+gear.py: All instances of the Gear class
 Copyright (C) 2020 DoW
 
 This program is free software; you can redistribute it and/or

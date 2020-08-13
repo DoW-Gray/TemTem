@@ -291,6 +291,8 @@ class Battle:
             if target.live_stats[Stats.HP] <= 0:
                 self._handle_ko(target)
 
+        attacker.moves[choice.detail] = -1  # incremented in TemTem.end_turn()
+
     def process_turn(self, choices):
         # Start-of-turn effects
         for side, tem_slot in self._active_tems_by_speed():
