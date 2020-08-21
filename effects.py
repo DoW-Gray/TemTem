@@ -211,6 +211,8 @@ class Gear(EffectHandler):
 
 def string_to_class_name(inpt):
     # Used in both gear.py and traits.py, so I put it here
+    if inpt is None:
+        return ''
     inpt = inpt.strip()
     if not inpt:
         return ''

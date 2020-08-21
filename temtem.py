@@ -44,8 +44,8 @@ class TemTem:
     def __init__(
             self,
             species,
-            moves,
-            trait,
+            moves=[],
+            trait='',
             svs={},
             tvs={},
             gear=None,
