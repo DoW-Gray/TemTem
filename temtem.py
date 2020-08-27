@@ -488,7 +488,7 @@ class TemTem:
         # next lines: trait, level, tvs, svs
         tvs = {stat: 0 for stat in Stats}
         svs = {stat: 50 for stat in Stats}
-        level = 48
+        level = DEFAULT_LEVEL
         while not (line := next(lines).strip()).startswith('-'):
             if line.startswith('Trait:'):
                 trait = line.split('Trait:')[1].strip()
