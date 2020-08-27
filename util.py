@@ -36,7 +36,7 @@ def try_increase_stat(tem, stat, remaining_tvs):
     cur_tvs = tem.tvs[stat]
     cur_stat = tem.stats[stat]
     last_tvs = (cur_tvs, remaining_tvs)
-    while remaining_tvs and tem.tvs[stat] < 500:
+    while remaining_tvs and tem.tvs[stat] < 499:
         tem.tvs[stat] += 1
         remaining_tvs -= 1
         tem.stats[stat] = tem._calc_stat(stat)
@@ -58,7 +58,7 @@ def try_increase_sta_regen(tem, remaining_tvs):
     cur_sta_regen = sta_regen(tem)
     cur_tvs = tem.tvs[Stats.Sta]
     last_tvs = (cur_tvs, remaining_tvs)
-    while remaining_tvs:
+    while remaining_tvs and tem.tvs[Stats.Sta] < 499:
         tem.tvs[Stats.Sta] += 1
         remaining_tvs -= 1
         tem.stats[Stats.Sta] = tem._calc_stat(Stats.Sta)
