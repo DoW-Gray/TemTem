@@ -24,6 +24,7 @@ from temtem import TemTem
 
 GYALIS_DATA = {
     'Stats': {
+        'BST': 460,
         Stats.HP: 86,
         Stats.Sta: 44,
         Stats.Spe: 100,
@@ -41,16 +42,19 @@ GYALIS_DATA = {
             'Glass Blade',
             'Sharp Stabs',
             'Footwork',
+            'Double Gash',
             'Block',
             'Drill Impact',
             'Crystal Bite',
-            'Ninja Jutsu'
+            'Ninja Jutsu',
+            'Hook Kick',
         ],
         'TC': ['Awful Song', 'Antitoxins', 'Rend', 'Footwork'],
     },
 }
 PIGEPIC_DATA = {
     'Stats': {
+        'BST': 433,
         Stats.HP: 54,
         Stats.Sta: 72,
         Stats.Spe: 58,

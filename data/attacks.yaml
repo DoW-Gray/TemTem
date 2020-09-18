@@ -1,1504 +1,2218 @@
----
-Wake Up:
-    class: Physical
-    type: neutral
-    damage: 1
-    stamina: 0
-    hold: 0
-    priority: 4
-    target: single
-Psychic Collaborator:
+Acid Reflux:
     class: Special
-    type: mental
-    damage: 1
-    stamina: 19
-    hold: 1
-    priority: 2
-    target: other
-    synergy type: mental
-Psychic Collaborator +mental:
-    class: Special
-    type: mental
-    synergy move: true
-    damage: 170
-    stamina: 19
-    hold: 1
-    priority: 2
-    target: other
-    synergy move: true
-Cold Breeze:
-    class: Special
-    type: wind
-    damage: 10
-    stamina: 9
-    hold: 0
-    priority: 2
-    target: other
+    damage: 80
     effects:
-        cold: 3
-Scratch:
-    class: Physical
-    type: neutral
-    damage: 20
-    stamina: 4
-    hold: 0
-    priority: 2
-    target: other
-Peck:
-    class: Physical
-    type: neutral
-    damage: 24
-    stamina: 5
-    hold: 0
-    priority: 4
-    target: other
-Strangle:
-    class: Physical
-    type: neutral
-    damage: 25
-    stamina: 11
-    hold: 0
-    priority: 0
-    target: other
-    effects:
-        strangle: true
-Bubbles:
-    class: Special
-    type: water
-    damage: 27
-    stamina: 5
-    hold: 0
-    priority: 2
-    target: other
-Novice Punch:
-    class: Physical
-    type: neutral
-    damage: 30
-    stamina: 3
-    hold: 0
-    priority: 2
-    target: single
-    synergy type: melee
-Novice Punch +melee:
-    class: Physical
-    type: neutral
-    damage: 51
-    stamina: 3
-    hold: 0
-    priority: 2
-    target: single
-    synergy move: true
-Kick:
-    class: Physical
-    type: neutral
-    damage: 32
-    stamina: 8
-    hold: 0
-    priority: 3
-    target: other
-Finbeat:
-    class: Physical
-    type: neutral
-    damage: 32
-    stamina: 4
-    hold: 0
-    priority: 3
-    target: other
-Glass Blade:
-    class: Physical
-    type: crystal
-    damage: 32
-    stamina: 5
-    hold: 0
-    priority: 2
-    target: single
-Sand Splatter:
-    class: Physical
-    type: earth
-    damage: 35
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: other
-DC Beam:
-    class: Special
-    type: electric
-    damage: 35
-    stamina: 5
-    hold: 0
-    priority: 3
-    target: other
-Nibble:
-    class: Physical
-    type: neutral
-    damage: 37
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: other
-Spores:
-    class: Special
-    type: nature
-    damage: 37
-    stamina: 6
-    hold: 0
-    priority: 2
-    target: other
-Venomous Claws:
-    class: Physical
-    type: toxic
-    damage: 40
-    stamina: 9
-    hold: 0
-    priority: 2
-    target: other
-Wind Blade:
-    class: Special
-    type: wind
-    damage: 40
-    stamina: 9
-    hold: 0
-    priority: 2
-    target: other
-Perfect Jab:
-    class: Physical
-    type: melee
-    damage: 40
-    stamina: 15
-    hold: 0
-    priority: 2
-    target: single
-    effects:
-        Def: -1
-Urushiol:
-    class: Physical
-    type: toxic
-    damage: 41
-    stamina: 8
-    hold: 0
-    priority: 2
-    target: other
-    synergy type: toxic
-Urushiol +toxic:
-    class: Physical
-    type: toxic
-    damage: 41
-    stamina: 8
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        poisoned: 4
-    synergy move: true
-Shrill Voice:
-    class: Special
-    type: neutral
-    damage: 42
-    stamina: 12
-    hold: 1
-    priority: 2
-    target: team or ally
-Fire Flame:
-    class: Special
-    type: fire
-    damage: 45
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: single
-Energy Manipulation:
-    class: Special
-    type: mental
-    damage: 45
-    stamina: 11
-    hold: 0
-    priority: 3
-    target: other
-    synergy type: nature
-Energy Manipulation +nature:
-    class: Special
-    type: mental
-    damage: 60
-    stamina: 11
-    hold: 0
-    priority: 3
-    target: other
-    effects:
-        exhausted: 1
-    synergy move: true
-Chain Lightning:
-    class: Special
-    type: electric
-    damage: 48
-    stamina: 15
-    hold: 0
-    priority: 2
-    target: clockwise
-Data Burst:
-    class: Physical
-    type: digital
-    damage: 48
-    stamina: 6
-    hold: 0
-    priority: 0
-    target: other
-Martial Strike:
-    class: Special
-    type: melee
-    damage: 50
-    stamina: 5
-    hold: 1
-    priority: 2
-    target: other
-Sharp Leaf:
-    class: Physical
-    type: nature
-    damage: 50
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: other
-Toxic Plume:
-    class: Special
-    type: toxic
-    damage: 50
-    stamina: 24
-    hold: 1
-    priority: 2
-    target: whole team
-    effects:
-        poisoned: 1
-    synergy type: crystal
-Toxic Plume +crystal:
-    class: Special
-    type: toxic
-    damage: 50
-    stamina: 16
-    hold: 1
-    priority: 2
-    target: whole team
-    effects:
-        poisoned: 1
-        Atk: -1
-    synergy move: true
-Rend:
-    class: Special
-    type: neutral
-    damage: 50
-    stamina: 22
+        poisoned: 2
     hold: 2
     priority: 2
-    target: other
-    effects:
-        nullified: 4
-High-pressure Water:
-    class: Special
-    type: water
-    damage: 50
-    stamina: 15
-    hold: 1
-    priority: 2
-    target: other
-    synergy type: fire
-High-pressure Water +fire:
-    class: Special
-    type: water
-    damage: 50
-    stamina: 15
-    hold: 1
-    priority: 2
-    target: other
-    effects:
-        burned: 3
-    synergy move: true
-Toxic Slime:
-    class: Physical
+    stamina: 20
+    target: team or ally
     type: toxic
-    damage: 50
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: single
-Tesla Prison:
-    class: Special
-    type: electric
-    damage: 50
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        Spd: -1
-Tail Strike:
-    class: Physical
-    type: neutral
-    damage: 50
-    stamina: 5
-    hold: 1
-    priority: 2
-    target: other
-Water Blade:
-    class: Special
-    type: water
-    damage: 52
-    stamina: 10
-    hold: 0
-    priority: 1
-    target: other
-Warm Cuddle:
-    class: Physical
-    type: fire
-    damage: 53
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: other
-Ice Cubes:
-    class: Physical
-    type: water
-    damage: 54
-    stamina: 13
-    hold: 0
-    priority: 2
-    target: other
-    synergy type: water
-Ice Cubes +water:
-    class: Physical
-    type: water
-    damage: 54
-    stamina: 9
-    hold: 0
-    priority: 2
-    target: other
-    synergy move: true
-Mechanical Heat:
-    class: Physical
-    type: fire
-    damage: 55
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: other
-Heavy Blow:
-    class: Physical
-    type: neutral
-    damage: 58
-    stamina: 11
-    hold: 0
-    priority: 2
-    target: other
 Allergic Spread:
     class: Special
-    type: nature
     damage: 58
+    hold: 1
+    priority: 2
     stamina: 18
-    hold: 1
-    priority: 2
     target: team or ally
-Hyperkinetic Strike:
-    class: Special
-    type: wind
-    damage: 59
-    stamina: 28
-    hold: 1
-    priority: 3
-    target: other
-Jaw Strike:
-    class: Physical
-    type: neutral
-    damage: 60
-    stamina: 9
-    hold: 0
-    priority: 2
-    target: other
-Ice Shuriken:
-    class: Physical
-    type: water
-    damage: 60
-    stamina: 14
-    hold: 0
-    priority: 2
-    target: other
+    type: nature
+Antitoxins:
+    class: Status
+    damage: 0
     effects:
-        cold: 2
-Crystal Dust:
-    class: Special
-    type: crystal
-    damage: 60
-    stamina: 11
-    hold: 0
-    priority: 3
-    target: other
-    synergy type: wind
-Crystal Dust +wind:
-    class: Special
-    type: crystal
-    damage: 80
-    stamina: 11
-    hold: 0
-    priority: 4
-    target: other
-    synergy move: true
-Tentacle Whip:
-    class: Physical
-    type: neutral
-    damage: 60
-    stamina: 15
-    hold: 0
+        poisoned: -1
+    hold: 2
     priority: 2
-    target: other
-Psy Wave:
-    class: Special
-    type: mental
-    damage: 61
-    stamina: 7
-    hold: 1
-    priority: 2
-    target: other
-Toxic Fang:
-    class: Physical
+    stamina: 26
+    target: team
     type: toxic
-    damage: 62
-    stamina: 12
-    hold: 1
-    priority: 2
-    target: other
-    effects:
-        poisoned: 1
-Embers:
-    class: Physical
-    type: fire
-    damage: 63
-    stamina: 15
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        burned: 1
-Rampage:
-    class: Physical
-    type: neutral
-    damage: 65
-    stamina: 26
-    hold: 1
-    priority: 1
-    target: whole team
-    synergy type: melee
-Rampage +melee:
-    class: Physical
-    type: neutral
-    damage: 85
-    stamina: 26
-    hold: 1
-    priority: 1
-    target: whole team
-    synergy move: true
 Aqua Bullet Hell:
     class: Special
-    type: water
     damage: 67
+    hold: 0
+    priority: 2
     stamina: 17
-    hold: 0
-    priority: 2
     target: other
-Tsunami:
-    class: Special
     type: water
-    damage: 70
-    stamina: 25
-    hold: 1
-    priority: 2
-    target: team or ally
-    synergy type: wind
-Tsunami +wind:
-    class: Special
-    type: water
-    damage: 80
-    stamina: 25
-    hold: 1
-    priority: 2
-    target: team or ally
-    effects:
-        cold: 3
-    synergy move: true
-Magma Cannon:
-    class: Special
-    type: fire
-    damage: 70
-    stamina: 37
-    hold: 3
-    priority: 1
-    target: other
-    effects:
-        burned: 3
-Mud Shower:
-    class: Special
-    type: earth
-    damage: 70
-    stamina: 14
-    hold: 0
-    priority: 2
-    target: other
-Fierce Claw:
-    class: Physical
-    type: neutral
-    damage: 71
-    stamina: 13
-    hold: 0
-    priority: 2
-    target: other
-Meteor Swarm:
-    class: Physical
-    type: fire
-    damage: 75
-    stamina: 25
-    hold: 1
-    priority: 1
-    target: team or ally
-    synergy type: fire
-Meteor Swarm +fire:
-    class: Physical
-    type: fire
-    damage: 75
-    stamina: 25
-    hold: 1
-    priority: 1
-    target: team or ally
-    effects:
-        burned: 1
-    synergy move: true
-Electric Storm:
-    class: Special
-    type: electric
-    damage: 76
-    stamina: 26
-    hold: 1
-    priority: 2
-    target: team or ally
-Sharp Stabs:
-    class: Physical
-    type: crystal
-    damage: 76
-    stamina: 15
-    hold: 1
-    priority: 3
-    target: single
-Telekinetic Shrapnel:
-    class: Physical
-    type: mental
-    damage: 80
-    stamina: 8
-    hold: 1
-    priority: 2
-    target: other
-Uppercut:
-    class: Physical
-    type: melee
-    damage: 80
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: other
 Aqua Stone:
     class: Physical
-    type: water
     damage: 80
-    stamina: 21
     hold: 1
     priority: 2
-    target: other
+    stamina: 21
     synergy type: earth
+    target: other
+    type: water
 Aqua Stone +earth:
     class: Physical
-    type: water
     damage: 104
+    hold: 1
+    priority: 2
     stamina: 21
-    hold: 1
-    priority: 2
-    target: other
     synergy move: true
-Toxic Ink:
-    class: Physical
-    type: toxic
-    damage: 80
-    stamina: 16
-    hold: 0
-    priority: 2
+    synergy type: earth
     target: other
-    effects:
-        poisoned: 2
-Head Charge:
-    class: Physical
-    type: melee
-    damage: 80
-    stamina: 10
-    hold: 1
-    priority: 1
-    target: single
-Double Kick:
-    class: Physical
-    type: neutral
-    damage: 80
-    stamina: 22
-    hold: 0
-    priority: 3
-    target: other
-Iced Stalactite:
-    class: Physical
     type: water
-    damage: 82
-    stamina: 22
-    hold: 1
-    priority: 2
-    target: other
-    effects:
-        cold: 3
-Clinch:
-    class: Physical
-    type: neutral
-    damage: 85
-    stamina: 14
-    hold: 0
-    priority: 1
-    target: other
-Boomerang:
-    class: Physical
-    type: wind
-    damage: 85
-    stamina: 14
-    hold: 1
-    priority: 3
-    target: other
-Haito Uchi:
-    class: Physical
-    type: melee
-    damage: 85
-    stamina: 21
-    hold: 1
-    priority: 2
-    target: other
-    effects:
-        asleep: 1
-Earth Wave:
-    class: Physical
-    type: earth
-    damage: 90
-    stamina: 28
-    hold: 2
-    priority: 1
-    target: team or ally
-Humiliating Slap:
-    class: Physical
-    type: neutral
-    damage: 90
-    stamina: 20
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        Def: -1
-Wind Burst:
-    class: Special
-    type: wind
-    damage: 90
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: other
-Awful Song:
-    class: Special
-    type: neutral
-    damage: 96
-    stamina: 20
-    hold: 1
-    priority: 2
-    target: other
-    synergy type: neutral
-Awful Song +neutral:
-    class: Special
-    type: neutral
-    damage: 96
-    stamina: 20
-    hold: 1
-    priority: 2
-    target: team or ally
-    synergy move: true
-Psy Surge:
-    class: Special
-    type: mental
-    damage: 100
-    stamina: 15
-    hold: 1
-    priority: 1
-    target: other
-Water Cannon:
-    class: Special
-    type: water
-    damage: 100
-    stamina: 21
-    hold: 0
-    priority: 2
-    target: other
-    synergy type: toxic
-Water Cannon +toxic:
-    class: Special
-    type: water
-    damage: 100
-    stamina: 21
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        poisoned: 2
-    synergy move: true
-Noxious Bomb:
-    class: Physical
-    type: toxic
-    damage: 100
-    stamina: 20
-    hold: 0
-    priority: 2
-    target: other
-Feather Gatling:
-    class: Physical
-    type: wind
-    damage: 100
-    stamina: 17
-    hold: 0
-    priority: 2
-    target: other
-Head Ram:
-    class: Physical
-    type: neutral
-    damage: 100
-    stamina: 17
-    hold: 0
-    priority: 1
-    target: other
-Beta Burst:
-    class: Special
-    type: mental
-    damage: 100
-    stamina: 23
-    hold: 0
-    priority: 2
-    target: other
-Chains Hit:
-    class: Physical
-    type: neutral
-    damage: 110
-    stamina: 16
-    hold: 0
-    priority: 2
-    target: single
-Multiple Pecks:
-    class: Physical
-    type: neutral
-    damage: 110
-    stamina: 26
-    hold: 0
-    priority: 2
-    target: other
-Blizzard:
-    class: Special
-    type: wind
-    damage: 120
-    stamina: 15
-    hold: 1
-    priority: 1
-    target: other
-Drill Impact:
-    class: Physical
-    type: neutral
-    damage: 120
-    stamina: 20
-    hold: 0
-    priority: 2
-    target: other
-Water Cutting Lily:
-    class: Physical
-    type: nature
-    damage: 120
-    stamina: 31
-    hold: 0
-    priority: 3
-    target: single
-    synergy type: water
-Water Cutting Lily +water:
-    class: Physical
-    type: nature
-    damage: 144
-    stamina: 31
-    hold: 0
-    priority: 3
-    target: single
-    synergy move: true
-Hypoxia:
-    class: Special
-    type: wind
-    damage: 120
-    stamina: 30
-    hold: 0
-    priority: 2
-    target: single
-Crystal Spikes:
-    class: Special
-    type: crystal
-    damage: 120
-    stamina: 27
-    hold: 0
-    priority: 3
-    target: other
-Stone Ball:
-    class: Physical
-    type: earth
-    damage: 130
-    stamina: 29
-    hold: 0
-    priority: 1
-    target: single
-    synergy type: fire
-Stone Ball +fire:
-    class: Physical
-    type: earth
-    damage: 130
-    stamina: 29
-    hold: 0
-    priority: 1
-    target: single
-    effects:
-        burned: 2
-    synergy move: true
-Crystal Plume Gatling:
-    class: Physical
-    type: crystal
-    damage: 130
-    stamina: 24
-    hold: 0
-    priority: 2
-    target: other
-Held Anger:
-    class: Physical
-    type: neutral
-    damage: 130
-    stamina: 12
-    hold: 3
-    priority: 1
-    target: other
-Sharp Rain:
-    class: Special
-    type: water
-    damage: 130
-    stamina: 20
-    hold: 2
-    priority: 2
-    target: other
 Aquatic Whirlwind:
     class: Special
+    damage: 130
+    hold: 1
+    priority: 3
+    stamina: 29
+    target: other
     type: water
-    damage: 130
-    stamina: 29
-    hold: 1
-    priority: 3
-    target: other
-Crystal Bite:
-    class: Physical
-    type: crystal
-    damage: 130
-    stamina: 22
-    hold: 1
-    priority: 2
-    target: other
-Ninja Jutsu:
-    class: Physical
-    type: neutral
-    damage: 130
-    stamina: 27
-    hold: 2
-    priority: 4
-    target: other
-Dust Vortex:
+Awful Song:
     class: Special
-    type: earth
-    damage: 131
-    stamina: 24
+    damage: 96
     hold: 1
     priority: 2
-    target: other
-Tornado:
-    class: Special
-    type: wind
-    damage: 135
-    stamina: 31
-    hold: 1
-    priority: 3
-    target: other
-Nicho Sai:
-    class: Physical
-    type: melee
-    damage: 135
-    stamina: 29
-    hold: 1
-    priority: 3
-    target: other
-Fire Tornado:
-    class: Special
-    type: fire
-    damage: 145
-    stamina: 22
-    hold: 2
-    priority: 2
-    target: other
-Frond Whip:
-    class: Physical
-    type: nature
-    damage: 146
-    stamina: 28
-    hold: 1
-    priority: 1
-    target: other
-Harmful Lick:
-    class: Physical
-    type: neutral
-    damage: 150
-    stamina: 29
-    hold: 0
-    priority: 1
-    target: other
-Gamma Burst:
-    class: Special
-    type: mental
-    damage: 150
-    stamina: 51
-    hold: 0
-    priority: 2
-    target: other
-Major Slash:
-    class: Physical
-    type: neutral
-    damage: 150
-    stamina: 33
-    hold: 1
-    priority: 2
-    target: other
-Oshi-Dashi:
-    class: Physical
-    type: melee
-    damage: 150
-    stamina: 28
-    hold: 1
-    priority: 2
-    target: other
-Narcoleptic Hit:
-    class: Physical
-    type: mental
-    damage: 150
-    stamina: 15
-    hold: 1
-    priority: 1
-    target: other
-    effects:
-        asleep: 2
-Inner Spirit:
-    class: Special
-    type: melee
-    damage: 170
-    stamina: 23
-    hold: 2
-    priority: 2
-    target: other
-Photosynthesis:
-    class: Status
-    type: nature
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: self
-    effects:
-        sta: 0.5
-Paralysing Poison:
-    class: Status
-    type: toxic
     stamina: 20
-    hold: 2
-    priority: 2
+    synergy type: neutral
     target: single
-    effects:
-        poisoned: 2
-        trapped: 2
-    synergy type: toxic
-Paralysing Poison +toxic:
-    class: Status
-    type: toxic
+    type: neutral
+Awful Song +neutral:
+    class: Special
+    damage: 96
+    hold: 1
+    priority: 2
     stamina: 20
-    hold: 2
-    priority: 2
-    target: single
-    effects:
-        poisoned: 4
-        trapped: 4
     synergy move: true
-Toxic Spores:
+    synergy type: neutral
+    target: team or ally
+    type: neutral
+Bamboozle:
     class: Status
-    type: toxic
-    stamina: 9
-    hold: 0
-    priority: 1
-    target: other
+    damage: 0
     effects:
-        poisoned: 3
-Madness Buff:
-    class: Status
-    type: melee
-    stamina: 15
+        evading: 2
     hold: 0
     priority: 2
-    target: self
-    efects:
-        SpA: 2
-        SpD: 2
-        HP: -0.25
-Diamond Fort:
+    stamina: 18
+    target: single
+    type: mental
+Bark Shield:
     class: Status
-    type: crystal
-    stamina: 26
-    hold: 2
-    priority: 1
-    target: self
+    damage: 0
     effects:
         Def: 2
-        SpD: 2
-Pollution:
-    class: Status
-    type: toxic
-    stamina: 22
     hold: 2
+    priority: 1
+    stamina: 30
+    target: team
+    type: nature
+Base Jump:
+    class: Physical
+    damage: 115
+    hold: 0
     priority: 2
-    target: team or ally
-    effects:
-        poisoned: 2
-Crystallize:
-    class: Status
-    type: crystal
-    stamina: 18
+    stamina: 16
+    target: other
+    type: neutral
+Bestial Charge:
+    class: Physical
+    damage: 55
     hold: 1
     priority: 2
+    stamina: 20
+    target: team or ally
+    type: neutral
+Beta Burst:
+    class: Special
+    damage: 100
+    hold: 0
+    priority: 2
+    stamina: 23
+    target: other
+    type: mental
+Blizzard:
+    class: Special
+    damage: 120
+    hold: 1
+    priority: 1
+    stamina: 15
+    target: other
+    type: wind
+Block:
+    class: Status
+    damage: 0
+    effects:
+        Def: 2
+    hold: 1
+    priority: 2
+    stamina: 16
     target: self
+    type: melee
+Boomerang:
+    class: Physical
+    damage: 85
+    hold: 1
+    priority: 3
+    stamina: 14
+    target: other
+    type: wind
+Brace:
+    class: Status
+    damage: 0
+    effects:
+        brace: true
+    hold: 1
+    priority: 3
+    stamina: 5
+    target: self
+    type: neutral
+Bubbles:
+    class: Special
+    damage: 27
+    hold: 0
+    priority: 2
+    stamina: 5
+    target: other
+    type: water
+Burrow:
+    class: Status
+    damage: 0
+    effects:
+        evading: 4
+    hold: 1
+    priority: 1
+    stamina: 12
+    target: self
+    type: earth
+Bush:
+    class: Status
+    damage: 0
+    effects:
+        regenerated: 2
+        evading: 1
+    hold: 2
+    priority: 3
+    stamina: 21
+    synergy type: earth
+    target: self
+    type: nature
+Bush +earth:
+    class: Status
+    damage: 0
+    effects:
+        regenerated: 2
+        evading: 1
+        SpD: 2
+    hold: 2
+    priority: 3
+    stamina: 21
+    synergy move: true
+    synergy type: earth
+    target: self
+    type: nature
+Cage:
+    class: Status
+    damage: 0
+    effects:
+        trapped: 2
+    hold: 1
+    priority: 5
+    stamina: 23
+    target: all
+    type: neutral
+Chain Heal:
+    class: Status
+    damage: 0
+    effects:
+        chain heal: true
+    hold: 2
+    priority: 2
+    stamina: 20
+    target: other
+    type: neutral
+Chain Lightning:
+    class: Special
+    damage: 48
+    effects:
+        chain lightning: true
+    hold: 0
+    priority: 2
+    stamina: 15
+    target: single
+    type: electric
+Chains Hit:
+    class: Physical
+    damage: 110
+    hold: 0
+    priority: 2
+    stamina: 16
+    target: single
+    type: neutral
+Charge:
+    class: Physical
+    damage: 50
+    hold: 1
+    priority: 3
+    stamina: 4
+    target: other
+    type: neutral
+Cheer Up:
+    class: Status
+    damage: 0
+    effects:
+        hold: -1
+    hold: 0
+    priority: 4
+    stamina: 7
+    target: single
+    type: neutral
+Clay Ball:
+    class: Physical
+    damage: 60
+    hold: 1
+    priority: 2
+    stamina: 5
+    target: other
+    type: earth
+Clinch:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 1
+    stamina: 14
+    target: other
+    type: neutral
+Cold Breeze:
+    class: Special
+    damage: 10
+    effects:
+        cold: 3
+    hold: 0
+    priority: 2
+    stamina: 9
+    target: other
+    type: wind
+Confiscate:
+    class: Status
+    damage: 0
+    effects:
+        seized: 3
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: other
+    type: neutral
+Cooperation:
+    class: Status
+    damage: 0
+    effects:
+        cooperation: true
+    hold: 0
+    priority: 4
+    stamina: 1
+    target: team
+    type: neutral
+Crystal Bite:
+    class: Physical
+    damage: 130
+    hold: 1
+    priority: 2
+    stamina: 22
+    target: other
+    type: crystal
+Crystal Dust:
+    class: Special
+    damage: 60
+    hold: 0
+    priority: 3
+    stamina: 11
+    synergy type: wind
+    target: single
+    type: crystal
+Crystal Dust +wind:
+    class: Special
+    damage: 80
+    hold: 0
+    priority: 4
+    stamina: 11
+    synergy move: true
+    synergy type: wind
+    target: single
+    type: crystal
+Crystal Plume Gatling:
+    class: Physical
+    damage: 130
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: other
+    type: crystal
+Crystal Spikes:
+    class: Special
+    damage: 110
+    hold: 0
+    priority: 3
+    stamina: 29
+    target: single
+    type: crystal
+Crystallize:
+    class: Status
+    damage: 0
     effects:
         Def: 2
         Spe: -1
-Block:
-    class: Status
-    type: melee
-    stamina: 16
     hold: 1
     priority: 2
+    stamina: 18
     target: self
-    effects:
-        Def: 2
-Sacrifice:
-    class: Status
-    type: neutral
-    stamina: 0
-    hold: 1
+    type: crystal
+DC Beam:
+    class: Special
+    damage: 35
+    hold: 0
     priority: 3
-    target: single
+    stamina: 5
+    target: other
+    type: electric
+Darkness:
+    class: Status
+    damage: 0
+    effects:
+        isolated: 2
+    hold: 2
+    priority: 2
+    stamina: 18
+    target: all
+    type: neutral
+Diamond Fort:
+    class: Status
+    damage: 0
     effects:
         Def: 2
         SpD: 2
-    self:
-        hp: -1
-Cheer Up:
-    class: Status
-    type: neutral
-    stamina: 7
-    hold: 0
-    priority: 4
-    target: single
-    effects:
-        hold: -1
-Relax:
-    class: Status
-    type: neutral
-    stamina: 12
-    hold: 1
-    priority: 1
-    target: all
-    effects:
-        asleep: 2
-King's Roar:
-    class: Status
-    type: neutral
-    stamina: 24
-    hold: 3
-    priority: 2
-    target: team or ally
-    effects:
-        Spd: -1
-        Atk: -1
-Lifeful Sap:
-    class: Status
-    type: nature
-    stamina: 12
-    hold: 0
-    priority: 2
-    target: self
-    effects:
-        regenerated: 7
-Lullaby:
-    class: Status
-    type: mental
-    stamina: 27
     hold: 2
     priority: 1
-    target: team or ally
-    effects:
-        asleep: 2
-Hypnosis:
-    class: Status
-    type: mental
-    stamina: 14
-    hold: 1
-    priority: 2
+    stamina: 26
+    target: self
+    type: crystal
+Dim Mak:
+    class: Special
+    damage: 0
+    hold: 2
+    priority: 3
+    stamina: 20
     target: other
+    type: melee
+Double Edge:
+    class: Special
+    damage: 84
     effects:
-        asleep: 2
-Roots:
-    class: Status
-    type: nature
-    stamina: 5
+        Def: 1
+        SpD: 1
+    hold: 0
+    priority: 1
+    stamina: 12
+    synergy type: neutral
+    target: single
+    type: neutral
+Double Edge +neutral:
+    class: Special
+    damage: 1
+    effects:
+        Def: 1
+        SpD: 1
+    hold: 0
+    priority: 1
+    stamina: 12
+    synergy move: true
+    synergy type: neutral
+    target: single
+    type: neutral
+Double Gash:
+    class: Physical
+    damage: 49
     hold: 0
     priority: 2
+    stamina: 7
     target: other
-    effects:
-        Spd: -1
-Gaia:
+    type: melee
+Double Kick:
+    class: Physical
+    damage: 80
+    hold: 0
+    priority: 3
+    stamina: 22
+    target: other
+    type: neutral
+Drill Impact:
+    class: Physical
+    damage: 120
+    hold: 0
+    priority: 2
+    stamina: 20
+    target: other
+    type: neutral
+Drought:
     class: Status
-    type: nature
-    stamina: 15
-    hold: 3
-    priority: 0
-    target: self
+    damage: 0
     effects:
-        stamina: 1.0
-Stone Wall:
-    class: Status
-    type: earth
-    stamina: 18
+        exhausted: 2
+    self:
+        overexerted: true
     hold: 1
     priority: 1
-    target: single
-    effects:
-        Def: 2
-        SpD: 1
-Nimble:
-    class: Status
-    type: wind
-    stamina: 4
-    hold: 0
-    priority: 2
-    target: other
-    effects:
-        Spd: 1
-Footwork:
-    class: Status
-    type: melee
-    stamina: 15
+    stamina: 14
+    target: all
+    type: earth
+Dust Vortex:
+    class: Special
+    damage: 131
     hold: 1
-    priority: 3
-    target: self
+    priority: 2
+    stamina: 24
+    target: other
+    type: earth
+Earth Wave:
+    class: Physical
+    damage: 90
+    hold: 2
+    priority: 1
+    stamina: 28
+    target: team or ally
+    type: earth
+Earthbreaker:
+    class: Physical
+    damage: 120
+    hold: 2
+    priority: 2
+    stamina: 28
+    synergy type: electric
+    target: other
+    type: earth
+Earthbreaker +electric:
+    class: Physical
+    damage: 150
     effects:
-        Spd: 2
-Bamboozle:
-    class: Status
-    type: mental
-    stamina: 18
+        seized: 2
+    hold: 2
+    priority: 2
+    stamina: 28
+    synergy move: true
+    synergy type: electric
+    target: other
+    type: electric
+Electric Storm:
+    class: Special
+    damage: 76
+    hold: 1
+    priority: 2
+    stamina: 26
+    target: team or ally
+    type: electric
+Embers:
+    class: Physical
+    damage: 63
+    effects:
+        burned: 1
     hold: 0
     priority: 2
+    stamina: 15
     target: single
+    type: fire
+Energy Manipulation:
+    class: Special
+    damage: 45
     effects:
-        evading: 2
+        exhausted: 1
+    hold: 0
+    priority: 3
+    stamina: 11
+    synergy type: nature
+    target: other
+    type: mental
+Energy Manipulation +nature:
+    class: Special
+    damage: 60
+    effects:
+        exhausted: 2
+    hold: 0
+    priority: 3
+    stamina: 11
+    synergy move: true
+    synergy type: nature
+    target: other
+    type: mental
+Execution:
+    class: Physical
+    damage: 50
+    hold: 3
+    priority: 1
+    stamina: 20
+    target: other
+    type: neutral
 Extinction:
     class: Status
-    type: fire
-    stamina: 32
-    hold: 2
-    priority: 2
-    target: all
+    damage: 0
     effects:
         doomed: 4
-Cooperation:
-    class: Status
-    type: neutral
-    stamina: 1
-    hold: 0
-    priority: 4
-    target: single
-    effects:
-        cooperation: true
-Misogi:
-    class: Status
-    type: water
-    stamina: 22
     hold: 2
     priority: 2
-    target: self
-    effects:
-        misogi: true
-    synergy type: water
-Misogi +water:
-    class: Status
-    type: water
-    stamina: 22
-    hold: 2
-    priority: 2
-    target: self
-    effects:
-        misogi: true
-        immune: 3
-    synergy move: true
-Tenderness:
-    class: Status
-    type: neutral
-    stamina: 3
+    stamina: 32
+    target: all
+    type: fire
+Feather Gatling:
+    class: Physical
+    damage: 100
     hold: 0
     priority: 2
+    stamina: 17
     target: other
-    effects:
-        Atk: -1
+    type: wind
+Fierce Claw:
+    class: Physical
+    damage: 71
+    hold: 0
+    priority: 2
+    stamina: 13
+    target: other
+    type: neutral
+Finbeat:
+    class: Physical
+    damage: 32
+    hold: 0
+    priority: 3
+    stamina: 4
+    target: other
+    type: neutral
+Fire Flame:
+    class: Special
+    damage: 45
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: single
+    type: fire
+Fire Tornado:
+    class: Special
+    damage: 145
+    hold: 2
+    priority: 2
+    stamina: 22
+    target: other
+    type: fire
+Flaming Meteorite:
+    class: Physical
+    damage: 145
+    hold: 2
+    priority: 2
+    stamina: 25
+    target: single
+    type: fire
 Flood:
     class: Status
-    type: water
-    stamina: 22
+    damage: 0
+    effects:
+        Spe: -1
     hold: 1
     priority: 2
-    target: team or ally
-    effects:
-        Spd: -1
+    stamina: 22
     synergy type: earth
+    target: team or ally
+    type: water
 Flood +earth:
     class: Status
-    type: water
-    stamina: 22
+    damage: 0
+    effects:
+        Spe: -2
     hold: 1
     priority: 2
-    target: team or ally
-    effects:
-        Spd: -2
+    stamina: 22
     synergy move: true
-Confiscate:
+    synergy type: earth
+    target: team or ally
+    type: water
+Footwork:
     class: Status
-    type: neutral
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: other
+    damage: 0
     effects:
-        seized: 3
-Stare:
+        Spe: 2
+    hold: 1
+    priority: 3
+    stamina: 15
+    target: self
+    type: melee
+Frond Whip:
+    class: Physical
+    damage: 146
+    hold: 1
+    priority: 1
+    stamina: 28
+    target: other
+    type: nature
+Gaia:
     class: Status
+    damage: 0
+    effects:
+        Sta: 1.0  # TODO: make sure this is handled correctly
+    hold: 3
+    priority: 0
+    stamina: 15
+    target: self
+    type: nature
+Gamma Burst:
+    class: Special
+    damage: 150
+    effects:
+        exhausted: 2
+    hold: 1
+    priority: 2
+    stamina: 51
+    target: other
     type: mental
-    stamina: 6
+Glass Blade:
+    class: Physical
+    damage: 32
     hold: 0
     priority: 2
+    stamina: 5
     target: other
+    type: crystal
+Goring:
+    class: Physical
+    damage: 120
+    hold: 1
+    priority: 3
+    stamina: 16
+    target: other
+    type: neutral
+Haito Uchi:
+    class: Physical
+    damage: 85
+    effects:
+        asleep: 1
+    hold: 1
+    priority: 2
+    stamina: 21
+    target: other
+    type: melee
+Hallucination:
+    class: Status
+    damage: 0
+    effects:
+        trapped: 2
+        exhausted: 2
+    hold: 0
+    priority: 2
+    stamina: 22
+    synergya type: mental
+    target: uother
+    type: toxic
+Hallucination +mental:
+    class: Special
+    damage: 50
+    effects:
+        trapped: 2
+        exhausted: 2
+    hold: 0
+    priority: 2
+    stamina: 22
+    synergy move: true
+    synergy type: mental
+    target: other
+    type: toxic
+Harmful Lick:
+    class: Physical
+    damage: 150
+    hold: 0
+    priority: 1
+    stamina: 29
+    target: other
+    type: neutral
+Head Charge:
+    class: Physical
+    damage: 80
+    hold: 1
+    priority: 1
+    stamina: 10
+    target: other
+    type: melee
+Head Ram:
+    class: Physical
+    damage: 100
+    hold: 0
+    priority: 1
+    stamina: 17
+    target: other
+    type: neutral
+Heat Up:
+    class: Status
+    damage: 0
+    effects:
+        Atk: 2
+    hold: 0
+    priority: 2
+    stamina: 23
+    target: self
+    type: fire
+Heavy Blow:
+    class: Physical
+    damage: 58
+    hold: 0
+    priority: 2
+    stamina: 11
+    target: other
+    type: neutral
+Held Anger:
+    class: Physical
+    damage: 130
+    hold: 3
+    priority: 1
+    stamina: 12
+    target: other
+    type: neutral
+Hellfire:
+    class: Special
+    damage: 84
+    hold: 1
+    priority: 2
+    stamina: 28
+    synergy type: fire
+    target: team or ally
+    type: fire
+Hellfire +fire:
+    class: Special
+    damage: 100
+    hold: 1
+    priority: 3
+    stamina: 28
+    effects:
+        burned: 2
+    synergy move: true
+    synergy type: fire
+    target: team or ally
+    type: fire
+Hibernate:
+    class: Status
+    damage: 0
+    effects:
+        frozen: 3
+        HP: 0.5
+        Sta: 0.5
+    hold: 2
+    priority: 2
+    stamina: 25
+    target: self
+    type: water
+High-pressure Water:
+    class: Special
+    damage: 50
+    hold: 1
+    priority: 2
+    stamina: 15
+    synergy type: fire
+    target: other
+    type: water
+High-pressure Water +fire:
+    class: Special
+    damage: 50
+    hold: 1
+    priority: 2
+    stamina: 15
+    effects:
+        burned: 3
+    synergy move: true
+    synergy type: fire
+    target: other
+    type: water
+Hook Kick:
+    class: Physical
+    damage: 110
+    hold: 1
+    priority: 2
+    stamina: 20
+    target: other
+    type: melee
+Humiliating Slap:
+    class: Physical
+    damage: 90
+    hold: 0
+    priority: 2
+    stamina: 20
+    target: other
+    type: neutral
+Hyperkinetic Strike:
+    class: Special
+    damage: 59
+    hold: 1
+    priority: 3
+    stamina: 28
+    target: other
+    type: wind
+Hypnosis:
+    class: Status
+    damage: 0
+    effects:
+        asleep: 2
+    hold: 1
+    priority: 2
+    stamina: 17
+    target: other
+    type: mental
+Hypoxia:
+    class: Special
+    damage: 120
+    hold: 0
+    priority: 2
+    stamina: 30
+    target: other
+    type: wind
+Ice Cubes:
+    class: Physical
+    damage: 54
+    hold: 0
+    priority: 2
+    stamina: 13
+    synergy type: water
+    target: other
+    type: water
+Ice Cubes +water:
+    class: Physical
+    damage: 54
+    hold: 0
+    priority: 2
+    stamina: 9
+    synergy move: true
+    synergy type: water
+    target: other
+    type: water
+Ice Shuriken:
+    class: Physical
+    damage: 60
+    effects:
+        cold: 2
+    hold: 0
+    priority: 2
+    stamina: 14
+    target: other
+    type: water
+Iced Stalactite:
+    class: Physical
+    damage: 82
+    effects:
+        cold: 3
+    hold: 1
+    priority: 2
+    stamina: 22
+    target: other
+    type: water
+Inner Spirit:
+    class: Special
+    damage: 170
+    hold: 2
+    priority: 2
+    stamina: 23
+    target: single
+    type: melee
+Intimidation:
+    class: Status
+    damage: 0
+    effects:
+        exhausted: 1
+    hold: 2
+    priority: 2
+    stamina: 12
+    target: team or ally
+    type: mental
+Jaw Strike:
+    class: Physical
+    damage: 60
+    hold: 0
+    priority: 2
+    stamina: 9
+    target: other
+    type: neutral
+Kick:
+    class: Physical
+    damage: 32
+    hold: 0
+    priority: 3
+    stamina: 8
+    target: other
+    type: neutral
+King's Roar:
+    class: Status
+    damage: 0
+    effects:
+        Spe: -1
+        Atk: -1
+    hold: 3
+    priority: 2
+    stamina: 24
+    target: team or ally
+    type: neutral
+Lifeful Sap:
+    class: Status
+    damage: 0
+    effects:
+        regenerated: 7
+    hold: 0
+    priority: 2
+    stamina: 12
+    target: self
+    type: nature
+Look out:
+    class: Status
+    damage: 0
+    effects:
+        alerted: 5
+    hold: 1
+    priority: 2
+    stamina: 12
+    target: single
+    type: neutral
+Lullaby:
+    class: Status
+    damage: 0
+    effects:
+        asleep: 2
+    hold: 2
+    priority: 1
+    stamina: 27
+    target: team or ally
+    type: mental
+Madness Buff:
+    class: Status
+    damage: 0
+    effects:
+        HP: -0.3
+        SpA: 2
+        SpD: 2
+    hold: 0
+    priority: 2
+    stamina: 19
+    target: self
+    type: melee
+Magma Cannon:
+    class: Special
+    damage: 70
+    effects:
+        burned: 3
+    hold: 3
+    priority: 1
+    stamina: 37
+    target: other
+    type: fire
+Major Slash:
+    class: Physical
+    damage: 150
+    hold: 1
+    priority: 2
+    stamina: 33
+    target: other
+    type: neutral
+Martial Strike:
+    class: Special
+    damage: 50
+    hold: 1
+    priority: 2
+    stamina: 5
+    target: other
+    type: melee
+Meditation:
+    class: Status
+    damage: 0
+    effects:
+        vigorized: 3
+    hold: 0
+    priority: 2
+    stamina: 6
+    target: self
+    type: mental
+Metabolize:
+    class: Status
+    damage: 0
+    effects:
+        metabolize: true
+    hold: 2
+    priority: 1
+    stamina: 21
+    synergy type: nature
+    target: other
+    type: toxic
+Metabolize +nature:
+    class: Status
+    damage: 0
+    effects:
+        regenerated: 2
+        metabolize: true
+    hold: 2
+    priority: 1
+    stamina: 21
+    synergy move: true
+    synergy type: nature
+    target: other
+    type: toxic
+Meteor Swarm:
+    class: Physical
+    damage: 75
+    hold: 1
+    priority: 1
+    stamina: 25
+    synergy type: fire
+    target: team or ally
+    type: fire
+Meteor Swarm +fire:
+    class: Physical
+    damage: 75
+    effects:
+        burned: 1
+    hold: 1
+    priority: 1
+    stamina: 25
+    synergy move: true
+    synergy type: fire
+    target: team or ally
+    type: fire
+Mineral Hail:
+    class: Physical
+    damage: 100
+    hold: 3
+    priority: 2
+    stamina: 30
+    target: team or ally
+    type: crystal
+Mirror Shell:
+    class: Status
+    damage: 0
+    effects:
+        SpD: 2
+    hold: 1
+    priority: 1
+    stamina: 15
+    target: self
+    type: crystal
+Misogi:
+    class: Status
+    damage: 0
+    effects:
+        remove statuses: true
+    hold: 2
+    priority: 2
+    stamina: 22
+    synergy type: water
+    target: self
+    type: water
+Misogi +water:
+    class: Status
+    damage: 0
+    effects:
+        remove statuses: true
+        immune: 3
+    hold: 2
+    priority: 2
+    stamina: 22
+    synergy move: true
+    synergy type: water
+    target: self
+    type: water
+Mud Shower:
+    class: Special
+    damage: 70
+    hold: 0
+    priority: 2
+    stamina: 14
+    target: other
+    type: earth
+Multiple Pecks:
+    class: Physical
+    damage: 110
+    hold: 0
+    priority: 2
+    stamina: 26
+    target: other
+    type: neutral
+Nagaise's Fury:
+    class: Special
+    damage: 105
+    hold: 1
+    priority: 2
+    stamina: 28
+    synergy type: mental
+    target: team or ally
+    type: water
+Nagaise's Fury +mental:
+    class: Special
+    damage: 135
+    hold: 1
+    priority: 2
+    stamina: 28
+    synergy move: true
+    synergy type: mental
+    target: team or ally
+    type: water
+Narcoleptic Hit:
+    class: Physical
+    damage: 150
+    self:
+        asleep: 2
+    hold: 1
+    priority: 1
+    stamina: 15
+    target: other
+    type: mental
+Nibble:
+    class: Physical
+    damage: 37
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: other
+    type: neutral
+Nicho Sai:
+    class: Physical
+    damage: 135
+    hold: 1
+    priority: 3
+    stamina: 29
+    target: other
+    type: melee
+Nimble:
+    class: Status
+    damage: 0
+    effects:
+        Spe: 1
+    hold: 0
+    priority: 2
+    stamina: 4
+    target: other
+    type: wind
+Ninja Jutsu:
+    class: Physical
+    damage: 130
+    hold: 2
+    priority: 4
+    stamina: 27
+    target: other
+    type: neutral
+Nito Seiho:
+    class: Physical
+    damage: 105
+    hold: 1
+    priority: 2
+    stamina: 19
+    target: other
+    type: melee
+Novice Punch:
+    class: Physical
+    damage: 30
+    hold: 0
+    priority: 2
+    stamina: 3
+    synergy type: melee
+    target: other
+    type: neutral
+Novice Punch +melee:
+    class: Physical
+    damage: 51
+    hold: 0
+    priority: 2
+    stamina: 3
+    synergy move: true
+    synergy type: melee
+    target: other
+    type: neutral
+Noxious Bomb:
+    class: Physical
+    damage: 100
+    hold: 0
+    priority: 2
+    stamina: 20
+    target: single
+    type: toxic
+Oshi-Dashi:
+    class: Physical
+    damage: 150
+    hold: 1
+    priority: 2
+    stamina: 28
+    target: other
+    type: melee
+Paralyzing Poison:
+    class: Status
+    damage: 0
+    effects:
+        poisoned: 2
+        trapped: 2
+    hold: 2
+    priority: 2
+    stamina: 20
+    synergy type: toxic
+    target: single
+    type: toxic
+Paralyzing Poison +toxic:
+    class: Status
+    damage: 0
+    effects:
+        poisoned: 4
+        trapped: 2
+    hold: 2
+    priority: 2
+    stamina: 20
+    synergy move: true
+    synergy type: toxic
+    target: single
+    type: toxic
+Peck:
+    class: Physical
+    damage: 24
+    hold: 0
+    priority: 4
+    stamina: 5
+    target: other
+    type: neutral
+Perfect Jab:
+    class: Physical
+    damage: 40
+    hold: 0
+    priority: 2
+    stamina: 15
+    target: other
+    type: melee
+Petrify:
+    class: Special
+    damage: 50
+    effects:
+        trapped: 5
+    hold: 2
+    priority: 1
+    stamina: 15
+    target: other
+    type: earth
+Photosynthesis:
+    class: Status
+    damage: 0
+    effects:
+        Sta: 0.5
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: self
+    type: nature
+Pickpocket:
+    class: Physical
+    damage: 35
+    effects:
+        seized: 2
+    hold: 1
+    priority: 4
+    stamina: 17
+    target: other
+    type: neutral
+Piercing Wheel:
+    class: Physical
+    damage: 100
     effects:
         Def: -1
     self:
-        alerted: 2
-Sparks:
-    class: Status
-    type: electric
-    stamina: 5
-    hold: 0
-    priority: 2
-    target: single
-    effects:
-        SpA: 1
-Mirror Shell:
-    class: Status
-    type: crystal
-    stamina: 15
+        vigorized: 2
     hold: 1
-    priority: 1
-    target: self
+    priority: 3
+    stamina: 28
+    target: other
+    type: earth
+Plague:
+    class: Special
+    damage: 100
     effects:
-        SpD: 2
-Bark Shield:
-    class: Status
-    type: nature
-    stamina: 30
-    hold: 2
-    priority: 1
-    target: whole team
-    effects:
-        Def: 2
-Shy Shield:
-    class: Status
-    type: neutral
-    stamina: 4
+        exhausted: 1
     hold: 0
     priority: 3
-    target: self
-    effects:
-        Def: 1
-Slime:
-    class: Status
-    type: neutral
-    stamina: 12
-    hold: 0
-    priority: 1
+    stamina: 23
     target: other
-    effects:
-        Spd: -1
-        trapped: 2
-Roar:
+    type: nature
+Pollution:
     class: Status
-    type: neutral
-    stamina: 10
+    damage: 0
+    effects:
+        poisoned: 2
     hold: 2
     priority: 2
+    stamina: 22
     target: team or ally
+    type: toxic
+Psy Surge:
+    class: Special
+    damage: 100
+    hold: 1
+    priority: 1
+    stamina: 15
+    target: other
+    type: mental
+Psy Wave:
+    class: Special
+    damage: 61
+    hold: 1
+    priority: 2
+    stamina: 7
+    target: other
+    type: mental
+Psychic Collaborator:
+    class: Special
+    damage: 1
+    hold: 1
+    priority: 2
+    stamina: 19
+    synergy type: mental
+    target: other
+    type: mental
+Psychic Collaborator +mental:
+    class: Special
+    damage: 170
+    hold: 1
+    priority: 2
+    stamina: 19
+    synergy move: true
+    synergy type: mental
+    target: other
+    type: mental
+Psychosis:
+    class: Status
+    damage: 0
     effects:
-        Atk: -1
+        doomed: 4
+    hold: 2
+    priority: 1
+    stamina: 16
+    target: other
+    type: mental
+Quartz Shield:
+    class: Status
+    damage: 0
+    effects:
+        Def: 1
+        SpD: 1
+    hold: 1
+    priority: 2
+    stamina: 9
+    target: single
+    type: crystal
+Quicksand:
+    class: Status
+    damage: 0
+    effects:
+        Spe: -1
+    hold: 1
+    priority: 3
+    stamina: 14
+    synergy type: wind
+    target: all
+    type: earth
+Quicksand +wind:
+    class: Status
+    damage: 0
+    effects:
+        quicksand: true
+    hold: 1
+    priority: 3
+    stamina: 14
+    synergy move: true
+    synergy type: wind
+    target: all
+    type: earth
+Rage:
+    class: Status
+    damage: 0
+    effects:
+        Atk: 2
+        Def: -2
+    hold: 1
+    priority: 2
+    stamina: 10
+    target: self
+    type: melee
+Rampage:
+    class: Physical
+    damage: 65
+    hold: 1
+    priority: 1
+    stamina: 26
+    synergy type: melee
+    target: team or ally
+    type: neutral
+Rampage +melee:
+    class: Physical
+    damage: 85
+    hold: 1
+    priority: 1
+    stamina: 26
+    synergy move: true
+    synergy type: melee
+    target: team or ally
+    type: neutral
+Relax:
+    class: Status
+    damage: 0
+    effects:
+        asleep: 2
+    hold: 1
+    priority: 1
+    stamina: 12
+    target: all
+    type: neutral
+Rend:
+    class: Special
+    damage: 50
+    effects:
+        nullified: 4
+    hold: 2
+    priority: 2
+    stamina: 22
+    target: other
+    type: neutral
+Resin Trap:
+    class: Special
+    damage: 110
+    effects:
+        trapped: 2
+    hold: 1
+    priority: 2
+    stamina: 24
+    target: other
+    type: nature
 Revitalize:
     class: Status
-    type: nature
-    stamina: 15
-    hold: 1
-    priority: 2
-    target: whole team
+    damage: 0
     effects:
         HP: 0.25
-    synergy type: nature
-Revitalize +nature:
-    class: Status
-    type: nature
-    stamina: 11
     hold: 1
     priority: 2
-    target: whole team
+    stamina: 15
+    synergy type: nature
+    target: other
+    type: nature
+Revitalize +nature:
+    class: Status
+    damage: 0
     effects:
         HP: 0.25
     self:
         HP: 0.1
-    synergy move: true
-Turbo Choreography:
-    class: Status
-    type: wind
-    stamina: 27
     hold: 1
-    priority: 4
-    target: whole team
-    effects:
-        Spd: 1
-    synergy type: wind
-Turbo Choreography +wind:
-    class: Status
-    type: wind
-    stamina: 27
-    hold: 1
-    priority: 4
-    target: whole team
-    effects:
-        Spd: 2
+    priority: 2
+    stamina: 11
     synergy move: true
+    synergy type: nature
+    target: other
+    type: nature
+Roar:
+    class: Status
+    damage: 0
+    effects:
+        Atk: -1
+    hold: 2
+    priority: 2
+    stamina: 10
+    target: team or ally
+    type: neutral
+Rockfall:
+    class: Physical
+    damage: 75
+    hold: 1
+    priority: 2
+    stamina: 24
+    synergy type: fire
+    target: team or ally
+    type: earth
+Rockfall +fire:
+    class: Physical
+    damage: 75
+    effects:
+        burned: 2
+    hold: 1
+    priority: 2
+    stamina: 24
+    synergy move: true
+    synergy type: fire
+    target: team or ally
+    type: earth
+Roots:
+    class: Status
+    damage: 0
+    effects:
+        Spe: -1
+    hold: 0
+    priority: 2
+    stamina: 5
+    target: other
+    type: nature
+Sacrifice:
+    class: Status
+    damage: 0
+    effects:
+        Def: 2
+        SpD: 2
+        remove statuses: true
+    self:
+        HP: -1
+    hold: 1
+    priority: 3
+    stamina: 0
+    target: other
+    type: neutral
+Sand Splatter:
+    class: Physical
+    damage: 35
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: other
+    type: earth
+Sand Storm:
+    class: Special
+    damage: 69
+    hold: 1
+    priority: 2
+    stamina: 23
+    target: team or ally
+    type: earth
+Savage Suplex:
+    class: Physical
+    damage: 150
+    effects:
+        exhausted: 2
+    hold: 1
+    priority: 2
+    stamina: 24
+    target: other
+    type: neutral
+Scratch:
+    class: Physical
+    damage: 20
+    hold: 0
+    priority: 2
+    stamina: 4
+    target: other
+    type: neutral
+Seismunch's Wreck:
+    class: Physical
+    damage: 115
+    hold: 1
+    priority: 2
+    stamina: 33
+    synergy type: melee
+    target: team or ally
+    type: earth
+Seismunch's Wreck +melee:
+    class: Physical
+    damage: 130
+    hold: 1
+    priority: 3
+    stamina: 33
+    synergy move: true
+    synergy type: melee
+    target: team or ally
+    type: earth
+Serbatiyo's Wrath:
+    class: Special
+    damage: 108
+    hold: 3
+    priority: 2
+    stamina: 35
+    target: team or ally
+    type: water
+Sharp Leaf:
+    class: Physical
+    damage: 50
+    hold: 0
+    priority: 2
+    stamina: 7
+    target: other
+    type: nature
+Sharp Rain:
+    class: Special
+    damage: 130
+    hold: 2
+    priority: 2
+    stamina: 20
+    target: other
+    type: water
+Sharp Stabs:
+    class: Physical
+    damage: 76
+    hold: 1
+    priority: 3
+    stamina: 15
+    target: other
+    type: crystal
+Shelter:
+    class: Status
+    damage: 0
+    effects:
+        Def: 2
+        SpD: 2
+        overexerted: true
+    hold: 2
+    priority: 1
+    stamina: 12
+    target: other
+    type: neutral
 Show Off:
     class: Status
-    type: melee
-    stamina: 7
-    hold: 0
-    priority: 2
-    target: self
+    damage: 0
     effects:
         Atk: 1
-    synergy type: melee
-Show Off +melee:
-    class: Status
-    type: melee
-    stamina: 7
     hold: 0
     priority: 2
+    stamina: 7
+    synergy type: melee
     target: self
+    type: melee
+Show Off +melee:
+    class: Status
+    damage: 0
     effects:
         Atk: 1
         vigorized: 3
-    synergy move: true
-Cage:
-    class: Status
-    type: neutral
-    stamina: 23
-    hold: 1
-    priority: 5
-    target: all
-    effects:
-        trapped: 2
-Hallucination:
-    class: Status
-    type: toxic
-    stamina: 22
     hold: 0
     priority: 2
-    target: other
-    effects:
-        exhausted: 2
-        trapped: 2
-    synergy type: mental
-Hallucination +mental:
+    stamina: 7
+    synergy move: true
+    synergy type: melee
+    target: self
+    type: melee
+Shrill Voice:
     class: Special
-    type: toxic
-    damage: 50
-    stamina: 22
+    damage: 42
+    hold: 1
+    priority: 2
+    stamina: 12
+    target: team or ally
+    type: neutral
+Shy Shield:
+    class: Status
+    damage: 0
+    effects:
+        Def: 1
+    hold: 0
+    priority: 3
+    stamina: 4
+    target: self
+    type: neutral
+Slime:
+    class: Status
+    damage: 0
+    effects:
+        trapped: 2
+        Spe: -1
+    hold: 0
+    priority: 1
+    stamina: 12
+    target: other
+    type: neutral
+Sludge Gift:
+    class: Special
+    damage: 40
     hold: 0
     priority: 2
+    stamina: 4
     target: other
-    effects:
-        exhausted: 2
-        trapped: 2
-    synergy move: true
-Intimidation:
+    type: earth
+Smoldering Kiss:
+    class: Physical
+    damage: 40
+    self:
+        vigorized: 2
+    hold: 0
+    priority: 2
+    stamina: 5
+    target: other
+    type: fire
+Sparks:
     class: Status
+    damage: 0
+    effects:
+        SpA: 1
+    hold: 0
+    priority: 2
+    stamina: 5
+    target: single
+    type: electric
+Spores:
+    class: Special
+    damage: 37
+    hold: 0
+    priority: 2
+    stamina: 6
+    target: other
+    type: nature
+Stampede:
+    class: Physical
+    damage: 100
+    hold: 2
+    priority: 1
+    stamina: 28
+    synergy type: earth
+    target: team
+    type: neutral
+Stampede +earth:
+    class: Physical
+    damage: 125
+    hold: 2
+    priority: 1
+    stamina: 28
+    synergy move: true
+    synergy type: earth
+    target: team
+    type: neutral
+Stare:
+    class: Status
+    damage: 0
+    effects:
+        Def: -1
+    self:
+        alerted: 2
+    hold: 0
+    priority: 2
+    stamina: 6
+    target: other
     type: mental
+Sting:
+    class: Physical
+    damage: 48
+    effects:
+        poisoned: 2
+    hold: 0
+    priority: 3
+    stamina: 20
+    target: other
+    type: toxic
+Stone Ball:
+    class: Physical
+    damage: 130
+    hold: 0
+    priority: 1
+    stamina: 29
+    synergy type: fire
+    target: single
+    type: earth
+Stone Ball +fire:
+    class: Physical
+    damage: 130
+    hold: 0
+    priority: 1
+    stamina: 29
+    effects:
+        burned: 2
+    synergy move: true
+    synergy type: fire
+    target: single
+    type: earth
+Stone Wall:
+    class: Status
+    damage: 0
+    effects:
+        Def: 2
+        SpD: 1
+    hold: 1
+    priority: 1
+    stamina: 18
+    target: single
+    type: earth
+Strangle:
+    class: Physical
+    damage: 25
+    hold: 0
+    priority: 0
+    stamina: 11
+    target: other
+    type: neutral
+Tail Strike:
+    class: Physical
+    damage: 50
+    hold: 1
+    priority: 2
+    stamina: 5
+    target: other
+    type: neutral
+Telekinetic Shrapnel:
+    class: Physical
+    damage: 80
+    hold: 1
+    priority: 2
+    stamina: 8
+    target: other
+    type: mental
+Tenderness:
+    class: Status
+    damage: 0
+    effects:
+        Atk: -1
+    hold: 0
+    priority: 2
+    stamina: 3
+    target: other
+    type: neutral
+Tentacle Whip:
+    class: Physical
+    damage: 60
+    hold: 0
+    priority: 2
+    stamina: 15
+    target: other
+    type: neutral
+Tesla Prison:
+    class: Special
+    damage: 50
+    hold: 0
+    priority: 2
     stamina: 12
+    target: other
+    type: electric
+Thunder Strike:
+    class: Special
+    damage: 120
+    self:
+        exhausted: 2
+    hold: 0
+    priority: 2
+    stamina: 22
+    target: other
+    type: electric
+Time Split:
+    class: Special
+    damage: 30
+    hold: 1
+    priority: 2
+    stamina: 20
+    target: other
+    type: mental
+Tornado:
+    class: Special
+    damage: 135
+    hold: 1
+    priority: 3
+    stamina: 30
+    target: single
+    type: wind
+Tortenite's Garden:
+    class: Status
+    damage: 0
+    effects:
+        doomed: 4
+    self:
+        HP: 0.08
+    hold: 2
+    priority: 1
+    stamina: 24
+    synergy type: crystal
+    target: team
+    type: toxic
+Tortenite's Garden +crystal:
+    class: Status
+    damage: 0
+    effects:
+        doomed: 3
+    self:
+        HP: 0.16
+    hold: 2
+    priority: 1
+    stamina: 24
+    synergy move: true
+    synergy type: crystal
+    target: team
+    type: toxic
+Toughen:
+    class: Status
+    damage: 0
+    effects:
+        Def: 2
+    hold: 1
+    priority: 2
+    stamina: 15
+    target: self
+    type: earth
+Toxic Fang:
+    class: Physical
+    damage: 62
+    effects:
+        poisoned: 1
+    hold: 1
+    priority: 2
+    stamina: 12
+    target: other
+    type: toxic
+Toxic Gas:
+    class: Special
+    damage: 65
+    hold: 1
+    priority: 2
+    stamina: 25
+    target: team or ally
+    type: toxic
+Toxic Ink:
+    class: Physical
+    damage: 80
+    effects:
+        poisoned: 2
+    hold: 0
+    priority: 2
+    stamina: 16
+    target: other
+    type: toxic
+Toxic Plume:
+    class: Special
+    damage: 50
+    effects:
+        poisoned: 1
+    hold: 1
+    priority: 2
+    stamina: 24
+    synergy type: crystal
+    target: team
+    type: toxic
+Toxic Plume +crystal:
+    class: Special
+    damage: 50
+    effects:
+        poisoned: 1
+        Atk: -1
+    hold: 1
+    priority: 2
+    stamina: 16
+    synergy move: true
+    synergy type: crystal
+    target: team
+    type: toxic
+Toxic Slime:
+    class: Physical
+    damage: 50
+    hold: 0
+    priority: 2
+    stamina: 12
+    target: other
+    type: toxic
+Toxic Spores:
+    class: Status
+    damage: 0
+    effects:
+        poisoned: 3
+    hold: 0
+    priority: 1
+    stamina: 9
+    target: other
+    type: toxic
+Toxin Shower:
+    class: Special
+    damage: 40
     hold: 2
     priority: 2
+    stamina: 10
+    target: all
+    type: toxic
+Tsunami:
+    class: Special
+    damage: 70
+    hold: 1
+    priority: 2
+    stamina: 25
+    synergy type: wind
     target: team or ally
+    type: water
+Tsunami +wind:
+    class: Special
+    damage: 80
     effects:
-        exhausted: 1
+        cold: 3
+    hold: 1
+    priority: 2
+    stamina: 25
+    synergy move: true
+    synergy type: wind
+    target: team or ally
+    type: water
 Turbo Charge:
     class: Status
-    type: electric
-    stamina: 21
-    hold: 1
-    priority: 4
-    target: whole team
+    damage: 0
     effects:
         hold: -1
-Antitoxins:
+    hold: 1
+    priority: 4
+    stamina: 21
+    target: team
+    type: electric
+Turbo Choreography:
     class: Status
-    type: toxic
-    stamina: 26
-    hold: 2
-    priority: 2
-    target: whole team
+    damage: 0
     effects:
-        antitoxins: true
-Heat Up:
+        Spe: 1
+    hold: 1
+    priority: 4
+    stamina: 27
+    synergy type: wind
+    target: team
+    type: wind
+Turbo Choreography +wind:
     class: Status
-    type: fire
-    stamina: 23
+    damage: 0
+    effects:
+        Spe: 2
+    hold: 1
+    priority: 4
+    stamina: 27
+    synergy move: true
+    synergy type: wind
+    target: team
+    type: wind
+Untangle:
+    class: Status
+    damage: 0
+    effects:
+        trapped: -1
+    hold: 1
+    priority: 5
+    stamina: 13
+    target: other
+    type: neutral
+Uppercut:
+    class: Physical
+    damage: 80
     hold: 0
     priority: 2
-    target: self
-    effects:
-        Atk: 2
-Rage:
-    class: Status
+    stamina: 12
+    target: other
     type: melee
-    stamina: 10
-    hold: 1
+Urushiol:
+    class: Physical
+    damage: 41
+    hold: 0
     priority: 2
-    target: self
+    stamina: 8
+    synergy type: toxic
+    target: other
+    type: toxic
+Urushiol +toxic:
+    class: Physical
+    damage: 41
     effects:
-        Atk: 2
-        Def: -2
+        poisoned: 4
+    hold: 0
+    priority: 2
+    stamina: 8
+    synergy move: true
+    synergy type: toxic
+    target: other
+    type: toxic
+Venom Spread:
+    class: Special
+    damage: 150
+    hold: 0
+    priority: 3
+    stamina: 20
+    target: other
+    type: toxic
+Venomous Claws:
+    class: Physical
+    damage: 40
+    hold: 0
+    priority: 2
+    stamina: 9
+    target: other
+    type: toxic
+Wake Up:
+    class: Physical
+    damage: 1
+    hold: 0
+    priority: 4
+    stamina: 0
+    target: single
+    type: neutral
+Warm Cuddle:
+    class: Physical
+    damage: 53
+    hold: 0
+    priority: 2
+    stamina: 12
+    target: other
+    type: fire
+Water Blade:
+    class: Special
+    damage: 52
+    hold: 0
+    priority: 1
+    stamina: 10
+    target: other
+    type: water
+Water Cannon:
+    class: Special
+    damage: 100
+    hold: 0
+    priority: 2
+    stamina: 21
+    synergy type: toxic
+    target: other
+    type: water
+Water Cannon +toxic:
+    class: Special
+    damage: 100
+    effects:
+        poisoned: 2
+    hold: 0
+    priority: 2
+    stamina: 21
+    synergy move: true
+    synergy type: toxic
+    target: other
+    type: water
+Water Cutting Lily:
+    class: Physical
+    damage: 120
+    hold: 0
+    priority: 3
+    stamina: 31
+    synergy type: water
+    target: other
+    type: nature
+Water Cutting Lily +water:
+    class: Physical
+    damage: 144
+    hold: 0
+    priority: 3
+    stamina: 31
+    synergy move: true
+    synergy type: water
+    target: other
+    type: nature
+Waterjet:
+    class: Physical
+    damage: 110
+    effects:
+        cold: 2
+    hold: 2
+    priority: 2
+    stamina: 16
+    target: other
+    type: water
+Willpower Drain:
+    class: Status
+    damage: 0
+    effects:
+        Sta: -23
+    self:
+        Sta: 23
+        # TODO: check what happens when opp has <23 Sta remaining
+    hold: 1
+    priority: 3
+    stamina: 15
+    target: other
+    type: neutral
+Wind Blade:
+    class: Special
+    damage: 40
+    hold: 0
+    priority: 2
+    stamina: 9
+    target: other
+    type: wind
+Wind Burst:
+    class: Special
+    damage: 90
+    hold: 0
+    priority: 2
+    stamina: 12
+    target: other
+    type: wind
+

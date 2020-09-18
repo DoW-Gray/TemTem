@@ -28,6 +28,7 @@ from static import (
     Statuses,
     STAT_CONSTS,
     DEFAULT_LEVEL,
+    STATUS_CATCH_BONUS,
     lookup_temtem_data,
     lookup_attack,
 )
@@ -375,6 +376,25 @@ class TemTem:
             attack['type'] = Types.water
 
         return attack
+
+    def catch_chance(self, card_rate=1, four_leaf_clover=False):
+        """
+        See: https://temtem.gamepedia.com/Taming#Capture_formula
+        """
+        from math import sqrt
+
+        a = lookup_temtem_data(self.species)['Catch Rate'] * card_rate
+        max_hp = self.stats[Stats.HP]
+        a *= (4 * max_hp - 3 * self.live_stats[Stats.HP])
+        for status in self.statuses:
+            a *= STATUS_CATCH_BONUS[status]
+        a /= (2 * max_hp + 10 * self.level)
+        a *= 1.1 if four_leaf_clover else 1
+
+        b = 1_000_000 / sqrt(sqrt(21_000_000 / a))
+        if b >= 50_000:
+            return 1.0
+        return (b / 50_000) ** 4
 
     # shorthand methods to check statuses
 

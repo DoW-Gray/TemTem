@@ -260,21 +260,36 @@ TYPE_EFFECTIVENESS = {
 
 DEFAULT_LEVEL = 58
 
+STATUS_CATCH_BONUS = {
+    Statuses.cold: 1.2,
+    Statuses.frozen: 1.5,
+    Statuses.asleep: 1.5,
+    Statuses.trapped: 1.2,
+    Statuses.seized: 1.1,
+    Statuses.poisoned: 1.25,
+    Statuses.burned: 1.25,
+    Statuses.exhausted: 1.1,
+    Statuses.vigorized: 0.8,
+    Statuses.evading: 0.5,
+    Statuses.alerted: 0.8,
+}
+
 
 def load_temtem_data():
+    """
+    This function reads data from the TEMTEM_YAML, and manipulates it so that
+    stat names become stat enums, etc.
+    """
     global TEMTEM_DATA
     with open(TEMTEM_YAML, 'r') as fp:
         data = yaml.load(fp, Loader=yaml.FullLoader)
-    for tem, tem_data in data.items():
-        tem_data['Stats'] = {}
+    for tem_data in data.values():
         for stat in Stats:
-            tem_data['Stats'][stat] = tem_data[stat.name]
-            del tem_data[stat.name]
-        t1 = tem_data['Type 1']
-        t2 = tem_data['Type 2']
-        tem_data['Types'] = (Types[t1], Types[t2] if t2 else None)
-        del tem_data['Type 1']
-        del tem_data['Type 2']
+            tem_data['Stats'][stat] = tem_data['Stats'][stat.name]
+            del tem_data['Stats'][stat.name]
+        tem_data['Types'] = tuple([
+            (Types[t] if t else None) for t in tem_data['Types']
+        ])
         tem_data['Traits'] = tuple(tem_data['Traits'])
 
     # sanity checks

@@ -37,6 +37,17 @@ Python3.8 was chosen for a number of reasons:
     to be coded for this, e.g. attack targeting, move priority, move hold, what
     happens to tems that are switched out, etc.
 
+## Data
+Most of the mechanics details are taken from the
+[temtem wiki](https://temtem.gamepedia.com/Temtem_Wiki), with some details
+taken from my own research or discussion on discord, with results from these
+often then being uploaded to the wiki.
+
+Temtem and Move data were initially taken from the wiki, but are now being
+taken largely from [maael's api](https://github.com/maael/temtem-api/).
+
+Sets data is taken from [temtemstrat](https://temtemstrat.com/en/strategic-rank).
+
 ## Contributing
 Please feel free to add to this codebase! If you'd like to work on one of the
 above points, or have an idea you'd like to build, please feel free to talk to
@@ -48,7 +59,6 @@ pytest and flake8 pass. Adding your own tests would also be helpful!
 ## Licensing and Credits
 All code is copyright (c) DoW 2020, and licensed under GPL 2.0.
 
-Sets data was taken from
-[temtemstrat](https://temtemstrat.com/en/strategic-rank).
-TemTem and Attack data was taken from the
-[temtem wiki](https://temtem.gamepedia.com/Temtem_Wiki).
+Thanks to the wiki contributors, various discord users, Maael, and the guys at
+temtemstrat for the various information they made publically available, that
+was used here.
