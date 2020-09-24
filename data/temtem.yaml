@@ -63,9 +63,9 @@ Akranox:
     No.: 142
     Stats:
         Atk: 71
-        BST: 454
+        BST: 464
         Def: 64
-        HP: 61
+        HP: 71
         SpA: 71
         SpD: 64
         Spe: 71
@@ -456,6 +456,7 @@ Capyre:
         TC:
           - Magma Cannon
           - Block
+          - "Quetza-le\xF1o"
     Name: Capyre
     No.: 38
     Stats:
@@ -727,9 +728,9 @@ Garyo:
     Name: Garyo
     No.: 118
     Stats:
-        Atk: 78
-        BST: 445
-        Def: 68
+        Atk: 82
+        BST: 453
+        Def: 72
         HP: 74
         SpA: 56
         SpD: 66
@@ -801,11 +802,11 @@ Goolder:
     No.: 108
     Stats:
         Atk: 64
-        BST: 444
-        Def: 56
-        HP: 120
+        BST: 461
+        Def: 62
+        HP: 125
         SpA: 68
-        SpD: 56
+        SpD: 62
         Spe: 10
         Sta: 70
     Traits:
@@ -1161,8 +1162,8 @@ Kalabyss:
         Spe: 37
         Sta: 37
     Traits:
-      - Botanophobia
-      - Loneliness
+      - Toxic Skin
+      - Mucous
     Types:
       - water
       - toxic
@@ -1436,6 +1437,36 @@ Mastione:
     Types:
       - fire
       - null
+Momo:
+    Catch Rate: 98
+    Moves:
+        Egg: []
+        Level Up:
+          - Nibble
+          - Bark
+          - Head Charge
+          - Brace
+          - Willpower Drain
+          - Undermine
+        TC:
+          - Double Edge
+    Name: Momo
+    No.: 99
+    Stats:
+        Atk: 46
+        BST: 477
+        Def: 49
+        HP: 75
+        SpA: 79
+        SpD: 75
+        Spe: 89
+        Sta: 64
+    Traits:
+      - Stabmaster
+      - Snowstorm
+    Types:
+      - neutral
+      - null
 Mouflank:
     Catch Rate: 90
     Moves:
@@ -1676,6 +1707,7 @@ Nessla:
           - Stare
           - Iced Stalactite
           - Electric Storm
+          - Thunder Strike
         TC:
           - Wake Up
           - Rend
@@ -1683,10 +1715,10 @@ Nessla:
     No.: 123
     Stats:
         Atk: 76
-        BST: 437
+        BST: 443
         Def: 50
         HP: 45
-        SpA: 70
+        SpA: 76
         SpD: 72
         Spe: 66
         Sta: 58
@@ -1754,6 +1786,7 @@ Noxolotl:
           - Turbo Choreography
           - Noxious Bomb
           - Madness Buff
+          - Brace
     Name: Noxolotl
     No.: 106
     Stats:
@@ -1955,13 +1988,13 @@ Osukai:
     Name: Osukai
     No.: 68
     Stats:
-        Atk: 93
-        BST: 419
+        Atk: 95
+        BST: 441
         Def: 85
         HP: 71
         SpA: 31
-        SpD: 33
-        Spe: 58
+        SpD: 43
+        Spe: 68
         Sta: 48
     Traits:
       - Sensei
@@ -2328,10 +2361,10 @@ Pocus:
     No.: 80
     Stats:
         Atk: 61
-        BST: 423
+        BST: 438
         Def: 36
-        HP: 60
-        SpA: 77
+        HP: 65
+        SpA: 87
         SpD: 38
         Spe: 78
         Sta: 73
@@ -2423,6 +2456,7 @@ Raican:
           - Stampede
         TC:
           - Held Anger
+          - "Quetza-le\xF1o"
     Name: Raican
     No.: 59
     Stats:
@@ -2957,10 +2991,10 @@ Taifu:
     No.: 24
     Stats:
         Atk: 50
-        BST: 461
+        BST: 467
         Def: 45
         HP: 60
-        SpA: 85
+        SpA: 91
         SpD: 89
         Spe: 45
         Sta: 87
@@ -3487,7 +3521,6 @@ Vulffy:
           - Brace
           - Look out
           - Quicksand
-          - Drought
     Name: Vulffy
     No.: 144
     Stats:
@@ -3613,28 +3646,39 @@ Wiplump:
       - water
       - wind
 Yowlar:
-    Catch Rate: 200
+    Catch Rate: 90
     Moves:
-        Egg: []
+        Egg:
+          - Toughen
         Level Up:
+          - Charge
+          - Fierce Claw
+          - Show Off
+          - Clinch
           - Late Torment
           - Savage Suplex
           - Oshi-Dashi
           - Hibernate
-        TC: []
+          - Winter Call
+        TC:
+          - Misogi
+          - Confiscate
+          - Block
+          - Darkness
     Name: Yowlar
     No.: 116
     Stats:
-        Atk: 0
-        BST: 0
-        Def: 0
-        HP: 0
-        SpA: 0
-        SpD: 0
-        Spe: 0
-        Sta: 0
+        Atk: 80
+        BST: 497
+        Def: 86
+        HP: 96
+        SpA: 50
+        SpD: 74
+        Spe: 40
+        Sta: 71
     Traits:
       - Comebacker
+      - Cold-Blooded
     Types:
       - neutral
       - null
@@ -3753,12 +3797,12 @@ Zizare:
     Name: Zizare
     No.: 95
     Stats:
-        Atk: 70
-        BST: 410
-        Def: 90
+        Atk: 90
+        BST: 447
+        Def: 95
         HP: 60
         SpA: 40
-        SpD: 45
+        SpD: 57
         Spe: 30
         Sta: 75
     Traits:

@@ -78,7 +78,7 @@ Awful Song +neutral:
     stamina: 20
     synergy move: true
     synergy type: neutral
-    target: team or ally
+    target: single
     type: neutral
 Bamboozle:
     class: Status
@@ -944,6 +944,14 @@ King's Roar:
     stamina: 24
     target: team or ally
     type: neutral
+Late Torment:
+    class: Physical
+    damage: 180
+    hold: 0
+    priority: 1
+    stamina: 20
+    target: other
+    type: neutral
 Lifeful Sap:
     class: Status
     damage: 0
@@ -1390,6 +1398,25 @@ Quartz Shield:
     stamina: 9
     target: single
     type: crystal
+"Quetza-le\xF1o":
+    class: Physical
+    damage: 110
+    hold: 0
+    priority: 2
+    stamina: 27
+    synergy type: neutral
+    target: other
+    type: fire
+"Quetza-le\xF1o +neutral":
+    class: Physical
+    damage: 115
+    hold: 0
+    priority: 3
+    stamina: 27
+    synergy move: true
+    synergy type: neutral
+    target: other
+    type: fire
 Quicksand:
     class: Status
     damage: 0
@@ -2215,4 +2242,14 @@ Wind Burst:
     stamina: 12
     target: other
     type: wind
+Winter Call:
+    class: Status
+    damage: 0
+    effects:
+        cold: 2
+    hold: 3
+    priority: 2
+    stamina: 20
+    target: all
+    type: neutral
 

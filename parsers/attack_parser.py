@@ -31,6 +31,8 @@ from typing import Dict, List, Union
 
 MoveDict = Dict[str, Union[str, int]]
 
+VERBOSE = False
+
 TARGET_LOOKUP = {
     'Self': 'self',
     'Single Target': 'single',
@@ -79,11 +81,14 @@ def main(f_names: List[str]):
                 syn['synergy effects'] = move['synergyEffects']
                 syn['synergy move'] = True
                 output[f'{name} +{move["synergy"].lower()}'] = syn
-        except:  # noqa: E722
+        except Exception as err:
             if not re.search(
                 r'un(available|obtainable).*unknown.? what', move['description']
             ):  # we can silently skip unreleased moves
                 print(f'Unable to parse {name}, ignoring', file=sys.stderr)
+                if VERBOSE:
+                    print(move, file=sys.stderr)
+                    print(err, file=sys.stderr)
 
     output = yaml.dump(output, indent=4).replace('- ', '  - ')
 
@@ -104,5 +109,11 @@ if __name__ == '__main__':
     if not argv or any('-h' in arg for arg in argv):
         print(f'Usage: {__file__} path/to/techniques.json')
         exit(0)
+
+    for verbose_arg in ('-v', '--verbose'):
+        if verbose_arg in argv:
+            VERBOSE = True
+            argv.remove(verbose_arg)
+            break
 
     main(argv)
