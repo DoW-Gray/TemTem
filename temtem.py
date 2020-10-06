@@ -36,7 +36,8 @@ from static import (
 from gear import lookup_gear
 from traits import lookup_trait
 
-from log import error
+import logging
+log = logging.getLogger(__name__)
 
 SAMPLE_SETS = os.path.join('data', 'sets.txt')
 
@@ -563,16 +564,16 @@ def gen_tems(inpt):
         try:
             return TemTem.from_importable(next_tem)
         except Exception as err:
-            error('Unable to parse the following lines:')
+            log.error('Unable to parse the following lines:')
             for line in next_tem:
-                error(line)
-            error('Saw the following exception: %r' % err)
+                log.error(line)
+            log.error('Saw the following exception: %r', err)
 
     next_tem = []
     for line in inpt:
         if not line.strip():
             if next_tem:
-                if (tem := try_yield_tem(next_tem)):
+                if tem := try_yield_tem(next_tem):
                     yield tem
                 next_tem = []
         else:

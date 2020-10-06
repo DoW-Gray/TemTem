@@ -23,7 +23,8 @@ import os
 from enum import Enum
 import yaml
 
-from log import error
+import logging
+log = logging.getLogger(__name__)
 
 TEMTEM_DATA = None
 TEMTEM_YAML = os.path.join('data', 'temtem.yaml')
@@ -296,7 +297,7 @@ def load_temtem_data():
     if TEMTEM_DATA is not None:
         for tem in TEMTEM_DATA:
             if tem not in data:
-                error(f'Lost data on {tem} when reloading {TEMTEM_YAML}')
+                log.error('Lost data on %s when reloading %s', tem, TEMTEM_YAML)
 
     TEMTEM_DATA = data
 

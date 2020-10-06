@@ -27,7 +27,9 @@ from effects import (
     Unaffected,
     RedirectAttack
 )
-from log import error
+
+import logging
+log = logging.getLogger(__name__)
 
 _ALL_TRAITS = {}
 
@@ -45,7 +47,7 @@ def lookup_trait(name, /):
     try:
         return _ALL_TRAITS[class_name]
     except KeyError:
-        error(f'Unable to find trait {name}.')
+        log.error('Unable to find trait %s.', name)
         return NoTrait
 
 

@@ -21,7 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 from static import Statuses, Stats, Types
 from calc import effectiveness
 from effects import Effect, Gear, no_effect, string_to_class_name
-from log import error
+
+import logging
+log = logging.getLogger(__name__)
 
 _ALL_GEAR = {}
 
@@ -39,7 +41,7 @@ def lookup_gear(name, /):
     try:
         return _ALL_GEAR[class_name]
     except KeyError:
-        error(f'Unable to find gear {name}.')
+        log.error('Unable to find gear %s', name)
         return NoGear
 
 
