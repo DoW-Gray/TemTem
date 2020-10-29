@@ -1451,6 +1451,16 @@ Rage:
     stamina: 10
     target: self
     type: melee
+Rainbow Guard:
+    class: Status
+    damage: 0
+    effects:
+        immune: 2
+        evading: 1
+    priority: 2
+    stamina: 20
+    target: self
+    type: neutral
 Rampage:
     class: Physical
     damage: 65
@@ -2084,6 +2094,14 @@ Turbo Choreography +wind:
     synergy type: wind
     target: team
     type: wind
+Undermine:
+    class: Special
+    damage: 145
+    hold: 1
+    priority: 2
+    stamina: 26
+    target: other
+    type: neutral
 Untangle:
     class: Status
     damage: 0
