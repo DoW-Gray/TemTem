@@ -617,7 +617,8 @@ Drakash:
 Droply:
     Catch Rate: 140
     Moves:
-        Egg: []
+        Egg:
+          - Waterjet
         Level Up:
           - Scratch
           - Ice Cubes
@@ -712,7 +713,8 @@ Ganki:
 Garyo:
     Catch Rate: 70
     Moves:
-        Egg: []
+        Egg:
+          - Waterjet
         Level Up:
           - Scratch
           - Ice Cubes
@@ -819,6 +821,7 @@ Goty:
     Catch Rate: 140
     Moves:
         Egg:
+          - Bestial Charge
           - Burrow
           - Head Charge
         Level Up:
@@ -889,7 +892,8 @@ Granpah:
 Grumper:
     Catch Rate: 95
     Moves:
-        Egg: []
+        Egg:
+          - Goring
         Level Up:
           - Sand Splatter
           - Mud Shower
@@ -924,7 +928,8 @@ Grumper:
 Grumvel:
     Catch Rate: 115
     Moves:
-        Egg: []
+        Egg:
+          - Goring
         Level Up:
           - Sand Splatter
           - Mud Shower
@@ -1473,6 +1478,7 @@ Mouflank:
         Egg:
           - Burrow
           - Head Charge
+          - Bestial Charge
         Level Up:
           - Nibble
           - Kick
@@ -3650,6 +3656,7 @@ Yowlar:
     Moves:
         Egg:
           - Toughen
+          - Ice Cubes
         Level Up:
           - Charge
           - Fierce Claw
