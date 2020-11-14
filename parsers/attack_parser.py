@@ -52,6 +52,36 @@ PRIORITY_LOOKUP = {
 }
 
 
+def parse_move(move):
+    name = move['name']
+    res = {
+        'class': move['class'],
+        'type': move['type'].lower(),
+        'damage': move['damage'],
+        'stamina': move['staminaCost'],
+        'hold': move['hold'],
+        'priority': PRIORITY_LOOKUP[move['priority']],
+        'target': TARGET_LOOKUP[move['targets']],
+    }
+    if move['effects'] or move['class'] == 'Status':
+        # It's too difficult to try and parse the effects data in
+        # techniques.json, it's just too unreliable. So just put the
+        # effectText here and have a human do it :(
+        res['effect text'] = move['effectText']
+
+    if move['synergy'] not in {"None", "?", ""}:
+        res['synergy type'] = move['synergy'].lower()
+        yield name, res
+
+        name = f'{name} +{move["synergy"].lower()}'
+        res = deepcopy(res)
+        res['synergy effects'] = move['synergyEffects']
+        res['synergy move'] = True
+        yield name, res
+    else:
+        yield name, res
+
+
 def main(f_names: List[str]):
     with open(f_names[0], 'r') as fp:
         inpt = json.loads(fp.read())
@@ -59,33 +89,13 @@ def main(f_names: List[str]):
     output = {}
     for move in inpt:
         try:
-            name = move['name']
-            output[name] = {
-                'class': move['class'],
-                'type': move['type'].lower(),
-                'damage': move['damage'],
-                'stamina': move['staminaCost'],
-                'hold': move['hold'],
-                'priority': PRIORITY_LOOKUP[move['priority']],
-                'target': TARGET_LOOKUP[move['targets']],
-            }
-            if move['effects'] or move['class'] == 'Status':
-                # It's too difficult to try and parse the effects data in
-                # techniques.json, it's just too unreliable. So just put the
-                # effectText here and have a human do it :(
-                output[name]['effect text'] = move['effectText']
-
-            if move['synergy'] not in {"None", "?", ""}:
-                output[name]['synergy type'] = move['synergy'].lower()
-                syn = deepcopy(output[name])
-                syn['synergy effects'] = move['synergyEffects']
-                syn['synergy move'] = True
-                output[f'{name} +{move["synergy"].lower()}'] = syn
+            for name, data in parse_move(move):
+                output[name] = data
         except Exception as err:
             if not re.search(
                 r'un(available|obtainable).*unknown.? what', move['description']
             ):  # we can silently skip unreleased moves
-                print(f'Unable to parse {name}, ignoring', file=sys.stderr)
+                print(f'Unable to parse {move["name"]}, ignoring', file=sys.stderr)
                 if VERBOSE:
                     print(move, file=sys.stderr)
                     print(err, file=sys.stderr)

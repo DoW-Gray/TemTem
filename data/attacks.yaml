@@ -90,6 +90,17 @@ Bamboozle:
     stamina: 18
     target: single
     type: mental
+Bark:
+    class: Status
+    damage: 0
+    effects:
+        Def: -1
+        SpD: -1
+    hold: 1
+    priority: 3
+    stamina: 20
+    target: other
+    type: neutral
 Bark Shield:
     class: Status
     damage: 0
@@ -286,6 +297,16 @@ Cold Breeze:
     stamina: 9
     target: other
     type: wind
+Cold Geyser:
+    class: Physical
+    damage: 105
+    effects:
+        cold: 2
+    hold: 0
+    priority: 2
+    stamina: 25
+    target: single
+    type: water
 Confiscate:
     class: Status
     damage: 0
@@ -349,6 +370,14 @@ Crystal Spikes:
     stamina: 29
     target: single
     type: crystal
+Crystal Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: crystal
 Crystallize:
     class: Status
     damage: 0
@@ -389,6 +418,14 @@ Diamond Fort:
     stamina: 26
     target: self
     type: crystal
+Digital Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: digital
 Dim Mak:
     class: Special
     damage: 0
@@ -466,6 +503,14 @@ Dust Vortex:
     stamina: 24
     target: other
     type: earth
+Earth Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: earth
 Earth Wave:
     class: Physical
     damage: 90
@@ -502,6 +547,33 @@ Electric Storm:
     priority: 2
     stamina: 26
     target: team or ally
+    type: electric
+Electric Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: electric
+Electropunch:
+    class: Physical
+    damage: 110
+    hold: 0
+    priority: 2
+    stamina: 19
+    synergy type: digital
+    target: other
+    type: electric
+Electropunch +digital:
+    class: Physical
+    damage: 110
+    hold: 0
+    priority: 4
+    stamina: 19
+    synergy move: true
+    synergy type: digital
+    target: other
     type: electric
 Embers:
     class: Physical
@@ -584,6 +656,14 @@ Fire Flame:
     hold: 0
     priority: 2
     stamina: 7
+    target: other
+    type: fire
+Fire Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
     target: single
     type: fire
 Fire Tornado:
@@ -1030,6 +1110,22 @@ Meditation:
     stamina: 6
     target: self
     type: mental
+Melee Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: melee
+Mental Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: mental
 Metabolize:
     class: Status
     damage: 0
@@ -1162,6 +1258,22 @@ Narcoleptic Hit:
     stamina: 15
     target: other
     type: mental
+Nature Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: nature
+Neutral Stream:
+    class: Physical
+    damage: 105
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: neutral
 Nibble:
     class: Physical
     damage: 37
@@ -2032,6 +2144,14 @@ Toxic Spores:
     stamina: 9
     target: other
     type: toxic
+Toxic Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: toxic
 Toxin Shower:
     class: Special
     damage: 40
@@ -2221,6 +2341,14 @@ Water Cutting Lily +water:
     synergy type: water
     target: other
     type: nature
+Water Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
+    type: water
 Waterjet:
     class: Physical
     damage: 110
@@ -2259,6 +2387,14 @@ Wind Burst:
     priority: 2
     stamina: 12
     target: other
+    type: wind
+Wind Stream:
+    class: Physical
+    damage: 85
+    hold: 0
+    priority: 2
+    stamina: 24
+    target: single
     type: wind
 Winter Call:
     class: Status
