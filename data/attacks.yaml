@@ -1510,7 +1510,7 @@ Quartz Shield:
     stamina: 9
     target: single
     type: crystal
-"Quetza-le\xF1o":
+Quetza-leño:
     class: Physical
     damage: 110
     hold: 0
@@ -1519,7 +1519,7 @@ Quartz Shield:
     synergy type: neutral
     target: other
     type: fire
-"Quetza-le\xF1o +neutral":
+Quetza-leño +neutral:
     class: Physical
     damage: 115
     hold: 0

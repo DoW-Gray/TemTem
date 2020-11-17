@@ -1278,6 +1278,389 @@ Kinu:
     Types:
       - nature
       - mental
+Koish:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Water Stream
+          - Cold Geyser
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+Koish-Neutral:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Neutral Stream
+          - Harsh Lick
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - neutral
+Koish-Wind:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Wind Stream
+          - Boomerang
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - wind
+Koish-Earth:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Earth Stream
+          - Stone Ball
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - earth
+Koish-Fire:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Fire Stream
+          - Quetza-leño
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - fire
+Koish-Nature:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Nature Stream
+          - Water Cutting Lily
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - nature
+Koish-Electric:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Electric Stream
+          - Electropunch
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - electric
+Koish-Mental:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Mental Stream
+          - Matter Teleport
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - mental
+Koish-Digital:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Digital Stream
+          - Autodestruction
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - digital
+Koish-Melee:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Melee Stream
+          - Nito Seiho
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - melee
+Koish-Crystal:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Crystal Stream
+          - Mineral Hail
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - crystal
+Koish-Toxic:
+    Catch Rate: 100
+    Moves:
+        Egg: []
+        Level Up:
+          - Bubbles
+          - Finbeat
+          - Ice Cubes
+          - Water Cannon
+          - Hypnosis
+          - Rainbow Guard
+          - Toxic Stream
+          - Wastewater
+        TC:
+          - Misogi
+    Name: Koish
+    No.: 143
+    Stats:
+        Atk: 83
+        BST: 447
+        Def: 68
+        HP: 51
+        SpA: 70
+        SpD: 54
+        Spe: 66
+        Sta: 55
+    Traits:
+      - Synergy Master
+      - Iridescence
+    Types:
+      - water
+      - toxic
 Kuri:
     Catch Rate: 130
     Moves:
@@ -2462,7 +2845,7 @@ Raican:
           - Stampede
         TC:
           - Held Anger
-          - "Quetza-le\xF1o"
+          - Quetza-leño
     Name: Raican
     No.: 59
     Stats:
