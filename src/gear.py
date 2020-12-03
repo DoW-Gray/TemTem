@@ -159,8 +159,7 @@ class TucmaMask(Gear):
 class Snare(Gear):
     @staticmethod
     def on_hit(attacker, target, attack):
-        # TODO: check if own gear is disabled as well?
-        return Effect(attacker={'remove gear': True})
+        return Effect(attacker={'remove gear': True}, target={'remove gear': True})
 
 
 @gear
@@ -226,7 +225,14 @@ class Turban(Gear):
             return Effect(damage=0.8)
         return no_effect
 
-# TODO: handcuffs
+
+@gear
+class Handcuffs(Gear):
+    @staticmethod
+    def after_attack(attacker, target, attack):
+        if target.exhausted:
+            return Effect(target={Statuses.trapped: 3})
+        return no_effect
 
 
 @gear

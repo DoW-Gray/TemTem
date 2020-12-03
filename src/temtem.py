@@ -34,7 +34,7 @@ from static import (
 )
 
 from gear import lookup_gear
-from traits import lookup_trait
+import traits
 
 import logging
 log = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ class TemTem:
     ):
         self.species = species
         self.moves = {move: 0 for move in moves}  # {move: hold counter}
-        self.trait = lookup_trait(trait)
+        self.trait = traits.lookup_trait(trait)
         base_tem_data = lookup_temtem_data(species)
         self.base_stats = base_tem_data['Stats']
         self.types = base_tem_data['Types']
@@ -150,14 +150,16 @@ class TemTem:
     # public funcs for use in simulating battles
 
     def clear_boosts(self):
+        # TODO: check if determined applies here
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
         self.live_stats = self.stats
 
     def apply_boost(self, stat, boost):
-        # TODO: check for determined trait
-
         if isinstance(stat, str):
             stat = Stats[stat]
+
+        if self.trait == traits.Determined and boost < 0:
+            return
 
         self.boosts[stat] += boost
         if self.boosts[stat] > 5:
@@ -198,8 +200,6 @@ class TemTem:
             except DontApplyStatus:
                 return
 
-        # TODO: check if a tem can have both vigorized and exhausted at once
-
         # Check if a type or current status changes what's being applied
         if status in self.statuses:
             if status != Statuses.cold:
@@ -226,8 +226,19 @@ class TemTem:
                 return
             if self.alerted:
                 return
+
         elif status == Statuses.poisoned:
             if Types.toxic in self.types:
+                return
+
+        elif status == Statuses.exhausted:
+            if self.vigorized:
+                del self.statuses[Statuses.vigorized]
+                return
+
+        elif status == Statuses.vigorized:
+            if self.exhausted:
+                del self.statuses[Statuses.exhausted]
                 return
 
         # Handle applying a status when there are already 2

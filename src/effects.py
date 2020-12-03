@@ -167,6 +167,10 @@ class EffectHandler:
         return no_effect
 
     @staticmethod
+    def after_attack(attacker, target, attack):
+        return no_effect
+
+    @staticmethod
     def on_ally_attack(attacker, target, attack):
         return no_effect
 

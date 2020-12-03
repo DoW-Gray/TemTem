@@ -224,7 +224,26 @@ class Channeler(Trait):
             return Effect(damage=1.25)
         return no_effect
 
-# TODO: cobweb, confined
+
+@trait
+class Cobweb(Trait):
+    @staticmethod
+    def after_attack(attacker, target, attack):
+        if target.poisoned:
+            return Effect(target={Statuses.trapped: 2})
+        return no_effect
+
+
+@trait
+class Confined(Trait):
+    @staticmethod
+    def on_attack(attacker, target, attack):
+        if (
+            (attacker is target and Statuses.trapped in attack['effects'])
+            or Statuses.trapped in attack['self']
+        ):
+            return Effect(attacker={Stats.Def: 1, Stats.SpD: 1})
+        return no_effect
 
 
 @trait
@@ -251,7 +270,14 @@ class Demoralize(Trait):
     def on_switch_in(target):
         return Effect(opposing_team={Stats.Spe: -1})
 
-# TODO: determined, dreaded alarm
+
+@trait
+class Determined(Trait):
+    # handled in temtem.TemTem.apply_boost()
+    pass
+
+
+# TODO: dreaded alarm
 
 
 @trait
@@ -519,7 +545,14 @@ class PowerNap(Trait):
             return Effect(target={Stats.HP: int(target.stats[Stats.HP] * 1.15)})
         return no_effect
 
-# TODO: prideful
+
+@trait
+class Prideful(Trait):
+    @staticmethod
+    def after_attack(attacker, target, attack):
+        if target.live_stats[Stats.HP] <= 0:
+            return Effect(attacker={Stats.Atk: 1, Stats.SpA: 1, Stats.Spe: 1})
+        return no_effect
 
 
 @trait
@@ -634,7 +667,31 @@ class Rested(Trait):
             return Effect(target={'trait counter': target.trait_counter + 1})
         return no_effect
 
-# TODO: scavenger, self-esteem, sensei
+
+# TODO: scavenger
+
+
+@trait
+class SelfEsteem(Trait):
+    @staticmethod
+    def after_attack(attacker, target, attack):
+        if target.live_stats[Stats.HP] <= 0:
+            return Effect(
+                attacker={
+                    Statuses.cold: -1,
+                    Statuses.trapped: -1,
+                    Statuses.seized: -1,
+                    Statuses.poisoned: -1,
+                    Statuses.burned: -1,
+                    Statuses.doomed: -1,
+                    Statuses.isolated: -1,
+                    Statuses.exhausted: -1,
+                },
+            )
+        return no_effect
+
+
+# TODO: sensei
 
 
 @trait

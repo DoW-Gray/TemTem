@@ -287,7 +287,20 @@ class Battle:
                         0.7: 0.6,
                     }[clockwise_mod]
 
+        effects = []
         for target in targets:
+
+            for effect in (
+                attacker.trait.after_attack(attacker, target, attack),
+                attacker.gear.after_attack(attacker, target, attack),
+            ):
+                effect.apply(
+                    attacker=attacker,
+                    target=target,
+                    ally=ally,
+                    opposing_team=opposing_team,
+                )
+
             if target.live_stats[Stats.HP] <= 0:
                 self._handle_ko(target)
 
