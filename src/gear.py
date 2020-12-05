@@ -18,9 +18,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Statuses, Stats, Types
-from calc import effectiveness
-from effects import Effect, Gear, no_effect, string_to_class_name
+from .static import Statuses, Stats, Types
+from .calc import effectiveness
+from .effects import Effect, Gear, no_effect, string_to_class_name
 
 import logging
 log = logging.getLogger(__name__)

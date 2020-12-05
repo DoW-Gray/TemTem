@@ -19,8 +19,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 # For static.py
-from static import Stats, Types, Statuses
-from temtem import TemTem
+from .static import Stats, Types, Statuses
+from .temtem import TemTem
 
 GYALIS_DATA = {
     'Stats': {

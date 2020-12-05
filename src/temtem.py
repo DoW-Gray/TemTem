@@ -22,7 +22,7 @@ import os
 
 from math import ceil, floor
 
-from static import (
+from .static import (
     Stats,
     Types,
     Statuses,
@@ -33,8 +33,7 @@ from static import (
     lookup_attack,
 )
 
-from gear import lookup_gear
-import traits
+from .gear import lookup_gear
 
 import logging
 log = logging.getLogger(__name__)
@@ -53,9 +52,11 @@ class TemTem:
             gear=None,
             level=DEFAULT_LEVEL
     ):
+        from .traits import lookup_trait
+
         self.species = species
         self.moves = {move: 0 for move in moves}  # {move: hold counter}
-        self.trait = traits.lookup_trait(trait)
+        self.trait = lookup_trait(trait)
         base_tem_data = lookup_temtem_data(species)
         self.base_stats = base_tem_data['Stats']
         self.types = base_tem_data['Types']
@@ -155,10 +156,12 @@ class TemTem:
         self.live_stats = self.stats
 
     def apply_boost(self, stat, boost):
+        from .traits import Determined
+
         if isinstance(stat, str):
             stat = Stats[stat]
 
-        if self.trait == traits.Determined and boost < 0:
+        if self.trait == Determined and boost < 0:
             return
 
         self.boosts[stat] += boost
@@ -171,7 +174,7 @@ class TemTem:
 
     def apply_status(self, status, turns):
         from contextlib import suppress
-        from effects import DontApplyStatus
+        from .effects import DontApplyStatus
 
         if isinstance(status, str):
             # TODO: deprecate the ability to use a string rather than enum
@@ -332,7 +335,7 @@ class TemTem:
         # TODO: handle waking up, soft touch
 
     def use_stamina(self, stamina):
-        from traits import Resiliant, Tireless, Vigorous
+        from .traits import Resiliant, Tireless, Vigorous
 
         if self.vigorized:
             stamina //= 2  # TesTem uses floor here
@@ -362,7 +365,7 @@ class TemTem:
         like Shuine's Horn.
         '''
         from copy import copy
-        from gear import ShuinesHorn
+        from .gear import ShuinesHorn
 
         attack = lookup_attack(atk_name)
         if 'synergy type' in attack:
@@ -596,7 +599,7 @@ def gen_tems(inpt):
 
 # Tests
 def test_temtem_class():
-    from test_data import (
+    from .test_data import (
         GYALIS_IMPORT,
         GYALIS_STATS,
         GYALIS_TEM,
@@ -636,7 +639,7 @@ def test_temtem_class():
 
 
 def test_gen_tems():
-    from test_data import MULTI_IMPORT, GYALIS_TEM, KINU_TEM
+    from .test_data import MULTI_IMPORT, GYALIS_TEM, KINU_TEM
 
     with open(SAMPLE_SETS, 'r') as fp:
         next(gen_tems(fp))

@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Statuses, Stats
+from .static import Statuses, Stats
 
 
 class DontApplyStatus(Exception):
@@ -76,7 +76,7 @@ class Effect:
         from contextlib import suppress
 
         def apply_effect(tem, effect, count):
-            from gear import NoGear
+            from .gear import NoGear
             if effect in Stats:
                 tem.apply_boost(effect, count)
 

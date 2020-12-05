@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import (
+from .static import (
     Stats,
     Statuses,
     TYPE_EFFECTIVENESS,
@@ -88,8 +88,8 @@ def n_hko(attacker, attack, target):
 
 # Tests
 def test_effectiveness():
-    from test_data import GYALIS_TEM, KINU_TEM
-    from static import Types
+    from .test_data import GYALIS_TEM, KINU_TEM
+    from .static import Types
 
     assert effectiveness(Types.fire, GYALIS_TEM) == 2.0
     assert effectiveness(Types.crystal, GYALIS_TEM) == 1.0
@@ -102,7 +102,7 @@ def test_effectiveness():
 
 
 def test_calc_damage():
-    from test_data import GYALIS_TEM, KINU_TEM, VOLAREND_TEM
+    from .test_data import GYALIS_TEM, KINU_TEM, VOLAREND_TEM
 
     # Regular moves
     assert calc_damage(KINU_TEM, 'Turbo Choreography', GYALIS_TEM) == 0

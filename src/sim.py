@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Stats, lookup_attack
+from .static import Stats, lookup_attack
 
 
 class Choice:
@@ -195,8 +195,8 @@ class Battle:
         # TODO: handle wins here?
 
     def _process_attack(self, side, tem_slot, choice):
-        from effects import Unaffected, RedirectAttack
-        from calc import calc_damage
+        from .effects import Unaffected, RedirectAttack
+        from .calc import calc_damage
 
         attacker = self.active_tem(side, tem_slot)
         attack = attacker.lookup_attack(choice.detail)

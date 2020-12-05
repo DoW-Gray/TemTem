@@ -303,7 +303,7 @@ def load_temtem_data():
 
 
 def load_attack_data():
-    from effects import Effect
+    from .effects import Effect
 
     global ATTACK_DATA
 
@@ -357,7 +357,7 @@ def lookup_attack(name):
 
 # Tests
 def test_lookup_temtem():
-    from test_data import GYALIS_DATA, PIGEPIC_DATA
+    from .test_data import GYALIS_DATA, PIGEPIC_DATA
 
     for test_data, name in (GYALIS_DATA, 'Gyalis'), (PIGEPIC_DATA, 'Pigepic'):
         tem_data = lookup_temtem_data(name)
@@ -367,7 +367,7 @@ def test_lookup_temtem():
 
 def test_lookup_attack():
     from contextlib import suppress
-    from test_data import (
+    from .test_data import (
         BETA_BURST_DATA,
         HIGHPRESSURE_WATER_DATA,
         STONE_WALL_DATA,

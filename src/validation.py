@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from static import Types, lookup_attack, lookup_temtem_data
+from .static import Types, lookup_attack, lookup_temtem_data
 
 TEMTEM_CHECKS = {}
 TEAM_CHECKS = {}
