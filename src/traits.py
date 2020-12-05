@@ -311,8 +311,12 @@ class ElectricSynthesize(Trait):
 class EnergyReserves(Trait):
     @staticmethod
     def on_turn_end(target):
-        if target.live_stats[Stats.HP] < target.stats[Stats.HP] / 4:
-            return Effect(target={Statuses.vigorized: 2})
+        if target.trait_counter:
+            return no_effect
+        if target.live_stats[Stats.HP] < target.stats[Stats.HP] * 0.4:
+            return Effect(
+                target={Statuses.vigorized: 2, Stats.Atk: 2, 'trait counter': 1}
+            )
         return no_effect
 
 
@@ -442,6 +446,12 @@ class Immunity(Trait):
             return Effect(damage=0)
         return no_effect
 
+    @staticmethod
+    def on_status(target, status, count):
+        if status == Statuses.poisoned:
+            return Effect(target={Statuses.poisoned: -1})
+        return no_effect
+
 
 @trait
 class Individualist(Trait):
@@ -559,7 +569,7 @@ class Prideful(Trait):
 class Protector(Trait):
     @staticmethod
     def on_switch_in(target):
-        return Effect(ally={Stats.Def: 1, Stats.SpD: 1})
+        return Effect(ally={Stats.Def: 1, Stats.SpD: 1}, target={Stats.HP: -0.1})
 
 
 @trait
@@ -624,7 +634,7 @@ class Rejuvenate(Trait):
     def on_attack(attacker, target, attack):
         if attack['class'] != 'Physical':
             return no_effect
-        return Effect(attacker={Stats.HP: int(attacker.stats[Stats.HP] * 0.15)})
+        return Effect(attacker={Stats.HP: attacker.stats[Stats.HP] // 5})
 
 
 @trait
@@ -862,7 +872,7 @@ class Trance(Trait):
         return Effect(
             target={
                 Statuses.asleep: 2,
-                Statuses.regenerated: 2,
+                Statuses.regenerated: 3,
                 Stats.SpA: 2,
                 Stats.SpD: 2,
             }

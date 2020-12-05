@@ -166,7 +166,7 @@ class Snare(Gear):
 class Chamomile(Gear):
     @staticmethod
     def on_switch_in(target):
-        return Effect(target={'clear boosts': True})
+        return Effect(target={'clear boosts': True, Statuses.immune: 4})
 
 
 @gear
@@ -250,7 +250,7 @@ class Drill(Gear):
 class BatonPass(Gear):
     @staticmethod
     def on_switch_in(target):
-        return Effect(target={Stats.HP: int(target.stats[Stats.HP] * 0.08)})
+        return Effect(target={Stats.HP: target.stats[Stats.HP] // 10})
 
 # TODO: hopeless tonic
 

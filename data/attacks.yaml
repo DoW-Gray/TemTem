@@ -193,7 +193,7 @@ Bush:
     class: Status
     damage: 0
     effects:
-        regenerated: 2
+        regenerated: 1
         evading: 1
     hold: 2
     priority: 3
@@ -491,7 +491,7 @@ Drought:
     self:
         overexerted: true
     hold: 1
-    priority: 1
+    priority: 4
     stamina: 14
     target: all
     type: earth
@@ -870,8 +870,8 @@ Hibernate:
     damage: 0
     effects:
         frozen: 3
-        HP: 0.5
-        Sta: 0.5
+        HP: 0.4
+        Sta: 0.4
     hold: 2
     priority: 2
     stamina: 25
@@ -991,7 +991,7 @@ Intimidation:
     class: Status
     damage: 0
     effects:
-        exhausted: 1
+        exhausted: 2
     hold: 2
     priority: 2
     stamina: 12
@@ -1076,12 +1076,12 @@ Madness Buff:
     type: melee
 Magma Cannon:
     class: Special
-    damage: 70
+    damage: 92
     effects:
         burned: 3
-    hold: 3
+    hold: 2
     priority: 1
-    stamina: 37
+    stamina: 29
     target: other
     type: fire
 Major Slash:
@@ -1141,8 +1141,7 @@ Metabolize +nature:
     class: Status
     damage: 0
     effects:
-        regenerated: 2
-        metabolize: true
+        metabolize_synergy: true
     hold: 2
     priority: 1
     stamina: 21
@@ -1152,7 +1151,7 @@ Metabolize +nature:
     type: toxic
 Meteor Swarm:
     class: Physical
-    damage: 75
+    damage: 80
     hold: 1
     priority: 1
     stamina: 25
@@ -1161,7 +1160,7 @@ Meteor Swarm:
     type: fire
 Meteor Swarm +fire:
     class: Physical
-    damage: 75
+    damage: 90
     effects:
         burned: 1
     hold: 1
@@ -1174,7 +1173,7 @@ Meteor Swarm +fire:
 Mineral Hail:
     class: Physical
     damage: 100
-    hold: 3
+    hold: 2
     priority: 2
     stamina: 30
     target: team or ally
@@ -1738,7 +1737,7 @@ Scratch:
     type: neutral
 Seismunch's Wreck:
     class: Physical
-    damage: 115
+    damage: 110
     hold: 1
     priority: 2
     stamina: 33
@@ -1747,7 +1746,7 @@ Seismunch's Wreck:
     type: earth
 Seismunch's Wreck +melee:
     class: Physical
-    damage: 130
+    damage: 125
     hold: 1
     priority: 3
     stamina: 33
@@ -1757,8 +1756,8 @@ Seismunch's Wreck +melee:
     type: earth
 Serbatiyo's Wrath:
     class: Special
-    damage: 108
-    hold: 3
+    damage: 100
+    hold: 2
     priority: 2
     stamina: 35
     target: team or ally
@@ -2043,7 +2042,7 @@ Tortenite's Garden:
     effects:
         doomed: 4
     self:
-        HP: 0.08
+        HP: 0.1
     hold: 2
     priority: 1
     stamina: 24
@@ -2056,7 +2055,7 @@ Tortenite's Garden +crystal:
     effects:
         doomed: 3
     self:
-        HP: 0.16
+        HP: 0.2
     hold: 2
     priority: 1
     stamina: 24
@@ -2154,8 +2153,8 @@ Toxic Stream:
     type: toxic
 Toxin Shower:
     class: Special
-    damage: 40
-    hold: 2
+    damage: 60
+    hold: 1
     priority: 2
     stamina: 10
     target: all

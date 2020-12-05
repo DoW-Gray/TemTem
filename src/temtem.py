@@ -156,12 +156,17 @@ class TemTem:
         self.live_stats = self.stats
 
     def apply_boost(self, stat, boost):
-        from .traits import Determined
+        from .traits import Determined, Guardian
 
         if isinstance(stat, str):
             stat = Stats[stat]
 
-        if self.trait == Determined and boost < 0:
+        if (
+            boost < 0 and (
+                self.trait is Determined
+                or (self.ally and self.ally.trait is Guardian)
+            )
+        ):
             return
 
         self.boosts[stat] += boost
