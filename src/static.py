@@ -39,7 +39,7 @@ class _ReprEnum(Enum):
             'Types': 'Type',
             'Statuses': 'Status',
         }[self.__class__.__name__]
-        return f'<{classname}> {self.name}>'
+        return f'<{classname} {self.name}>'
 
 
 @unique
