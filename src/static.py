@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import os
 
-from enum import Enum
+from enum import Enum, unique, auto
 import yaml
 
 import logging
@@ -32,48 +32,61 @@ ATTACK_DATA = None
 ATTACK_YAML = os.path.join('data', 'attacks.yaml')
 
 
-class Stats(Enum):
-    HP = 1
-    Sta = 2
-    Spe = 3
-    Atk = 4
-    Def = 5
-    SpA = 6
-    SpD = 7
+class _ReprEnum(Enum):
+    def __repr__(self):
+        classname = {
+            'Stats': 'Stat',
+            'Types': 'Type',
+            'Statuses': 'Status',
+        }[self.__class__.__name__]
+        return f'<{classname} {self.name}>'
 
 
-class Types(Enum):
-    neutral = 1
-    fire = 2
-    water = 3
-    nature = 4
-    electric = 5
-    earth = 6
-    mental = 7
-    wind = 8
-    digital = 9
-    melee = 10
-    crystal = 11
-    toxic = 12
+@unique
+class Stats(_ReprEnum):
+    HP = auto()
+    Sta = auto()
+    Spe = auto()
+    Atk = auto()
+    Def = auto()
+    SpA = auto()
+    SpD = auto()
 
 
-class Statuses(Enum):
-    cold = 1
-    frozen = 2
-    asleep = 3
-    trapped = 4
-    doomed = 5
-    seized = 6
-    poisoned = 7
-    burned = 8
-    exhausted = 9
-    vigorized = 10
-    immune = 11
-    regenerated = 12
-    nullified = 13
-    evading = 14
-    alerted = 15
-    exiled = 16
+@unique
+class Types(_ReprEnum):
+    neutral = auto()
+    fire = auto()
+    water = auto()
+    nature = auto()
+    electric = auto()
+    earth = auto()
+    mental = auto()
+    wind = auto()
+    digital = auto()
+    melee = auto()
+    crystal = auto()
+    toxic = auto()
+
+
+@unique
+class Statuses(_ReprEnum):
+    cold = auto()
+    frozen = auto()
+    asleep = auto()
+    trapped = auto()
+    doomed = auto()
+    seized = auto()
+    poisoned = auto()
+    burned = auto()
+    exhausted = auto()
+    vigorized = auto()
+    immune = auto()
+    regenerated = auto()
+    nullified = auto()
+    evading = auto()
+    alerted = auto()
+    exiled = auto()
 
 
 STAT_CONSTS = {
