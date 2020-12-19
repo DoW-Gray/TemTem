@@ -27,7 +27,7 @@ import yaml
 from copy import deepcopy
 import re
 
-from typing import Dict, List, Union
+from typing import Dict, List, Union, Tuple, Iterable, Any
 
 MoveDict = Dict[str, Union[str, int]]
 
@@ -52,7 +52,7 @@ PRIORITY_LOOKUP = {
 }
 
 
-def parse_move(move):
+def parse_move(move: Dict[str, Any]) -> Iterable[Tuple[str, MoveDict]]:
     name = move['name']
     res = {
         'class': move['class'],
@@ -92,8 +92,9 @@ def main(f_names: List[str]):
             for name, data in parse_move(move):
                 output[name] = data
         except Exception as err:
-            if not re.search(
-                r'un(available|obtainable).*unknown.? what', move['description']
+            unavail = re.compile(r'un(available|obtainable).*unknown.? what')
+            if not (
+                unavail.search(move['description']) or unavail.search(move['effectText'])
             ):  # we can silently skip unreleased moves
                 print(f'Unable to parse {move["name"]}, ignoring', file=sys.stderr)
                 if VERBOSE:

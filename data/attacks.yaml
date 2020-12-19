@@ -78,7 +78,7 @@ Awful Song +neutral:
     stamina: 20
     synergy move: true
     synergy type: neutral
-    target: single
+    target: team or ally
     type: neutral
 Bamboozle:
     class: Status
