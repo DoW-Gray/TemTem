@@ -61,6 +61,16 @@ Aquatic Whirlwind:
     stamina: 29
     target: other
     type: water
+Autodestruction:
+    class: Physical
+    damage: 125
+    hold: 3
+    priority: 1
+    self:
+        HP: -1
+    stamina: 30
+    target: all
+    type: digital
 Awful Song:
     class: Special
     damage: 96
@@ -1100,6 +1110,14 @@ Martial Strike:
     stamina: 5
     target: other
     type: melee
+Matter Teleport:
+    class: Physical
+    damage: 125
+    hold: 0
+    priority: 2
+    stamina: 28
+    target: single
+    type: mental
 Meditation:
     class: Status
     damage: 0
@@ -2292,6 +2310,16 @@ Warm Cuddle:
     stamina: 12
     target: other
     type: fire
+Wastewater:
+    class: Physical
+    damage: 100
+    effects:
+        poisoned: 2
+    hold: 0
+    priority: 2
+    stamina: 25
+    target: single
+    type: toxic
 Water Blade:
     class: Special
     damage: 52
