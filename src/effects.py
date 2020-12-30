@@ -103,12 +103,7 @@ class Effect:
                 elif effect == 'overexerted':
                     tem.overexerted = 2  # equal to "used up all its stamina this turn"
                 elif effect == 'clear boosts':
-                    tem.boosts = {
-                        stat: 0
-                        for stat in Stats
-                        if stat not in (Stats.HP, Stats.Sta)
-                    }
-                    tem._calc_live_stats()
+                    tem.clear_boosts()
                 else:
                     raise NotImplementedError()
 

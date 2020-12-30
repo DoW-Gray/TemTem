@@ -27,6 +27,9 @@ from .effects import (
     Unaffected,
     RedirectAttack
 )
+from .temtem import TemTem
+
+from typing import Type, Dict, Any
 
 import logging
 log = logging.getLogger(__name__)
@@ -34,13 +37,13 @@ log = logging.getLogger(__name__)
 _ALL_TRAITS = {}
 
 
-def trait(cls):
+def trait(cls: Type[Trait]) -> Type[Trait]:
     global _ALL_TRAITS
     _ALL_TRAITS[cls.__name__] = cls
     return cls
 
 
-def lookup_trait(name, /):
+def lookup_trait(name: str, /) -> Trait:
     class_name = string_to_class_name(name)
     if class_name == '':
         return NoTrait
@@ -58,14 +61,14 @@ class NoTrait(Trait):
 @trait
 class Aerobic(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         # trait counter ensures no double-boost for multi-target moves
         if attack['type'] == Types.wind and not attacker.trait_counter:
             return Effect(attacker={Stats.Spe: 1, Stats.SpD: -1, 'trait counter': 1})
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return Effect(target={'trait counter': 0})
         return no_effect
@@ -74,7 +77,7 @@ class Aerobic(Trait):
 @trait
 class AirSpecialist(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.wind:
             return Effect(damage=1.15)
         return no_effect
@@ -83,7 +86,7 @@ class AirSpecialist(Trait):
 @trait
 class Amphibian(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             return Effect(target={Stats.Spe: 1})
         return no_effect
@@ -92,7 +95,7 @@ class Amphibian(Trait):
 @trait
 class Anaerobic(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.toxic:
             return Effect(target={Stats.SpA: -1, Stats.SpD: 1})
         return no_effect
@@ -101,7 +104,7 @@ class Anaerobic(Trait):
 @trait
 class Apothecary(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] != 'Special':
             return no_effect
         if target is attacker.ally:
@@ -112,7 +115,7 @@ class Apothecary(Trait):
 @trait
 class Autotomy(Trait):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         if target.trait_counter:
             return no_effect
         return Effect(target={Statuses.evading: 2, 'trait counter': 1})
@@ -121,8 +124,10 @@ class Autotomy(Trait):
 @trait
 class Avenger(Trait):
     @staticmethod
-    def on_ally_damage(attacker, target, ally, attack, damage):
-        if damage > target.live_stats[Stats.HP]:
+    def on_ally_damage(
+        attacker: TemTem, target: TemTem, ally: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        if damage > target.HP:
             return Effect(ally={Stats.Spe: 1, Stats.SpA: 1})
         return no_effect
 
@@ -130,21 +135,23 @@ class Avenger(Trait):
 @trait
 class Benefactor(Trait):
     @staticmethod
-    def on_ally_damage(attacker, target, ally, attack, damage):
+    def on_ally_damage(
+        attacker: TemTem, target: TemTem, ally: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
         return Effect(ally={Stats.HP: 0.1})
 
 
 @trait
 class BodyStretch(Trait):
     @staticmethod
-    def on_rest(target):
+    def on_rest(target: TemTem) -> Effect:
         return Effect(target={Statuses.regenerated: 2})
 
 
 @trait
 class BookLungs(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             return Effect(damage=0.7)
         return no_effect
@@ -153,7 +160,7 @@ class BookLungs(Trait):
 @trait
 class Botanist(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.nature:
             return Effect(damage=1.15)
         return no_effect
@@ -162,7 +169,7 @@ class Botanist(Trait):
 @trait
 class Botanophobia(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.nature:
             return Effect(damage=1.5)
         return no_effect
@@ -171,7 +178,7 @@ class Botanophobia(Trait):
 @trait
 class Brawny(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(damage=1.2)
         return no_effect
@@ -180,14 +187,14 @@ class Brawny(Trait):
 @trait
 class Bully(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         raise NotImplementedError()
 
 
 @trait
 class Burglar(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.asleep or target.exhausted:
             return Effect(target={'remove gear': True})
         return no_effect
@@ -196,14 +203,14 @@ class Burglar(Trait):
 @trait
 class Caffeinated(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         return Effect(target={Statuses.asleep: -1})
 
 
 @trait
 class Callosity(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(target={Stats.Def: 1})
         return no_effect
@@ -212,14 +219,14 @@ class Callosity(Trait):
 @trait
 class Camaraderie(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         raise NotImplementedError()
 
 
 @trait
 class Channeler(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Special':
             return Effect(damage=1.25)
         return no_effect
@@ -228,7 +235,7 @@ class Channeler(Trait):
 @trait
 class Cobweb(Trait):
     @staticmethod
-    def after_attack(attacker, target, attack):
+    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.poisoned:
             return Effect(target={Statuses.trapped: 2})
         return no_effect
@@ -237,7 +244,7 @@ class Cobweb(Trait):
 @trait
 class Confined(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if (
             (attacker is target and Statuses.trapped in attack['effects'])
             or Statuses.trapped in attack['self']
@@ -249,7 +256,7 @@ class Confined(Trait):
 @trait
 class ColdNatured(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.cold:
             return Effect(target={Statuses.Cold: -1, Statuses.Frozen: count})
         return no_effect
@@ -258,7 +265,7 @@ class ColdNatured(Trait):
 @trait
 class CowardsRest(Trait):
     @staticmethod
-    def on_rest(target):
+    def on_rest(target: TemTem) -> Effect:
         return Effect(target={Statuses.evading: 2})
 
 # TODO: deceit aura
@@ -267,7 +274,7 @@ class CowardsRest(Trait):
 @trait
 class Demoralize(Trait):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(opposing_team={Stats.Spe: -1})
 
 
@@ -283,14 +290,14 @@ class Determined(Trait):
 @trait
 class Earthbound(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         # trait counter ensures no double-boost for multi-target moves
         if attack['type'] == Types.earth and not attacker.trait_counter:
             return Effect(attacker={Stats.Def: 1, 'trait counter': 1})
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return Effect(attacker={'trait counter': 0})
         return no_effect
@@ -301,7 +308,7 @@ class Earthbound(Trait):
 @trait
 class ElectricSynthesize(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.electric:
             return Effect(damage=-1)
         return no_effect
@@ -310,10 +317,10 @@ class ElectricSynthesize(Trait):
 @trait
 class EnergyReserves(Trait):
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return no_effect
-        if target.live_stats[Stats.HP] < target.stats[Stats.HP] * 0.4:
+        if target.HP < target.max_hp * 0.4:
             return Effect(
                 target={Statuses.vigorized: 2, Stats.Atk: 2, 'trait counter': 1}
             )
@@ -323,19 +330,21 @@ class EnergyReserves(Trait):
 @trait
 class Escapist(Trait):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         if target.ally.trapped:
             return Effect(ally={Statuses.trapped: -1})
         return no_effect
 
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.trapped:
             return Effect(target={Statuses.trapped: -1})
         return no_effect
 
     @staticmethod
-    def on_ally_status(target, ally, status, count):
+    def on_ally_status(
+        target: TemTem, ally: TemTem, status: Statuses, count: int
+    ) -> Effect:
         if status == Statuses.trapped:
             return Effect(target={Statuses.trapped: -1})
         return no_effect
@@ -344,16 +353,18 @@ class Escapist(Trait):
 @trait
 class FaintedCurse(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, attack, damage):
-        if damage <= target.live_stats[Stats.HP]:
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        if damage <= target.HP:
             return no_effect
-        return Effect(attacker={Statuses.HP: -int(attacker.stats[Stats.HP] * 0.3)})
+        return Effect(attacker={Statuses.HP: -int(attacker.max_hp * 0.3)})
 
 
 @trait
 class FastCharge(Trait):
     @staticmethod
-    def on_ally_switch_in(target, ally):
+    def on_ally_switch_in(target: TemTem, ally: TemTem) -> Effect:
         if Types.digital in ally.types:
             return Effect(ally={Stats.Spe: 2})
         return no_effect
@@ -362,14 +373,14 @@ class FastCharge(Trait):
 @trait
 class FeverRush(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         return Effect(target={Stats.Atk: 1})
 
 
 @trait
 class FlawedCrystal(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] in {Types.mental, Types.toxic, Types.electric}:
             return Effect(damage=1.5)
         return no_effect
@@ -378,7 +389,7 @@ class FlawedCrystal(Trait):
 @trait
 class Friendship(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker is target.ally:
             raise Unaffected()
         return no_effect
@@ -387,8 +398,8 @@ class Friendship(Trait):
 @trait
 class Furor(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
-        if attacker.live_stats[Stats.HP] < attacker.stats[Stats.HP] * 0.33:
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if attacker.HP < attacker.max_hp * 0.33:
             return Effect(damage=1.33)
         return no_effect
 
@@ -396,7 +407,9 @@ class Furor(Trait):
 @trait
 class Guardian(Trait):
     @staticmethod
-    def on_ally_status(target, ally, status, count):
+    def on_ally_status(
+        target: TemTem, ally: TemTem, status: Statuses, count: int
+    ) -> Effect:
         # Note: this also stops Frozen on a cold-natured ally (tested in-game)
         if status in {
             Statuses.cold,
@@ -412,8 +425,10 @@ class Guardian(Trait):
 @trait
 class HeatDischarge(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, attack, damage):
-        if damage > target.live_stats[Stats.HP]:
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        if damage > target.HP:
             return Effect(attacker={Statuses.burned: 3})
         return no_effect
 
@@ -421,7 +436,7 @@ class HeatDischarge(Trait):
 @trait
 class Hover(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.earth:
             return Effect(damage=0.5)
         return no_effect
@@ -432,7 +447,7 @@ class Hover(Trait):
 @trait
 class Hydrologist(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             return Effect(damage=1.15)
         return no_effect
@@ -441,13 +456,13 @@ class Hydrologist(Trait):
 @trait
 class Immunity(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.toxic:
             return Effect(damage=0)
         return no_effect
 
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.poisoned:
             return Effect(target={Statuses.poisoned: -1})
         return no_effect
@@ -456,7 +471,7 @@ class Immunity(Trait):
 @trait
 class Individualist(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target is attacker.ally:
             raise Unaffected()
         return no_effect
@@ -467,7 +482,7 @@ class Individualist(Trait):
 @trait
 class MentalAlliance(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker.ally and Types.mental in attacker.ally.types:
             return Effect(damage=1.15)
         return no_effect
@@ -476,7 +491,9 @@ class MentalAlliance(Trait):
 @trait
 class Mirroring(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, attack, damage):
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
         if attack['class'] == 'Special':
             return Effect(attacker={Stats.HP: -damage // 4})
         return no_effect
@@ -485,7 +502,7 @@ class Mirroring(Trait):
 @trait
 class Mithridatism(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.poisoned:
             return Effect(target={Statuses.poisoned: -1})
         return no_effect
@@ -496,13 +513,13 @@ class Mithridatism(Trait):
 @trait
 class Mucous(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.electric:
             return Effect(damage=0.7)
         return no_effect
 
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status in {Statuses.cold, Statuses.burned}:
             return Effect(target={status: -1})
         return no_effect
@@ -511,14 +528,14 @@ class Mucous(Trait):
 @trait
 class Neutrality(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         return Effect(target={status: -1})
 
 
 @trait
 class Parrier(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(damage=0.7)
         return no_effect
@@ -527,19 +544,19 @@ class Parrier(Trait):
 @trait
 class Patient(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         # trait counter ensures no double-boost for multi-target moves
         if attack['hold'] and not attacker.trait_counter:
             return Effect(
                 attacker={
-                    Stats.Sta: attacker.stats[Stats.Sta] // 10,
+                    Stats.Sta: attacker.max_sta // 10,
                     'trait counter': 1
                 }
             )
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return Effect(target={'trait counter': 0})
         return no_effect
@@ -550,17 +567,17 @@ class Patient(Trait):
 @trait
 class PowerNap(Trait):
     @staticmethod
-    def on_turn_start(target):
+    def on_turn_start(target: TemTem) -> Effect:
         if target.asleep:
-            return Effect(target={Stats.HP: int(target.stats[Stats.HP] * 1.15)})
+            return Effect(target={Stats.HP: int(target.max_hp * 1.15)})
         return no_effect
 
 
 @trait
 class Prideful(Trait):
     @staticmethod
-    def after_attack(attacker, target, attack):
-        if target.live_stats[Stats.HP] <= 0:
+    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if target.HP <= 0:
             return Effect(attacker={Stats.Atk: 1, Stats.SpA: 1, Stats.Spe: 1})
         return no_effect
 
@@ -568,14 +585,14 @@ class Prideful(Trait):
 @trait
 class Protector(Trait):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(ally={Stats.Def: 1, Stats.SpD: 1}, target={Stats.HP: -0.1})
 
 
 @trait
 class Provident(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical' and attack['type'] in {
             Types.fire, Types.earth, Types.melee
         }:
@@ -586,7 +603,7 @@ class Provident(Trait):
 @trait
 class PunchingBag(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.melee:
             return Effect(damage=0.7)
         return no_effect
@@ -595,11 +612,8 @@ class PunchingBag(Trait):
 @trait
 class PuppetMaster(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
-        if (
-            target.live_stats[Stats.HP] < target.stats[Stats.HP] * 0.4
-            and target.ally
-        ):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if target.HP < target.max_hp * 0.4 and target.ally:
             raise RedirectAttack('ally')
         return no_effect
 
@@ -607,7 +621,7 @@ class PuppetMaster(Trait):
 @trait
 class Pyromaniac(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.fire:
             return Effect(damage=1.15)
         return no_effect
@@ -616,7 +630,7 @@ class Pyromaniac(Trait):
 @trait
 class Receptive(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status in {
             Statuses.vigorized,
             Statuses.immune,
@@ -631,10 +645,10 @@ class Receptive(Trait):
 @trait
 class Rejuvenate(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] != 'Physical':
             return no_effect
-        return Effect(attacker={Stats.HP: attacker.stats[Stats.HP] // 5})
+        return Effect(attacker={Stats.HP: attacker.max_hp // 5})
 
 
 @trait
@@ -646,7 +660,7 @@ class Resiliant(Trait):
 @trait
 class Resistant(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status in {
             Statuses.cold,
             Statuses.asleep,
@@ -666,13 +680,13 @@ class Rested(Trait):
     # TODO: ensure I'm not reading this wrong and it's a 1x mod turn 1, 1.3x t2,
     # 1.6x t3 onwards.
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker.trait_counter <= 2:
             return Effect(damage=1.3)
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter <= 2:
             return Effect(target={'trait counter': target.trait_counter + 1})
         return no_effect
@@ -684,8 +698,8 @@ class Rested(Trait):
 @trait
 class SelfEsteem(Trait):
     @staticmethod
-    def after_attack(attacker, target, attack):
-        if target.live_stats[Stats.HP] <= 0:
+    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if target.HP <= 0:
             return Effect(
                 attacker={
                     Statuses.cold: -1,
@@ -707,29 +721,29 @@ class SelfEsteem(Trait):
 @trait
 class Settling(Trait):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(target={'trait counter': 0})
 
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             # TODO: check this isn't compound
             return Effect(damage=1 + 0.08 * attacker.trait_counter)
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         return Effect(target={'trait counter': target.trait_counter + 1})
 
 
 @trait
 class SharedPain(Trait):
     @staticmethod
-    def on_turn_start(target):
+    def on_turn_start(target: TemTem) -> Effect:
         return Effect(target={'trait counter': 0})
 
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.trait_counter and target.ally:
             raise RedirectAttack('ally')
         return Effect(target={'trait counter': 1})
@@ -738,7 +752,7 @@ class SharedPain(Trait):
 @trait
 class SkullHelmet(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] in {Types.melee, Types.mental}:
             return Effect(damage=0.75)
         return no_effect
@@ -749,7 +763,7 @@ class SkullHelmet(Trait):
 @trait
 class Spoilsport(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['target'] in {'team or ally', 'whole team', 'all'}:
             # TODO: check clockwise not included. Is that even testable?
             return Effect(damage=1.25)
@@ -761,7 +775,7 @@ class Spoilsport(Trait):
 @trait
 class StrongLiver(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.toxic:
             return Effect(damage=-1)
         return no_effect
@@ -770,13 +784,13 @@ class StrongLiver(Trait):
 @trait
 class SynergyMaster(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['synergy move']:
             return Effect(damage=1.25)
         return no_effect
 
     @staticmethod
-    def on_ally_attack(attacker, target, attack):
+    def on_ally_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['synergy move']:
             return Effect(damage=1.25)
         return no_effect
@@ -785,7 +799,7 @@ class SynergyMaster(Trait):
 @trait
 class TacticalStrike(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['hold']:
             return Effect(damage=1.15)
         return no_effect
@@ -795,17 +809,17 @@ class TacticalStrike(Trait):
 class TardyRush(Trait):
     # TODO: speed up after 3 turns
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(target={'trait counter': 0})
 
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker.trait_counter >= 3 and attack['trait'] == 'Physical':
             return Effect(damage=1.1)
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter < 3:
             return Effect(target={'trait counter': target.trait_counter + 1})
         return no_effect
@@ -814,7 +828,7 @@ class TardyRush(Trait):
 @trait
 class TeamElusive(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['target'] in {'team or ally', 'whole team', 'all'}:
             raise Unaffected()
         return no_effect
@@ -823,7 +837,7 @@ class TeamElusive(Trait):
 @trait
 class ThickSkin(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.wind:
             return Effect(damage=0.5)
         return no_effect
@@ -838,7 +852,7 @@ class Tireless(Trait):
 @trait
 class ToxicAffinity(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.toxic:
             return Effect(damage=1.5)
         return no_effect
@@ -847,8 +861,10 @@ class ToxicAffinity(Trait):
 @trait
 class ToxicFarewell(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, attack, damage):
-        if damage >= target.live_stats[Stats.HP]:
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        if damage >= target.HP:
             return Effect(attacker={Statuses.poisoned: 3})
         return no_effect
 
@@ -856,7 +872,7 @@ class ToxicFarewell(Trait):
 @trait
 class ToxicSkin(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(attacker={Statuses.poisoned: 2})
         return no_effect
@@ -865,9 +881,11 @@ class ToxicSkin(Trait):
 @trait
 class Trance(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, attack, damage):
-        res_hp = target.live_stats[Stats.HP] - damage
-        if res_hp <= 0 or res_hp > target.stats[Stats.HP] * 0.3:
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        res_hp = target.HP - damage
+        if res_hp <= 0 or res_hp > target.max_hp * 0.3:
             return no_effect
         return Effect(
             target={
@@ -882,7 +900,7 @@ class Trance(Trait):
 @trait
 class Trauma(Trait):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(target={Stats.Def: -1})
         elif attack['class'] == 'Special':
@@ -893,7 +911,7 @@ class Trauma(Trait):
 @trait
 class TriApothecary(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] != 'Special':
             return no_effect
         if target is attacker.ally:
@@ -904,21 +922,21 @@ class TriApothecary(Trait):
 @trait
 class Unnoticed(Trait):
     @staticmethod
-    def on_turn_start(target):
+    def on_turn_start(target: TemTem) -> Effect:
         return Effect(target={'trait counter': 0})
 
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(target={'trait counter': 0})
 
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.trait_counter:
             return no_effect
         return Effect(target={'trait counter': 1})
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return no_effect
         return Effect(target={Stats.Spe: 1})
@@ -927,7 +945,7 @@ class Unnoticed(Trait):
 @trait
 class Vigorous(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker.trait_counter == 1:
             # This is set in TemTem.use_stamina(). Simply checking if
             # overexerted would cause strangle to increase attack power.
@@ -935,7 +953,7 @@ class Vigorous(Trait):
         return no_effect
 
     @staticmethod
-    def on_turn_end(target):
+    def on_turn_end(target: TemTem) -> Effect:
         if target.trait_counter:
             return Effect(target={'trait counter': 0})
         return no_effect
@@ -944,7 +962,7 @@ class Vigorous(Trait):
 @trait
 class WarmBlooded(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.cold:
             return Effect(target={Statuses.cold: -1})
         return no_effect
@@ -953,7 +971,7 @@ class WarmBlooded(Trait):
 @trait
 class WaterAffinity(Trait):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             return Effect(damage=1.5)
         return no_effect
@@ -962,7 +980,7 @@ class WaterAffinity(Trait):
 @trait
 class WaterCustodian(Trait):
     @staticmethod
-    def on_ally_hit(attacker, target, attack):
+    def on_ally_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             raise RedirectAttack('ally')
         return no_effect
@@ -971,19 +989,21 @@ class WaterCustodian(Trait):
 @trait
 class Withdrawal(Trait):
     @staticmethod
-    def on_rest(target):
+    def on_rest(target: TemTem) -> Effect:
         if target.asleep:
             raise NotImplementedError()
             # TODO: work out what happens with sleep - does the tem get alerted
             # instead?
-        return Effect(target={Stats.HP: int(target.stats[Stats.HP] * 0.15)})
+        return Effect(target={Stats.HP: int(target.max_hp * 0.15)})
 
 
 @trait
 class WreckedFarewell(Trait):
     @staticmethod
-    def on_take_damage(attacker, target, ally, attack, damage):
-        if damage >= target.live_stats[Stats.HP] and (
+    def on_take_damage(
+        attacker: TemTem, target: TemTem, ally: TemTem, attack: Dict[str, Any], damage: int
+    ) -> Effect:
+        if damage >= target.HP and (
             attacker is None or attacker is target
         ):
             return Effect(ally={Stats.HP: -0.25}, opposing_team={Stats.HP: -0.25})
@@ -992,7 +1012,7 @@ class WreckedFarewell(Trait):
 @trait
 class Zen(Trait):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.asleep:
             return Effect(target={Stats.Def: 1, Stats.SpD: 1})
         return no_effect

@@ -21,6 +21,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 from .static import Statuses, Stats, Types
 from .calc import effectiveness
 from .effects import Effect, Gear, no_effect, string_to_class_name
+from .temtem import TemTem
+
+from typing import Type, Dict, Any
 
 import logging
 log = logging.getLogger(__name__)
@@ -28,13 +31,13 @@ log = logging.getLogger(__name__)
 _ALL_GEAR = {}
 
 
-def gear(cls):
+def gear(cls: Type[Gear]) -> Type[Gear]:
     global _ALL_GEAR
     _ALL_GEAR[cls.__name__] = cls
     return cls
 
 
-def lookup_gear(name, /):
+def lookup_gear(name: str, /) -> Gear:
     class_name = string_to_class_name(name)
     if class_name == '':
         return NoGear
@@ -52,7 +55,7 @@ class NoGear(Gear):
 @gear
 class FireChip(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.fire:
             return Effect(damage=1.1)
         return no_effect
@@ -61,7 +64,7 @@ class FireChip(Gear):
 @gear
 class HandFan(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.wind:
             return Effect(damage=1.1)
         return no_effect
@@ -70,7 +73,7 @@ class HandFan(Gear):
 @gear
 class LightningRod(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.electric:
             return Effect(damage=0.8)
         return no_effect
@@ -79,16 +82,16 @@ class LightningRod(Gear):
 @gear
 class Pillow(Gear):
     @staticmethod
-    def on_turn_start(target):
+    def on_turn_start(target: TemTem) -> Effect:
         if target.asleep:
-            return Effect(target={Stats.HP: target.stats[Stats.HP] // 10})
+            return Effect(target={Stats.HP: target.max_hp // 10})
         return no_effect
 
 
 @gear
 class Pansunscreen(Gear):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.burned:
             return Effect(target={Statuses.burned: -1})
         return no_effect
@@ -97,7 +100,7 @@ class Pansunscreen(Gear):
 @gear
 class Talisman(Gear):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.doomed:
             return Effect(target={Statuses.doomed: -1})
         return no_effect
@@ -106,7 +109,7 @@ class Talisman(Gear):
 @gear
 class Umbrella(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.water:
             return Effect(damage=0.8)
         return no_effect
@@ -115,7 +118,7 @@ class Umbrella(Gear):
 @gear
 class IceCube(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.fire:
             return Effect(damage=0.8)
         return no_effect
@@ -124,7 +127,7 @@ class IceCube(Gear):
 @gear
 class EnergyDrink(Gear):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.asleep:
             return Effect(target={Statuses.asleep: -1})
         return no_effect
@@ -133,7 +136,7 @@ class EnergyDrink(Gear):
 @gear
 class RockShield(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.crystal:
             return Effect(damage=0.8)
         return no_effect
@@ -142,14 +145,14 @@ class RockShield(Gear):
 @gear
 class Sweatband(Gear):
     @staticmethod
-    def on_turn_start(target):
-        return Effect(target={Stats.Sta: int(target.stats[Stats.Sta] * 0.15)})
+    def on_turn_start(target: TemTem) -> Effect:
+        return Effect(target={Stats.Sta: int(target.max_sta * 0.15)})
 
 
 @gear
 class TucmaMask(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.toxic:
             return Effect(damage=0.8)
         return no_effect
@@ -158,21 +161,21 @@ class TucmaMask(Gear):
 @gear
 class Snare(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         return Effect(attacker={'remove gear': True}, target={'remove gear': True})
 
 
 @gear
 class Chamomile(Gear):
     @staticmethod
-    def on_switch_in(target):
+    def on_switch_in(target: TemTem) -> Effect:
         return Effect(target={'clear boosts': True, Statuses.immune: 4})
 
 
 @gear
 class Grease(Gear):
     @staticmethod
-    def on_status(target, status, count):
+    def on_status(target: TemTem, status: Statuses, count: int) -> Effect:
         if status == Statuses.trapped:
             return Effect(target={Statuses.trapped: -1})
         return no_effect
@@ -187,7 +190,7 @@ class ShuinesHorn(Gear):
 @gear
 class Coat(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.wind:
             return Effect(damage=0.8)
         return no_effect
@@ -196,7 +199,7 @@ class Coat(Gear):
 @gear
 class ResistanceBadge(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.neutral:
             return Effect(damage=1.15)
         return no_effect
@@ -205,13 +208,13 @@ class ResistanceBadge(Gear):
 @gear
 class WarDrum(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(damage=1.08)
         return no_effect
 
     @staticmethod
-    def on_ally_attack(attacker, target, attack):
+    def on_ally_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] == 'Physical':
             return Effect(damage=1.08)
         return no_effect
@@ -220,7 +223,7 @@ class WarDrum(Gear):
 @gear
 class Turban(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.earth:
             return Effect(damage=0.8)
         return no_effect
@@ -229,7 +232,7 @@ class Turban(Gear):
 @gear
 class Handcuffs(Gear):
     @staticmethod
-    def after_attack(attacker, target, attack):
+    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.exhausted:
             return Effect(target={Statuses.trapped: 3})
         return no_effect
@@ -238,7 +241,7 @@ class Handcuffs(Gear):
 @gear
 class Drill(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.evading:
             return Effect(target={Statuses.evading: -1})
         return no_effect
@@ -249,8 +252,8 @@ class Drill(Gear):
 @gear
 class BatonPass(Gear):
     @staticmethod
-    def on_switch_in(target):
-        return Effect(target={Stats.HP: target.stats[Stats.HP] // 10})
+    def on_switch_in(target: TemTem) -> Effect:
+        return Effect(target={Stats.HP: target.max_hp // 10})
 
 # TODO: hopeless tonic
 
@@ -258,7 +261,7 @@ class BatonPass(Gear):
 @gear
 class DoubleScreen(Gear):
     @staticmethod
-    def on_hit(attacker, target, attack):
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attacker.types[1] is not None:
             return Effect(damage=0.9)
         return no_effect
@@ -267,7 +270,7 @@ class DoubleScreen(Gear):
 @gear
 class IronCoating(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.earth:
             return Effect(damage=1.1)
         return no_effect
@@ -276,7 +279,7 @@ class IronCoating(Gear):
 @gear
 class Slingshot(Gear):
     @staticmethod
-    def on_attack(attacker, target, attack):
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if effectiveness(attack['type'], target) == 0.25:
             return Effect(attacker={Stats.Def: 1, Stats.SpD: 1, Stats.Spe: 1})
         return no_effect

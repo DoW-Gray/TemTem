@@ -53,7 +53,7 @@ def try_increase_sta_regen(tem, remaining_tvs):
     from math import ceil
 
     def sta_regen(tem):
-        return ceil(tem.stats[Stats.Sta] / 5) + 1
+        return ceil(tem.max_sta / 5) + 1
 
     cur_sta_regen = sta_regen(tem)
     cur_tvs = tem.tvs[Stats.Sta]
@@ -61,13 +61,13 @@ def try_increase_sta_regen(tem, remaining_tvs):
     while remaining_tvs and tem.tvs[Stats.Sta] < 499:
         tem.tvs[Stats.Sta] += 1
         remaining_tvs -= 1
-        tem.stats[Stats.Sta] = tem._calc_stat(Stats.Sta)
+        tem.max_sta = tem._calc_stat(Stats.Sta)
         if sta_regen(tem) > cur_sta_regen:
             cur_sta_regen = sta_regen(tem)
             last_tvs = (tem.tvs[Stats.Sta], remaining_tvs)
 
     tem.tvs[Stats.Sta] = last_tvs[0]
-    tem.stats[Stats.Sta] = tem._calc_stat(Stats.Sta)
+    tem.max_sta = tem._calc_stat(Stats.Sta)
     return last_tvs[1]
 
 
@@ -104,7 +104,7 @@ def optimise_tvs(tem):
     else:
         atk_stat = Stats.SpA
 
-    if tem.stats[Stats.Def] < tem.stats[Stats.SpD]:
+    if tem.Def < tem.SpD:
         def_stats = (Stats.Def, Stats.SpD)
     else:
         def_stats = (Stats.SpD, Stats.Def)

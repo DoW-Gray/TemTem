@@ -19,56 +19,62 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 from .static import (
-    Stats,
     Statuses,
+    Types,
     TYPE_EFFECTIVENESS,
     lookup_attack,
 )
+from .temtem import TemTem
+
+from typing import Any
 
 
-def calc_damage(attacker, attack, target, modifiers=1.0):
+def calc_damage(
+    attacker: TemTem, target: TemTem, attack: Any,  modifiers: float = 1.0
+) -> int:
+    """
+    formula (from the wiki, alongside discussion with a few prominent folks):
+
+    damage = (7 + (lvl / 200) * atk_dmg * (atk / def)) * modifiers
+           = ((lvl * atk_dmg * atk) / (200 * def) + 7) * modifiers
+
+    Note that a few modifiers e.g. burn affect the stats, rather than the
+    damage - these are assumed to be applied already
+
+    The result of this is rounded before being returned.
+    """
     if isinstance(attack, str):
         attack = lookup_attack(attack)
 
-    damage = attack['damage']
-    if (cl := attack['class']) == 'Status':
+    if (cls := attack['class']) == 'Status':
         return 0
-    elif cl == 'Physical':
-        damage *= attacker.live_stats[Stats.Atk] / target.live_stats[Stats.Def]
+    elif cls == 'Physical':
+        atk = attacker.Atk
+        df = target.Def
     else:
-        damage *= attacker.live_stats[Stats.SpA] / target.live_stats[Stats.SpD]
+        atk = attacker.SpA
+        df = target.SpD
 
-    damage *= attacker.level
-
-    if attacker.burned:
-        damage *= 0.7
-
-    damage /= 200
-    damage += 7
+    damage = (attacker.level * attack['damage'] * atk) / (200 * df) + 7
     damage *= effectiveness(attack['type'], target)
-
     damage *= modifiers
+
+    stab = 1.5 if attack['type'] in attacker.types else 1.0
 
     if attack['name'] == 'Hyperkinetic Strike':
         # Currently modifiers above here in the code aren't included in the
         # game, but this is a bug. I'm informed the move should also use ceil
         # rather than floor, and 64 for the base damge of this part.
-        damage += (
-            (attacker.level / 200)
-            * (attacker.live_stats[Stats.Spe] / target.live_stats[Stats.SpD])
-            * 59
-        )
+        damage += (attacker.level * 59 * attacker.Spe) / (200 * df)
 
-    if attack['type'] in attacker.types:
-        damage *= 1.5  # STAB
+        # I haven't found any documentation that hks works this way, but it
+        # perfectly matches results I see, and is the simplest such answer.
+        return int(damage * stab)
 
-    if abs(damage) < 1 and damage != 0.0:
-        # Damage should always be at least 1, unless target is immune
-        return -1 if damage < 0 else 1
-    return int(damage)
+    return round(damage * stab)
 
 
-def effectiveness(attack_type, target):
+def effectiveness(attack_type: Types, target: TemTem) -> float:
     if target.nullified:
         return 1.0
 
@@ -81,9 +87,15 @@ def effectiveness(attack_type, target):
     )
 
 
-def n_hko(attacker, attack, target):
-    damage = calc_damage(attacker, attack, target)
-    return target.stats[Stats.HP] // damage + 1
+def n_hko(
+    attacker: TemTem, target: TemTem, attack: Any, modifiers: float = 1.0
+) -> int:
+    from math import ceil, inf
+
+    damage = calc_damage(attacker, target, attack, modifiers)
+    if damage <= 0:
+        return inf  # I think this makes more sense than DivisionByZeroError()
+    return ceil(target.max_hp / damage)
 
 
 # Tests
@@ -105,22 +117,22 @@ def test_calc_damage():
     from .test_data import GYALIS_TEM, KINU_TEM, VOLAREND_TEM
 
     # Regular moves
-    assert calc_damage(KINU_TEM, 'Turbo Choreography', GYALIS_TEM) == 0
-    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 51
-    assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 149
-    assert calc_damage(GYALIS_TEM, 'Earth Wave', KINU_TEM) == 18
+    assert calc_damage(KINU_TEM, GYALIS_TEM, 'Turbo Choreography') == 0
+    assert calc_damage(KINU_TEM, GYALIS_TEM, 'Beta Burst') == 51
+    assert calc_damage(GYALIS_TEM, KINU_TEM, 'Crystal Bite') == 149
+    assert calc_damage(GYALIS_TEM, KINU_TEM, 'Earth Wave') == 18
 
     # Check burn reduces damage correctly
     GYALIS_TEM.apply_status(Statuses.burned, 2)
-    assert calc_damage(GYALIS_TEM, 'Crystal Bite', KINU_TEM) == 110
+    assert calc_damage(GYALIS_TEM, KINU_TEM, 'Crystal Bite') == 110
     GYALIS_TEM.statuses = {}
     KINU_TEM.apply_status(Statuses.burned, 2)
-    assert calc_damage(KINU_TEM, 'Beta Burst', GYALIS_TEM) == 39
+    assert calc_damage(KINU_TEM, GYALIS_TEM, 'Beta Burst') == 39
     KINU_TEM.statuses = {}
 
     # Very weird, currently buggy Hyperkinetic Strike. I've confirmed this value
     # is currently correct against the game, as well as the tem.team calc, but
     # I'm told the current behaviour is considered buggy, and may well change
     # in the near future (but to something simpler).
-    assert calc_damage(VOLAREND_TEM, 'Hyperkinetic Strike', KINU_TEM) == 56
+    assert calc_damage(VOLAREND_TEM, KINU_TEM, 'Hyperkinetic Strike') == 56
     # Note: the above does not include the Hand Fan modifier.

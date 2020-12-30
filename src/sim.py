@@ -18,7 +18,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-from .static import Stats, lookup_attack
+from .static import lookup_attack
 
 
 class Choice:
@@ -30,7 +30,7 @@ class Choice:
         self.winner = None
 
     def priority(self, tem, attack_prio):
-        speed = tem.live_stats[Stats.Spe]
+        speed = tem.Spe
 
         if self.action == 'run':
             return [4, speed]
@@ -88,7 +88,7 @@ class Battle:
         for side in (0, 1):
             for field_slot, tem_slot in enumerate(self.active[side]):
                 tem_speeds[(side, tem_slot)] = (
-                    self.teams[side][tem_slot].live_stats[Stats.Spe],
+                    self.teams[side][tem_slot].Spe,
                     side == self.speed_arrow,
                     field_slot,
                 )
@@ -264,7 +264,7 @@ class Battle:
 
             # Now apply damage
             if attacker['class'] != 'Status':
-                damage = calc_damage(attacker, attack, target, mod)
+                damage = calc_damage(attacker, target, attack, mod)
                 opposing_team = [
                     self.active_tem(other(side), 0), self.active_tem(other(side), 1)
                 ]
@@ -301,7 +301,7 @@ class Battle:
                     opposing_team=opposing_team,
                 )
 
-            if target.live_stats[Stats.HP] <= 0:
+            if target.HP <= 0:
                 self._handle_ko(target)
 
         attacker.moves[choice.detail] = -1  # incremented in TemTem.end_turn()
@@ -312,7 +312,8 @@ class Battle:
             (tem := self.teams[side][tem_slot]).start_turn()
             if tem.fainted and self._check_win(sides=(side,)):
                 return
-        # First, run actions that result from choices
+
+        # Run actions that result from choices
         for side, tem_slot in self._actions_gen(choices):
             choice = choices[side][tem_slot]
 
@@ -331,10 +332,17 @@ class Battle:
                 return
 
         # End-of-turn effects
+        ended_turn = []
         for side, tem_slot in self._active_tems_by_speed():
-            (tem := self.teams[side][tem_slot]).end_turn()
+            (tem := self.teams[side][tem_slot]).end_turn(active=True)
             if tem.fainted and self._check_win(sides=(side,)):
                 return
+            ended_turn.append(tem)
+
+        for side in (0, 1):
+            for tem in self.teams[side]:
+                if tem not in ended_turn:
+                    tem.end_turn(active=False)
 
         # Finally, replace tems that fainted
         raise NotImplementedError()

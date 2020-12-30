@@ -33,7 +33,7 @@ from .static import (
     lookup_attack,
 )
 
-from .gear import lookup_gear
+from typing import Iterable, Dict, Any
 
 import logging
 log = logging.getLogger(__name__)
@@ -44,15 +44,16 @@ SAMPLE_SETS = os.path.join('data', 'sets.txt')
 class TemTem:
     def __init__(
             self,
-            species,
-            moves=[],
-            trait='',
-            svs={},
-            tvs={},
-            gear=None,
-            level=DEFAULT_LEVEL
+            species: str,
+            moves: Iterable[str] = [],
+            trait: str = '',
+            svs: Dict[str, int] = {},
+            tvs: Dict[str, int] = {},
+            gear: str = '',
+            level: int = DEFAULT_LEVEL,
     ):
         from .traits import lookup_trait
+        from .gear import lookup_gear
 
         self.species = species
         self.moves = {move: 0 for move in moves}  # {move: hold counter}
@@ -78,10 +79,11 @@ class TemTem:
             else:
                 self.tvs[stat] = 0
         self._calc_stats()
+        self.HP = self.stats[Stats.HP]  # current hp
+        self.Sta = self.stats[Stats.Sta]  # current sta
 
         self.gear = lookup_gear(gear)
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
-        self._calc_live_stats()
 
         self.statuses = {}
         self.resting = False
@@ -95,16 +97,17 @@ class TemTem:
 
         self.ally = None
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<TemTem {self.species}>'
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
         if not isinstance(other, TemTem):
             return NotImplemented
 
         return (
             self.species == other.species
-            and set(self.moves) == set(other.moves)  # order isn't relevant
+            and set(self.moves) == set(other.moves)
+            # cast to set because move order and hold aren't important
             and self.trait == other.trait
             and self.svs == other.svs
             and self.tvs == other.tvs
@@ -113,7 +116,9 @@ class TemTem:
             and self.boosts == other.boosts
         )
 
-    def _calc_stat(self, stat):
+    # private stat calculation funcs
+
+    def _calc_stat(self, stat: Stats) -> int:
         """
         Separated out into its own function for e.g. increasing one tv
         """
@@ -124,66 +129,49 @@ class TemTem:
         const = STAT_CONSTS[stat][2] + (self.level if stat == Stats.HP else 0)
         return int(val1 + val2 + const)
 
-    # private stat calculation funcs
-
     def _calc_stats(self):
         stats = {}
         for stat in Stats:
             stats[stat] = self._calc_stat(stat)
         self.stats = stats
 
-    def _calc_live_stats(self):
-        live_stats = {}
-        for stat in Stats:
-            if stat in (Stats.HP, Stats.Sta):
-                try:
-                    live_stats[stat] = self.live_stats[stat]
-                except (KeyError, AttributeError):
-                    live_stats[stat] = self.stats[stat]
-            elif (boost := self.boosts[stat]) > 0:
-                live_stats[stat] = int(self.stats[stat] * (2 + boost) / 2)
-            elif boost < 0:
-                live_stats[stat] = max(1, int(2 * self.stats[stat] / (2 - boost)))
-            else:
-                live_stats[stat] = self.stats[stat]
-        self.live_stats = live_stats
+    def _live_stat(self, stat: Stats) -> int:
+        if stat in (Stats.HP, Stats.Sta):
+            raise ValueError(f"{self!r}._live_stat() called for stat {stat}")
+
+        res = self.stats[stat]
+        if (boost := self.boosts[stat]) > 0:
+            res *= (2 + boost) / 2
+        elif boost:
+            res *= 2 / (2 - boost)
+
+        if stat in (Stats.Atk, Stats.SpA) and self.burned:
+            res *= 0.7
+
+        # TODO: trait stat boosts, such as settling? I'll need to test in-game
+
+        return max(1, int(res))
 
     # public funcs for use in simulating battles
 
     def clear_boosts(self):
         # TODO: check if determined applies here
         self.boosts = {stat: 0 for stat in Stats if stat not in (Stats.HP, Stats.Sta)}
-        self.live_stats = self.stats
 
-    def apply_boost(self, stat, boost):
+    def apply_boost(self, stat: Stats, boost: int):
         from .traits import Determined, Guardian
 
-        if isinstance(stat, str):
-            stat = Stats[stat]
-
-        if (
-            boost < 0 and (
-                self.trait is Determined
-                or (self.ally and self.ally.trait is Guardian)
-            )
+        if boost < 0 and (
+            self.trait is Determined or
+            (self.ally is not None and self.ally.trait is Guardian)
         ):
             return
 
-        self.boosts[stat] += boost
-        if self.boosts[stat] > 5:
-            self.boosts[stat] = 5
-        elif self.boosts[stat] < -5:
-            self.boosts[stat] = -5
+        self.boosts[stat] = max(-5, min(5, self.boosts[stat] + boost))
 
-        self._calc_live_stats()
-
-    def apply_status(self, status, turns):
+    def apply_status(self, status: Statuses, turns: int):
         from contextlib import suppress
         from .effects import DontApplyStatus
-
-        if isinstance(status, str):
-            # TODO: deprecate the ability to use a string rather than enum
-            status = Statuses[status]
 
         # TODO: check gear applies before trait
         if not self.seized:
@@ -199,7 +187,7 @@ class TemTem:
         except DontApplyStatus:
             return
 
-        if self.ally:
+        if self.ally is not None:
             ally_effect = self.ally.trait.on_ally_status(
                 self.ally, self, status, turns
             )
@@ -266,7 +254,7 @@ class TemTem:
             self.gear.on_turn_start(self).apply(target=self)
         self.trait.on_turn_start(self).apply(target=self)
 
-    def end_turn(self):
+    def end_turn(self, active: bool = False):
         '''
         handle various things that need to be done at the end of each turn:
           - status effects update / run out
@@ -277,14 +265,14 @@ class TemTem:
         apply_alerted = False
         for status, details in self.statuses.items():
             if status == Statuses.poisoned:
-                self.take_damage(ceil(self.stats[Stats.HP] / 8))
+                self.take_damage(ceil(self.max_hp / 8))
             elif status == Statuses.burned:
-                self.take_damage(ceil(self.stats[Stats.HP] / 16))
+                self.take_damage(ceil(self.max_hp / 16))
             elif status == Statuses.regenerated:
-                self.take_damage(floor(self.stats[Stats.HP] / 10))
+                self.take_damage(floor(self.max_hp / 10))
             elif status == Statuses.doomed and details['remaining'] == 1:
                 # TODO: do I want a different "become KO'd" method?
-                self.take_damage(self.stats[Stats.HP])
+                self.take_damage(self.max_hp)
 
             if details['remaining'] > 1:
                 new_statuses[status] = {
@@ -307,18 +295,21 @@ class TemTem:
             self.overexerted -= 1
 
         # update stamina
-        live_sta = self.live_stats[Stats.Sta]
-        sta = self.stats[Stats.sta]
+        sta = self.max_sta
         denom = 5 if self.resting else 20
-        self.live_stats[Stats.Sta] = min(sta, live_sta + 1 + ceil(sta / denom))
+        self.Sta = min(self.max_sta, int(sta + 1 + ceil(sta / denom)))
         self.resting = False
         # NOTE: trait/gear .on_rest method is handled elsewhere, before this point.
+
+        # Effects that only happen if the tem is on the field
+        if not active:
+            return
 
         # update hold counts
         for move, hold in self.moves.items():
             self.moves[move] = min(hold + 1, lookup_attack(move)['hold'])
 
-    def take_damage(self, damage):
+    def take_damage(self, damage: int):
         '''
         take damage or heal
         Note: trait / gear .on_take_damage is handled before this point
@@ -328,42 +319,41 @@ class TemTem:
 
         assert isinstance(damage, int)
 
-        self.live_stats[Stats.HP] -= damage
+        self.HP -= damage
 
-        if self.live_stats[Stats.HP] <= 0:
+        if self.HP <= 0:
             self.fainted = True
-            self.live_stats[Stats.HP] = 0
-        elif self.live_stats[Stats.HP] > self.stats[Stats.HP]:
+            self.HP = 0
+        elif self.HP > self.max_hp:
             # can't heal above max HP
-            self.live_stats[Stats.HP] = self.stats[Stats.HP]
+            self.HP = self.max_hp
 
         # TODO: handle waking up, soft touch
 
-    def use_stamina(self, stamina):
+    def use_stamina(self, stamina: int):
         from .traits import Resiliant, Tireless, Vigorous
 
         if self.vigorized:
             stamina //= 2  # TesTem uses floor here
-        if self.exhausted:
-            # TODO: if can't be exhausted and vigorized, should be elif
+        elif self.exhausted:
             stamina = floor(stamina * 1.5)  # TesTem uses floor here
 
-        if self.live_stats[Stats.Sta] > stamina:
-            self.live_stats[Stats.Sta] -= stamina
+        if self.Sta >= stamina:
+            self.Sta -= stamina
             return
 
-        damage = stamina - self.live_stats[Stats.Sta]
+        damage = stamina - self.Sta
         if self.trait is Resiliant:
-            damage = min(damage, self.live_stats[Stats.HP] - 1)
+            damage = min(damage, self.HP - 1)
         self.take_damage(damage)
-        self.live_stats[Stats.Sta] = 0
+        self.Sta = 0
 
         if self.trait is not Tireless:
             self.overexerted = 2
             if self.trait is Vigorous:
                 self.trait_counter = 1
 
-    def lookup_attack(self, atk_name):
+    def lookup_attack(self, atk_name: str) -> Dict[str, Any]:
         '''
         Return the atk dict given by static.lookup_attack, but with fixed
         synergy (e.g. from KOs or switches), and handle a few other things
@@ -397,18 +387,19 @@ class TemTem:
 
         return attack
 
-    def catch_chance(self, card_rate=1, four_leaf_clover=False):
+    def catch_chance(self, card_rate: int = 1, four_leaf_clover: bool = False) -> float:
         """
         See: https://temtem.gamepedia.com/Taming#Capture_formula
+        Variable names here are pretty meaningless, but at least match those
+        in the above webpage.
         """
         from math import sqrt
 
         a = lookup_temtem_data(self.species)['Catch Rate'] * card_rate
-        max_hp = self.stats[Stats.HP]
-        a *= (4 * max_hp - 3 * self.live_stats[Stats.HP])
+        a *= (4 * self.max_hp - 3 * self.HP)
         for status in self.statuses:
             a *= STATUS_CATCH_BONUS[status]
-        a /= (2 * max_hp + 10 * self.level)
+        a /= (2 * self.max_hp + 10 * self.level)
         a *= 1.1 if four_leaf_clover else 1
 
         b = 1_000_000 / sqrt(sqrt(21_000_000 / a))
@@ -416,7 +407,39 @@ class TemTem:
             return 1.0
         return (b / 50_000) ** 4
 
-    # shorthand methods to check statuses
+    # methods to access important info about the tem
+
+    # stats
+
+    @property
+    def max_hp(self) -> int:
+        return self.stats[Stats.HP]
+
+    @property
+    def max_sta(self) -> int:
+        return self.stats[Stats.Sta]
+
+    @property
+    def Spe(self) -> int:
+        return self._live_stat(Stats.Spe)
+
+    @property
+    def Atk(self) -> int:
+        return self._live_stat(Stats.Atk)
+
+    @property
+    def Def(self) -> int:
+        return self._live_stat(Stats.Def)
+
+    @property
+    def SpA(self) -> int:
+        return self._live_stat(Stats.SpA)
+
+    @property
+    def SpD(self) -> int:
+        return self._live_stat(Stats.SpD)
+
+    # status conditions
 
     @property
     def cold(self):
@@ -485,7 +508,7 @@ class TemTem:
     # import / export functions
 
     @classmethod
-    def from_importable(cls, importable):
+    def from_importable(cls, importable: str) -> "TemTem":
         """
         e.g.
         Top Percentage (Rattata) @ Example Item
@@ -499,7 +522,7 @@ class TemTem:
         - DDoS
         """
 
-        def line_iter(importable):
+        def line_iter(importable: str) -> Iterable[str]:
             if isinstance(importable, str):
                 importable = importable.split('\n')
 
@@ -538,10 +561,10 @@ class TemTem:
                 pass  # don't care about luma
             else:
                 assert line[1:4] == 'Vs:'
-                vs = tvs if line.startswith('TVs:') else svs
+                vals = tvs if line.startswith('TVs:') else svs
                 for part in line.split(':')[1].split('/'):
                     num, stat = part.strip().split()
-                    vs[Stats[stat]] = int(num)
+                    vals[Stats[stat]] = int(num)
 
         # Now for moves
         moves = [line.lstrip('-').strip()]
@@ -552,7 +575,7 @@ class TemTem:
 
         return cls(species, moves, trait, svs, tvs, gear, level)
 
-    def export(self):
+    def export(self) -> str:
         res = f'{self.species} {f"@ {self.gear.__name__}" or ""}\n'
         res += f'Trait: {self.trait.__name__}\n'
         if self.level != DEFAULT_LEVEL:
@@ -575,7 +598,7 @@ class TemTem:
         return res
 
 
-def gen_tems(inpt):
+def gen_tems(inpt: str) -> Iterable[TemTem]:
     if isinstance(inpt, str):
         inpt = inpt.split('\n')
 
@@ -615,18 +638,26 @@ def test_temtem_class():
     # test stat calculation
     assert GYALIS_TEM.stats == GYALIS_STATS
 
-    # test boost application and TemTem._calc_live_stats
+    # test boost application and TemTem._live_stat
     GYALIS_TEM.apply_boost(Stats.Atk, 2)
-    assert GYALIS_TEM.live_stats[Stats.Atk] == 302
+    assert GYALIS_TEM.Atk == 302
     GYALIS_TEM.apply_boost(Stats.Atk, 1)
-    assert GYALIS_TEM.live_stats[Stats.Atk] == 377
+    assert GYALIS_TEM.Atk == 377
     GYALIS_TEM.apply_boost(Stats.Def, -6)
     assert GYALIS_TEM.boosts[Stats.Def] == -5
-    assert GYALIS_TEM.live_stats[Stats.Def] == 23
+    assert GYALIS_TEM.Def == 23
     GYALIS_TEM.clear_boosts()
-    assert GYALIS_TEM.live_stats == GYALIS_STATS
+    assert {
+        Stats.HP: GYALIS_TEM.max_hp,
+        Stats.Sta: GYALIS_TEM.max_sta,
+        Stats.Spe: GYALIS_TEM.Spe,
+        Stats.Atk: GYALIS_TEM.Atk,
+        Stats.Def: GYALIS_TEM.Def,
+        Stats.SpA: GYALIS_TEM.SpA,
+        Stats.SpD: GYALIS_TEM.SpD,
+    } == GYALIS_STATS
 
-    # TODO: test clear_boosts, apply_boost, apply_status, end_turn, take_damage
+    # TODO: test apply_status, end_turn, take_damage, use_stamina
 
     # test TemTem.export
     assert GYALIS_TEM.export() == GYALIS_IMPORT
