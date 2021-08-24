@@ -285,3 +285,72 @@ class Slingshot(Gear):
         return no_effect
 
 # TODO: doppelganger brooch
+
+
+@gear
+class SenseiRobe(Gear):
+    @staticmethod
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if attack['type'] == Types.melee and attack['class'] == 'Special':
+            return Effect(damage=1.25)
+        return no_effect
+
+
+@gear
+class AloeVera(Gear):
+    @staticmethod
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if target.types[0] == Types.toxic or target.types[1] == Types.toxic:
+            return Effect(damage=1.15)
+        return no_effect
+
+
+@gear
+class TinfoilHat(Gear):
+    @staticmethod
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if attack['type'] == Types.digital:
+            return Effect(damage=0.7)
+        return no_effect
+
+
+@gear
+class Taser(Gear):
+    @staticmethod
+    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if attack['type'] == Types.electric and attack['class'] == 'Special':
+            return Effect(target={Statuses.burned: 1})
+        return no_effect
+
+
+@gear
+class Matcha(Gear):
+    @staticmethod
+    def on_rest(target) -> Effect:
+        return Effect(target={Statuses.cold: 0, Stats.Sta: target.max_sta * 0.4})
+
+
+@gear
+class ReactiveVial(Gear):
+    @staticmethod
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if effectiveness(attack['type'], target) >= 1:
+            return Effect(target={Stats.HP: target.max_hp * 0.15, Statuses.nullified: 1, 'remove gear': True})
+        return no_effect
+
+
+@gear
+class HackedMicrochip(Gear):
+    @staticmethod
+    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if attack['class'] == 'Status':
+            return no_effect
+        return Effect(target={Statuses.evading: 2})
+
+
+@gear
+class FirstAidKit(Gear):
+    @staticmethod
+    def on_take_damage(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+        if target.stats[Stats.HP] < target.max_hp * 0.25:
+            return Effect(target={Stats.HP: target.max_hp * 0.15, 'remove gear': True})
