@@ -197,6 +197,10 @@ class EffectHandler:
     def on_turn_end(target):
         return no_effect
 
+    @staticmethod
+    def after_hit(target):
+        return no_effect
+
 
 class Trait(EffectHandler):
     # Defined for both readability and isinstance()

@@ -308,7 +308,7 @@ class AloeVera(Gear):
 @gear
 class TinfoilHat(Gear):
     @staticmethod
-    def on_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+    def on_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['type'] == Types.digital:
             return Effect(damage=0.7)
         return no_effect
@@ -333,18 +333,18 @@ class Matcha(Gear):
 @gear
 class ReactiveVial(Gear):
     @staticmethod
-    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+    def after_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if effectiveness(attack['type'], target) >= 1:
             return Effect(target={Stats.HP: target.max_hp * 0.15, Statuses.nullified: 1, 'remove gear': True})
         return no_effect
 
 
-# TODO: implement target.after_attack in sim.py _process_attack for effects that happen to the defending TemTem after damage has been dealt.
+# TODO: implement target.after_hit in sim.py _process_attack for effects that happen to the defending TemTem after damage has been dealt.
 # TODO: wiki says hacked microchip activates from offensive digital techniques, need to test whether status attacks that apply status effects such as burn will trigger this
 @gear
 class HackedMicrochip(Gear):
     @staticmethod
-    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+    def after_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if attack['class'] in {'self', 'team or ally', 'team', 'all'}:
             return no_effect
         if attack['class'] == 'Status':
@@ -355,6 +355,6 @@ class HackedMicrochip(Gear):
 @gear
 class FirstAidKit(Gear):
     @staticmethod
-    def after_attack(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
+    def after_hit(attacker: TemTem, target: TemTem, attack: Dict[str, Any]) -> Effect:
         if target.stats[Stats.HP] < target.max_hp * 0.25:
             return Effect(target={Stats.HP: target.max_hp * 0.15, 'remove gear': True})
